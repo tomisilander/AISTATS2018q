@@ -221,9 +221,13 @@ efficiently using a so called Szpankowski
 approximation~\cite{cosco.aistat03}:
 \begin{eqnarray}
 \label{eqn:szp}
-\lefteqn{reg(N,r) \approx \frac{\sqrt{2} r \Gamma{\left(\frac{r}{2} \right)}}{3 \sqrt{N} \Gamma{\left(\frac{r-1}{2}  \right)}}} \\
- &&+ \left(\frac{r-1}{2}\right) \log{\left (\frac{N}{2} \right )}- \log \Gamma{\left(\frac{r}{2} \right)} + \frac{1}{2} \log{\left (\pi \right )}\nonumber\\
- &&+ \frac{r^{2} \Gamma^{2}{\left(\frac{r}{2} \right)}}{9N \Gamma^{2}{\left(\frac{r-1}{2}\right)}} + \frac{2r^3-3r^2-2r+3}{36N}\nonumber.
+\lefteqn{reg(N,r) \approx \frac{\sqrt{2} r \Gamma{\left(\frac{r}{2} \right)}}
+                               {3 \sqrt{N} \Gamma{\left(\frac{r-1}{2}  \right)}}} \\
+&&+ \left(\frac{r-1}{2}\right) \log{\left (\frac{N}{2} \right )}
+- \log \Gamma{\left(\frac{r}{2} \right)} + \frac{1}{2} \log{\left (\pi \right )}\nonumber\\
+&&- \frac{r^{2} \Gamma^{2}{\left(\frac{r }{2} \right)}}
+         {9N \Gamma^{2}{\left(\frac{r-1}{2}\right)}}
++ \frac{2r^3-3r^2-2r+3}{36N}\nonumber.
 \end{eqnarray}
 fNML solves the parameter sensitivity problem and yields predictive
 models superior to BDeu.  However, the criterion does not satisfy the
@@ -247,7 +251,7 @@ one for each variable, but unlike the other two, it is not based on
 further partitioning the corresponding data column
 \begin{eqnarray}
 s^{qNML}(D;G) & := & \sum_{i=1}^n s^{qNML}_i(D;G)\\
- & := & \sum_{i=1}^n \frac{P^1_{NML}(D[\cdot,(i,G_i)];G)}{P^1_{NML}(D[\cdot,G_i];G)}.\nonumber
+ & := & \sum_{i=1}^n \log \frac{P^1_{NML}(D[\cdot,(i,G_i)];G)}{P^1_{NML}(D[\cdot,G_i];G)}.\nonumber
 \end{eqnarray}
 The trick here is to model a subset of columns as though there were no
 conditional independencies among the corresponding variables $S
