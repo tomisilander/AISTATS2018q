@@ -81,8 +81,41 @@ suplementary material.
 
 \subsection{qNML is consistent}
 
+One important property possessed by nearly every model selection criterion is consistency. In our context, consistency means that given a data matrix with $N$ samples coming from a distribution faithful to some DAG $G$, the qNML will give the highest score to true graph $G$ with a probability tending to one as $N$ increases. We will show this by first proving that qNML is asymptotically equivalent to widely used BIC criterion which is known to be consistent \cite{Schw78, Haug88}. 
 
-\subsection {On implementation}
+The BIC can be written as
+\begin{equation}
+\textnormal{BIC}(D,G) = \sum_{i = 1}^n \log P(D_i \ | \ \hat{\theta}_{i | G_i} ) - \frac{q_i(r_i - 1)}{2} \log N,
+\end{equation}where $D_i = D[\cdot, i]$ stands for the data on variable $i$, $\hat{\theta}_{i | G_i}$ denotes the maximum likelihood parameters of the conditional distribution of variable $i$ given its parents in $G$. Since the both BIC and qNML scores are decomposable, we can focus on studying the local scores. Using the definition of qNML, we have
+\begin{align}\label{qnmlDef2}
+s^{qNML}_i(D;G) &= \log \frac{P(D_{i, G_i} \ | \ \hat{\theta}_{i, G_i} )}{P(D_{G_i} \ | \ \hat{\theta}_{G_i} )} \notag \\
+& -(reg(N,q_i r_i) - reg(N,q_i)).
+\end{align}
+
+Now, we observe that the first term in (\ref{qnmlDef2}) can written as
+$$
+\log \frac{P(D_{i, G_i} \ | \ \hat{\theta}_{i, G_i} )}{P(D_{G_i} \ | \ \hat{\theta}_{G_i} )} = \log P(D_i \ | \ \hat{\theta}_{i | G_i} )
+$$ which simply shows that the goodness-of-the-fit terms agree between the criteria. Next, we consider the difference of regrets in (\ref{qnmlDef2}) which corresponds to the penalty term of BIC. The following theorem states that these two are asymptotically equal.
+
+\begin{theorem}
+Let $r_i$ and $q_i$ denote the number of possible values for variable $X_i$ and the possible configurations of parents $X_{G_i}$, respectively. As $N \to \infty$,
+$$reg(N,q_i r_i) - reg(N,q_i) = \frac{q_i(r_i - 1)}{2}\log N + O(1).$$
+\end{theorem}   
+\begin{proof}
+By considering only the leading term in (\ref{eqn:szp}), the regret for a single multinomial variable with $m$ categories can be written asymptotically as
+$$
+reg(N,m) = \frac{m-1}{2}\log N + O(1).
+$$ Using this, we have
+\begin{align*}
+reg(N,q_i r_i)& -  reg(N,q_i) \\ 
+&= \frac{q_ir_i-1}{2}\log N-\frac{q_i-1}{2}\log N + O(1) \\
+&= \frac{q_ir_i-1-q_i + 1}{2}\log N + O(1) \\
+&= \frac{q_i(r_i - 1)}{2} \log N + O(1).
+\end{align*}
+\end{proof}
+This suffices in order to show that qNML is asymptotically equivalent to BIC and, hence, consistent. The outline of this proof follows the similar pattern as found in \cite{SilanderIJAR10} where the consistency of fNML was proved.
+
+\subsection{On implementation}
 
 Collapsing many variables into a single one causes $r$ in the
 equation~(\ref{eqn:szp}) to be exponentially large (in our experiments
