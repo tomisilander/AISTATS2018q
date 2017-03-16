@@ -1,7 +1,10 @@
 \documentclass[letterpaper]{article}
 \usepackage{proceed2e}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,epsfig,booktabs}
+\usepackage{amsmath,amsthm,epsfig,booktabs}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
 
 % Set the typeface to Times Roman
 \usepackage{times}
@@ -251,7 +254,8 @@ one for each variable, but unlike the other two, it is not based on
 further partitioning the corresponding data column
 \begin{eqnarray}
 s^{qNML}(D;G) & := & \sum_{i=1}^n s^{qNML}_i(D;G)\\
- & := & \sum_{i=1}^n \log \frac{P^1_{NML}(D[\cdot,(i,G_i)];G)}{P^1_{NML}(D[\cdot,G_i];G)}.\nonumber
+& := & \sum_{i=1}^n \log \frac{P^1_{NML}(D[\cdot,(i,G_i)];G)}
+                             {P^1_{NML}(D[\cdot,G_i];G)}.\nonumber
 \end{eqnarray}
 The trick here is to model a subset of columns as though there were no
 conditional independencies among the corresponding variables $S
@@ -264,6 +268,59 @@ that it coincides with the $P_{NML}(D;G)$ for all the networks that
 are composed of fully connected components.  The number of such
 networks equals the number of nonempty partitions of a set of $n$
 elements, i.e., the $n^\text{th}$ Bell number.
+
+\subsection {qNML is score equivalent}
+
+The qNML yields equal scores for network structures that encode same
+sets of independencies. Verma and Pearl~\cite{Verm90} showed that the
+equivalent networks are exactly those who a) are same when directed
+arcs are substitued by undirected ones and b) who have same
+V-structures, i.e.  the variable triplets $(A,B,C)$ where both $A$ and
+$B$ are parents of $C$, but there is no arc between $A$ and $B$ (in
+neither direction).  Later, Chickering~\cite{Chick95} showed that all
+the equivalent network structures, and only them, can be reached from
+each other by reversing, one by one, so called covered arcs, i.e. the
+arcs from node $A$ to $B$, for which $B$'s parents other than $A$ are
+exactly the $A$'s parents ($G_B=\{A\}\cup G_A$).
+
+We will next state this as a
+theorem and sketch a proof for it. A more detailed proof appears in the
+suplementary material.
+\begin{theorem}
+  \label{thm:scoreqv}
+  Let $G$ and $G'$ be two Bayesian network structures that differ only
+  by a single covered arc reversal, i.e., the arc from $A$ to $B$ in $G$
+  has been reversed in $G'$ to point from $B$ to $A$, then
+  $$s^{qNML}(D;G)=s^{qNML}(D;G').$$
+\end{theorem}
+\begin{proof}
+  Now the scores for structures can be decomposed as the
+  $s^{qNML}(D;G)=\sum_{i=1}^{n}s_i^{qNML}(D;G)$ and
+  $s^{qNML}(D;G')=\sum_{i=1}^{n}s_i^{qNML}(D;G')$.  Since only the
+  terms corresponding to the variables $A$ and $B$ in these sums are
+  different, it is enough to show that sum of these two terms are
+  equal for $G$ and $G'$. Since we can assume the data to be fixed we
+  lighten up the notations and write
+  $P^1_{NML}(i,G_i) := P^1_{NML}(D[\cdot,(i,G_i)];G)$ and
+  $P^1_{NML}(G_i)   := P^1_{NML}(D[\cdot,G_i];G)$.
+  \begin{eqnarray}
+    \lefteqn{s_A^{qNML}(D;G)+s_B^{qNML}(D;G)} \nonumber\\
+    && =\log\frac{P^1_{NML}(A,G_{A})}{P^1_{NML}(G_{A})}
+            \frac{P^1_{NML}(B,G_{B})}{P^1_{NML}(G_{B})}\nonumber\\
+    && =\log 1\cdot\frac{P^1_{NML}(B,G_{B})}{P^1_{NML}(G_{A})}\nonumber\\
+    && =\log \frac{P^1_{NML}(B,G'_{B})}{P^1_{NML}(G'_{A})}
+             \frac{P^1_{NML}(A,G'_{A})}{P^1_{NML}(G'_{B})}\nonumber\\
+ && =s_A^{qNML}(D;G')+s_B^{qNML}(D;G'),\nonumber
+\end{eqnarray}
+  due to equations
+  $\{A\}\cup G_A  = G_B$,
+  $\{B\}\cup G'_B = G'_A$,
+  $\{B\}\cup G_B  = \{A\} \cup G'_A$,
+  and $G_A        = G'_B$.
+\end{proof}
+
+\subsection{qNML is consistent}
+
 
 \subsection {On implementation}
 
