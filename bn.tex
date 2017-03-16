@@ -1,0 +1,133 @@
+\section{BAYESIAN NETWORKS}
+\label{sec:bns}
+
+Bayesian networks are a general way to describe the dependencies
+between the components of an $n$\nobreakdash-dimensional discrete data
+vector $X=(X_{1},\ldots,X_{n})$ in which the component $X_{i}$ may
+take any of the discrete values in a set $\{1,\ldots,r_{i}\}$.
+Despite denoting the values with small integers, the model will treat
+the components of $X$ categorical.
+
+
+\subsection{Likelihood}
+\label{ssec:likelihood}
+
+Bayesian network $B=(G,\theta)$ defines a probability distribution for
+$X$. The component $G$ defines the structure of the model as a
+directed acyclic graph that has exactly one node for each component of
+$X$. The structure $G=(G_{1},\ldots,G_{n})$ defines for each
+variable/node $X_{i}$ its (possibly empty) parent set $G_{i}$, i.e.,
+the nodes from which there are a directed edges to the variable
+$X_{i}$.
+
+Given a realization $x$ of $X$, we denote the sub\nobreakdash-vector
+of $x$ that consists of the values of the parents of $X_{i}$ in $x$ as
+$G_{i}(x)$. It is customary to enumerate all the possible
+sub\nobreakdash-vectors $G_{i}(X)$ from $1$ to $q_{i}=\prod_{h\in
+  G_{i}}r_{h}.$ In case $G_{i}$ is empty, we define $q_{i}=1$ and
+$P(G_{i}(x)=1)=1$ for all vectors $x$.
+
+For each variable $X_{i}$ there is a $q_{i}\times r_{i}$ table
+$\theta_{i}$ of parameters whose $j^{\textnormal{th}}$ row and
+$k^{\textnormal{th}}$ column defines the conditional probability
+$P(X_{i}=k\mid G_{i}(X)=j;\theta)=\theta_{ijk}$.  With structure $G$
+and parameters $\theta$, we can now express the likelihood function of
+the model as
+\begin{equation}
+P(x|G,\theta)=\prod_{i=1}^{n}P(x_{i}\mid G_{i}(x);\theta_{i})=\prod_{i=1}^{n}\theta_{iG_{i}(x)x_{i}}.
+\end{equation}
+
+
+
+\subsection{Bayesian structure learning}
+
+Bayesian learning of Bayesian network structures is based on the
+posterior probability $P(G|D,\alpha)$, where $\alpha$ denotes the
+hyper\nobreakdash-parameters for the model parameters $\theta$, and
+the $D$ is a collection of $N$ $n$\nobreakdash-dimensional i.i.d. data
+vectors collected to a $N\times n$ design matrix.  We use structure
+$G$ to extend the common matrix indexing notation $D[i,j]$, and allow
+more general row selectors.  Notably the notation $D[G_i=j,i]$ is used
+to denote those rows of the column $i$ in which the parents $G_i$
+contain the value configuration number $j\in\{1,\ldots,q_i\}$.
+
+It is common to assume the uniform prior for structures, in which case
+the objective function for structure learning is reduced to the
+marginal likelihood $P(D|G,\alpha)$.  If the model parameters
+$\theta_{ij}$ are further assumed to be independently Dirichlet
+distributed only depending on $i$ and $G_{i}$ and the data $D$ is
+assumed to have no missing values, the marginal likelihood can be
+decomposed as
+\begin{eqnarray}
+\label{eqn:bayesmix}
+P(D|G,\alpha) & = & \prod_{i=1}^{n}\prod_{j=1}^{q_i}\int
+P(D[G_i=j,i]|\alpha)\\ & = & \prod_{i=1}^{n}\prod_{j=1}^{q_i}\int
+P([G_i=j,i]|\theta)P(\theta|\alpha) d\theta.\nonumber
+\end{eqnarray}
+In coding terms this means that each data column $D[\cdot,i]$ is first partitioned based on the
+values in columns $G_i$, and each part is then coded using a Bayesian mixture that can be expressed
+in a closed form~\cite{Bunt91, Heck95}.
+
+\subsection {Problems, solutions and problems}
+
+Finding the satisfactory Dirichlet hyperparameters for the Bayesian
+mixture above has, however, turned out to be problematic. Early on,
+one of the desiderata for a good model selection criterion was that it
+would yield equal scores for essentially equivalent
+models~\cite{Verm90}.  For example, the score for the structure
+$X_1\rightarrow X_2$ should be the same as the score for the model
+$X_2 \rightarrow X_1$ since they both correspond to the hypothesis
+that variables $X_1$ and $X_2$ are statistically dependent on each
+other.  It can be shown~\cite{Heck95} that to achieve this, not all
+the hyperparameters $\alpha$ are possible and for practical reasons
+Buntine~\cite{Bunt91} suggested a so called BDeu score with just one
+hyperparameter $\alpha\in R_{++}$ so that $\theta_{ij\cdot}\sim
+Dir(\frac{\alpha}{q_i r_i},\ldots,\frac{\alpha}{q_i r_i})$.  However,
+it soon turned out that BDeu score was very sensitive to the selection
+of this hyperparameter~\cite{cosco.uai07} and that for small sample
+sizes this method detects spurious correlations~\cite{Steck08} leading
+to models with suspiciously many parameters.
+
+A natural solution to avoid parameter sensitivity of BDeu would be to
+use a normalized maximum likelihood (NML)
+criterion~\cite{Shta87,Riss96a}, i.e., to find the structure $G$ that
+maximizes
+\begin{equation}
+P_{NML}(D;G)=\frac{P(D|\hat\theta(D;G))}{\sum_{D'}{P(D'|\hat\theta(D';G))}},
+\end{equation}
+where $\hat\theta$ denotes the (easy to find) maximum likelihood
+parameters and the sum in the denominator goes over all the possible
+$N\times n$ data matrices. While it is easy to see that this criterion
+satisfies the requirement of giving equal scores to equal structures,
+the normalizing constant renders the computation
+infeasible. Consequently, Silander et al.~\cite{cosco.pgm08a}
+suggested solving the parameter sensitivity problem by adopting the
+NML-code to the column partitions, i.e., changing the Bayesian mixture
+in equation~(\ref{eqn:bayesmix}) to
+\begin{equation}
+P^1_{NML}(D[G_i=j,i];G)=\frac{P(D|\hat\theta(D[G_i=j,i];G))}{\sum_{D'}{P(D';\hat\theta(D'|G))}},
+\end{equation}
+where $D'\in{\{1,\ldots,r_i\}}^{|D[G_i=j,i]|}$.  The logarithm of the
+denominator is often called a regret, since it indicates the extra
+code length needed compared to the code length obtained using the (a
+priori unknown) maximum likelihood parameters. The regret for
+$P^1_{NML}$ depends only on the length $N$ of the categorical data
+vector with $r$ different categorical values.  While the naive
+computation of the regret is still prohibitive, it can be approximated
+efficiently using a so called Szpankowski
+approximation~\cite{cosco.aistat03}:
+\begin{eqnarray}
+\label{eqn:szp}
+\lefteqn{reg(N,r) \approx \frac{\sqrt{2} r \Gamma{\left(\frac{r}{2} \right)}}
+                               {3 \sqrt{N} \Gamma{\left(\frac{r-1}{2}  \right)}}} \\
+&&+ \left(\frac{r-1}{2}\right) \log{\left (\frac{N}{2} \right )}
+- \log \Gamma{\left(\frac{r}{2} \right)} + \frac{1}{2} \log{\left (\pi \right )}\nonumber\\
+&&- \frac{r^{2} \Gamma^{2}{\left(\frac{r }{2} \right)}}
+         {9N \Gamma^{2}{\left(\frac{r-1}{2}\right)}}
++ \frac{2r^3-3r^2-2r+3}{36N}\nonumber.
+\end{eqnarray}
+fNML solves the parameter sensitivity problem and yields predictive
+models superior to BDeu.  However, the criterion does not satisfy the
+property of giving the same score for the models that correspond to
+the same dependence statements. Furthermore, the learned structures
+still sometimes appear surprisingly complicated.

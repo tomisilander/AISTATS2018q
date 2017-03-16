@@ -1,0 +1,110 @@
+\section{EXPERIMENTAL RESULTS}
+
+To empirically compare the model selection criteria we took 20 UCI
+data sets~\cite{Lichman:2013} and run 1000 train and test experiments
+for 20 different sample sizes for all of them. The training was
+conducted using a dynamic programming based exact structure
+learning\cite{cosco.uai06} which limited the number $n$ of variables
+to less than 20.
+
+Figure~\ref{fig:bcmean} shows an example of the behavior of the
+studied selection criteria.  For small sample sizes fNML and qNML
+yield equally accurate predictions while BDeu requires more samples to
+obtain competitive performance. The curves are mean curves from 1000
+independent train and test splits.
+
+\begin{figure}
+\centering
+\includegraphics[width=8cm,height=5cm]{breast_cancer_mean.pdf}
+\caption{Predictive log-loss in a breast cancer data as a function of
+  sample size for different model selection criteria.}
+\label{fig:bcmean}
+\end{figure}
+
+Figure~\ref{fig:bcnpmean} shows how fNML still sometimes behaves
+strangely in terms of model complexity here measured by the number of
+parameters in the model.  qNML, instead, appears to yield more
+parsimonious models.
+
+\begin{figure}
+\centering
+\includegraphics[width=8cm,height=5cm]{breast_cancer_np_mean.pdf}
+\caption{Number of parameters in a breast cancer model as a function
+  of sample size for different model selection criteria.}
+\label{fig:bcnpmean}
+\end{figure}
+
+\begin{table}
+\centering
+\begin{tabular}{crrrr}
+\toprule
+           Data &     N &   BDeu &            fNML &            qNML \\
+\midrule
+           Iris &    16 &   3.59 &            3.47 &   \textbf{3.43} \\
+  PostOperative &    20 &  10.24 &   \textbf{8.27} &            8.32 \\
+           Wine &    27 &  18.11 &           12.68 &  \textbf{12.51} \\
+ HeartHungarian &    45 &  10.15 &            9.10 &   \textbf{8.90} \\
+   BreastCancer &    45 &  12.01 &  \textbf{10.57} &           10.66 \\
+ HeartCleveland &    48 &  16.36 &           12.81 &  \textbf{12.54} \\
+          Ecoli &    51 &   5.77 &   \textbf{5.30} &            5.37 \\
+          Liver &    54 &   4.07 &            3.97 &   \textbf{3.91} \\
+          Glass &    55 &   7.16 &   \textbf{6.22} &            6.28 \\
+        Thyroid &    55 &   2.83 &   \textbf{2.75} &            2.77 \\
+   HeartStatlog &    56 &  14.15 &           11.92 &  \textbf{11.60} \\
+      TicTacToe &    96 &  10.99 &  \textbf{10.73} &           11.05 \\
+        Balance &    96 &   7.48 &   \textbf{7.39} &            7.78 \\
+    BcWisconsin &   105 &   5.81 &            5.12 &   \textbf{5.08} \\
+       Diabetes &   117 &   4.95 &            4.95 &   \textbf{4.89} \\
+          Yeast &   225 &   5.54 &   \textbf{5.40} &            5.42 \\
+        Abalone &   418 &   3.93 &   \textbf{3.88} &            3.96 \\
+     PageBlocks &   548 &   2.36 &   \textbf{2.32} &            2.38 \\
+        Shuttle &  2900 &   1.70 &   \textbf{1.69} &            1.72 \\
+          Adult &  4885 &  10.22 &  \textbf{10.08} &           10.12 \\
+\bottomrule
+\end{tabular}
+\caption{Predictive log losses for small sample sizes for different model selection criteria in 20 different datasets.}
+\label{tbl:preds}
+	\end{table}
+
+Table~\ref{tbl:preds} features predictive losses for the small sample
+sizes.  (The results for large sample sizes converge for all sensible
+criteria.)  As we can see, fNML still usually (12/20) performs best
+but qNML is not much worse while BDeu may sometimes perform much
+worse.
+
+Looking at the number of parameters for the same datasets and sample
+sizes (Table~\ref{tbl:nofparams}) reveals that qNML usually (18/20)
+yields simplest models, and sometimes, like in the BreastCancer data,
+the differences are of orders of magnitude.
+
+\begin{table}
+\centering
+\begin{tabular}{crrrr}
+\toprule
+           Data &     N &          BDeu &  fNML &          qNML \\
+\midrule
+           Iris &    16 &            36 &    33 &   \textbf{28} \\
+  PostOperative &    20 &          1304 &   464 &  \textbf{115} \\
+           Wine &    27 &         11559 &   780 &  \textbf{214} \\
+ HeartHungarian &    45 &          4706 &   838 &  \textbf{100} \\
+   BreastCancer &    45 &         26774 &  2710 &  \textbf{246} \\
+ HeartCleveland &    48 &         29346 &  1407 &  \textbf{204} \\
+          Ecoli &    51 &           113 &   167 &   \textbf{80} \\
+          Liver &    54 &            40 &    60 &   \textbf{24} \\
+          Glass &    55 &          1488 &   572 &  \textbf{100} \\
+        Thyroid &    55 &            37 &    70 &   \textbf{28} \\
+   HeartStatlog &    56 &         18414 &  1099 &  \textbf{159} \\
+      TicTacToe &    96 &         13645 &  2438 &  \textbf{696} \\
+        Balance &    96 &   \textbf{20} &   237 &           168 \\
+    BcWisconsin &   105 &          5921 &   816 &   \textbf{88} \\
+       Diabetes &   117 &            35 &   216 &   \textbf{34} \\
+          Yeast &   225 &   \textbf{78} &   307 &            80 \\
+        Abalone &   418 &            90 &   156 &   \textbf{62} \\
+     PageBlocks &   548 &           699 &   377 &   \textbf{56} \\
+        Shuttle &  2900 &           380 &   594 &  \textbf{111} \\
+          Adult &  4885 &  \textbf{599} &  1431 &           876 \\
+\bottomrule
+\end{tabular}
+\caption{Number of model parameters for small sample sizes for different model selection criteria in 20 different datasets.}
+\label{tbl:nofparams}
+\end{table}
