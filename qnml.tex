@@ -13,6 +13,7 @@ Like BDeu and fNML, qNML can be expressed as a product of $n$ terms,
 one for each variable, but unlike the other two, it is not based on
 further partitioning the corresponding data column
 \begin{eqnarray}
+\label{eqn:qnmldef}
 s^{qNML}(D;G) & := & \sum_{i=1}^n s^{qNML}_i(D;G)\\
 & := & \sum_{i=1}^n \log \frac{P^1_{NML}(D[\cdot,(i,G_i)];G)}
                              {P^1_{NML}(D[\cdot,G_i];G)}.\nonumber
@@ -34,7 +35,7 @@ elements, i.e., the $n^\text{th}$ Bell number.
 The qNML yields equal scores for network structures that encode same
 sets of independencies. Verma and Pearl~\cite{Verm90} showed that the
 equivalent networks are exactly those who a) are same when directed
-arcs are substitued by undirected ones and b) who have same
+arcs are substituted by undirected ones and b) who have same
 V-structures, i.e.  the variable triplets $(A,B,C)$ where both $A$ and
 $B$ are parents of $C$, but there is no arc between $A$ and $B$ (in
 neither direction).  Later, Chickering~\cite{Chick95} showed that all
@@ -45,7 +46,7 @@ exactly the $A$'s parents ($G_B=\{A\}\cup G_A$).
 
 We will next state this as a
 theorem and sketch a proof for it. A more detailed proof appears in the
-suplementary material.
+supplementary material.
 \begin{theorem}
   \label{thm:scoreqv}
   Let $G$ and $G'$ be two Bayesian network structures that differ only
@@ -81,28 +82,47 @@ suplementary material.
 
 \subsection{qNML is consistent}
 
-One important property possessed by nearly every model selection criterion is consistency. In our context, consistency means that given a data matrix with $N$ samples coming from a distribution faithful to some DAG $G$, the qNML will give the highest score to true graph $G$ with a probability tending to one as $N$ increases. We will show this by first proving that qNML is asymptotically equivalent to widely used BIC criterion which is known to be consistent \cite{Schw78, Haug88}. 
+One important property possessed by nearly every model selection
+criterion is consistency. In our context, consistency means that given
+a data matrix with $N$ samples coming from a distribution faithful to
+some DAG $G$, the qNML will give the highest score to true graph $G$
+with a probability tending to one as $N$ increases. We will show this
+by first proving that qNML is asymptotically equivalent to widely used
+BIC criterion which is known to be consistent \cite{Schw78, Haug88}.
 
 The BIC can be written as
 \begin{equation}
 \textnormal{BIC}(D,G) = \sum_{i = 1}^n \log P(D_i \ | \ \hat{\theta}_{i | G_i} ) - \frac{q_i(r_i - 1)}{2} \log N,
-\end{equation}where $D_i = D[\cdot, i]$ stands for the data on variable $i$, $\hat{\theta}_{i | G_i}$ denotes the maximum likelihood parameters of the conditional distribution of variable $i$ given its parents in $G$. Since the both BIC and qNML scores are decomposable, we can focus on studying the local scores. Using the definition of qNML, we have
+\end{equation}
+where $D_i = D[\cdot, i]$ stands for the data on variable $i$,
+$\hat{\theta}_{i | G_i}$ denotes the maximum likelihood parameters of
+the conditional distribution of variable $i$ given its parents in
+$G$. Since the both BIC and qNML scores are decomposable, we can focus
+on studying the local scores. Using the definition of qNML, we have
 \begin{align}\label{qnmlDef2}
-s^{qNML}_i(D;G) &= \log \frac{P(D_{i, G_i} \ | \ \hat{\theta}_{i, G_i} )}{P(D_{G_i} \ | \ \hat{\theta}_{G_i} )} \notag \\
-& -(reg(N,q_i r_i) - reg(N,q_i)).
+s^{qNML}_i(D;G) &= \log \frac{P(D_{i, G_i} \ | \ \hat{\theta}_{i, G_i}
+  )}{P(D_{G_i} \ | \ \hat{\theta}_{G_i} )} \notag \\ & -(reg(N,q_i
+r_i) - reg(N,q_i)).
 \end{align}
 
 Now, we observe that the first term in (\ref{qnmlDef2}) can written as
 $$
 \log \frac{P(D_{i, G_i} \ | \ \hat{\theta}_{i, G_i} )}{P(D_{G_i} \ | \ \hat{\theta}_{G_i} )} = \log P(D_i \ | \ \hat{\theta}_{i | G_i} )
-$$ which simply shows that the goodness-of-the-fit terms agree between the criteria. Next, we consider the difference of regrets in (\ref{qnmlDef2}) which corresponds to the penalty term of BIC. The following theorem states that these two are asymptotically equal.
+$$ which simply shows that the goodness-of-the-fit terms agree between
+the criteria. Next, we consider the difference of regrets in
+(\ref{qnmlDef2}) which corresponds to the penalty term of BIC. The
+following theorem states that these two are asymptotically equal.
 
 \begin{theorem}
-Let $r_i$ and $q_i$ denote the number of possible values for variable $X_i$ and the possible configurations of parents $X_{G_i}$, respectively. As $N \to \infty$,
+Let $r_i$ and $q_i$ denote the number of possible values for variable
+$X_i$ and the possible configurations of parents $X_{G_i}$,
+respectively. As $N \to \infty$,
 $$reg(N,q_i r_i) - reg(N,q_i) = \frac{q_i(r_i - 1)}{2}\log N + O(1).$$
 \end{theorem}   
 \begin{proof}
-By considering only the leading term in (\ref{eqn:szp}), the regret for a single multinomial variable with $m$ categories can be written asymptotically as
+By considering only the leading term in (\ref{eqn:szp}), the regret
+for a single multinomial variable with $m$ categories can be written
+asymptotically as
 $$
 reg(N,m) = \frac{m-1}{2}\log N + O(1).
 $$ Using this, we have
@@ -113,7 +133,85 @@ reg(N,q_i r_i)& -  reg(N,q_i) \\
 &= \frac{q_i(r_i - 1)}{2} \log N + O(1).
 \end{align*}
 \end{proof}
-This suffices in order to show that qNML is asymptotically equivalent to BIC and, hence, consistent. The outline of this proof follows the similar pattern as found in \cite{SilanderIJAR10} where the consistency of fNML was proved.
+This suffices in order to show that qNML is asymptotically equivalent
+to BIC and, hence, consistent. The outline of this proof follows the
+similar pattern as found in \cite{SilanderIJAR10} where the
+consistency of fNML was proved.
+
+\subsection{qNML equals NML for exponentially many models}
+The fNML criterion equals NML criterion just for the Bayesian network
+with no arcs.  We will next show that the qNML equals NML when the
+connected components of the network are tournaments (complete directed
+acyclic subgraphs of G).
+
+We first note that the NML-criterion for the Bayesian networks
+decomposes by the connected components. Namely, if $G$ consists of $C$
+connected components $(G^1,\ldots,G^C)$ with variable sets $(V^1,\ldots,V^C)$,
+the maximum likelihood for the data $D$ decomposes, and we can write
+\begin{eqnarray}
+  \lefteqn{P_{NML}(D;G)} \nonumber \\
+  && = \frac{P(D;\hat\theta(D),G)}
+            {\sum_{D_{V_1}}\ldots \sum_{D_{V_C}}\prod_{c=1}^C P(D_{V^c};\hat\theta(D_{V^c}),G)} \nonumber \\
+            && = \frac{\prod_{c=1}^C P(D_{V^c};\hat\theta(D_{V^c}),G)} 
+            {\prod_{c=1}^C\sum_D^cP(D_{V^c};\hat\theta(D_{V^c}),G)}.\nonumber \\
+            && = \prod_{c=1}^CP_{NML}(D_{V^c};G).
+\end{eqnarray}
+
+Clearly, the qNML score also decomposes by the connected components,
+so it remains to show that if the (sub)network $G$ is a tournament,
+then for any data $D$, $s^{qNML}(D;G)=\log P_{NML}(D;G)$.  Due to the
+score equivalence of both the NML criterion and the qNML criterion, we
+may pick such a tournament $G$ that linear ordering defined by $G$
+matches the ordering of the data columns, i.e., $i<j$ implies $G_i
+\subset G_j$. Now from the definition~(\ref{eqn:qnmldef}) of the qNML
+criterion we see that for the tournament $G$, the sum telescopes
+leaving us with $s^{qNML}(D;G) = \log P^1_{NML}(D[\cdot,G];G)$, thus
+it is enough to show that $P^1_{NML}(D;G)=P_{NML}(D;G)$.
+This follows, since for any data vector $x$ in data $D$, the
+$P^1(x;\hat\theta(D),G) = P(x;\hat\theta(D),G)$,
+where we have denoted by $P^1$ the model that takes $n$-dimensional
+vectors to be values of the single (collapsed) categorical variable.
+Denoting prefixes of data vector $x$ by $x^{:i}$, and number of times
+such a prefix appears in a $N\times n$ datamatrix $D$ by $n_D(x^{:i})$,
+($n_D(x^0)=N)$, we have
+\begin{eqnarray}
+  P(D;\hat\theta(D),G) &=& \prod_{j=1}^{N}P(d_j;\theta(D),G) \nonumber \\
+  &=& \prod_{j=1}^{N} \prod_{i=1}^{n} \frac{n_D(d_j^{:i})}{n_D(d_j^{:i-1})} \nonumber\\
+  &=& \prod_{j=1}^{N} \frac{n_D(d_j^{:n})}{N} \nonumber \\
+  &=& P^1(D;\hat\theta^1(D),G).
+\end{eqnarray}
+Since both $P^1_{NML}$ and $P_{NML}$ are defined in terms of the
+maximum likelihood probabilities, the equality above implies the equality
+of these distributions.
+
+Equality established, we would like to still state the number of
+different networks connected components of which are tournaments.  We
+start by generating all the $p(n)$ integer partitions i.e. ways to
+partition $n$ labelled into parts with different size-profiles.  For
+example, for $n=4$, we have $p(4)=5$ partition profiles $[[4], [3, 1],
+  [2, 2], [2, 1, 1], [1, 1, 1, 1]]$.  Each of these partition size
+profiles corresponds to many different networks, apart from the last
+one that corresponds just to the empty network.  We count number of
+networks for one such partition size profile (and then later sum these
+counts up).  For any such partition profile $(p_1,\ldots,p_k)$ we can
+(think we can) count the ways we can pick the nodes to different parts
+and then order each part. This leads to the product $n\choose
+p_1$$p_1$!${n-p_1}\choose p_2$$p_2!$${n-p_1-p2}\choose
+p_3$$p3!$$\ldots$${n-\sum_{j=1}^{k-1}p_j}\choose p_k$$p_k!$. However,
+the order of different parts of the same size does not matter, so for
+all groups of parts having the same size, we have to divide the
+product above by the factorial of the size of such group. Notice also,
+that the product above telescopes, leaving us a formula for OEIS
+sequence A000262 as described by Thomas Wieder:
+
+With $p(n) =$ the number of integer partitions of $n$, 
+     $d(i)$ = the number of different parts of the $i$-th partition of $n$, $m(i,j) =$ multiplicity of the $j$-th part of the $i$-th partition of $n$,  one has: 
+
+$$
+a(n) = \sum_{i=1}^{p(n)} \frac{n!}{\prod_{j=1}^{d(i)} m(i,j)!}.
+$$
+
+HERE SOME TEXT ABOUT GROWTH RATE
 
 \subsection{On implementation}
 
