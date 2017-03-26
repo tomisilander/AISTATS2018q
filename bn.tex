@@ -119,8 +119,8 @@ computation of the regret is still prohibitive, it can be approximated
 efficiently using an approximation derived by Szpankowski and
 Weinberger~\cite{Szpankowski2012}:
 \begin{eqnarray}
-    reg(N, r) & \approx & N\left(\log{\alpha} + (\alpha + 2)C_\alpha -
-                \frac{1}{C_\alpha}\right)\nonumber \\
+    reg(N, r) & \approx & N\left(\log{\alpha} + (\alpha + 2) \log{C_\alpha}
+                - \frac{1}{C_\alpha}\right)\nonumber \\
     && - \frac{1}{2} \log{\left(C_\alpha + \frac{2}{\alpha}\right)},
 \end{eqnarray}
 where $\alpha = \frac{r}{N}$ and
