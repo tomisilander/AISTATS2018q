@@ -86,7 +86,9 @@ Dir(\frac{\alpha}{q_i r_i},\ldots,\frac{\alpha}{q_i r_i})$.  However,
 it soon turned out that BDeu score was very sensitive to the selection
 of this hyperparameter~\cite{cosco.uai07} and that for small sample
 sizes this method detects spurious correlations~\cite{Steck08} leading
-to models with suspiciously many parameters.
+to models with suspiciously many parameters. 
+
+Recently, Suzuki~\cite{Suzuki2017} discussed the theoretical properties of the BDeu of score and showed that in certain settings BDeu has tendency to add more and more parent variables for a child node even though the empirical conditional entropy of the child given the parents has already reached zero. More in detail, assume that in our data $D$, the values of $X_i$ are completely determined by variables in set $Z$, so that the entropy $H(X | Z) = 0$. Now, if we can further find one or more variables, denoted by $Y$, whose values are determined completely by the variables in $Z$, then BDeu will prefer the set $Z\cup Y$ over mere $Z$ as the parents of $X_i$. Suzuki argues that this kind of behaviour violates regularity in model selection as the more complex model is preferred over a simpler one even though it does not fit to data any better. The phenomena seems to stem from the way the hyperparameters for the Dirichlet distribution are chosen in BDeu as the  BD score based on the Jeffreys prior does not suffer from this anomaly.    
 
 A natural solution to avoid parameter sensitivity of BDeu would be to
 use a normalized maximum likelihood (NML)
