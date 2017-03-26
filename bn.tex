@@ -116,18 +116,17 @@ priori unknown) maximum likelihood parameters. The regret for
 $P^1_{NML}$ depends only on the length $N$ of the categorical data
 vector with $r$ different categorical values.  While the naive
 computation of the regret is still prohibitive, it can be approximated
-efficiently using a so called Szpankowski
-approximation~\cite{cosco.aistat03}:
+efficiently using an approximation derived by Szpankowski and
+Weinberger~\cite{Szpankowski2012}:
 \begin{eqnarray}
-\label{eqn:szp}
-\lefteqn{reg(N,r) \approx \frac{\sqrt{2} r \Gamma{\left(\frac{r}{2} \right)}}
-                               {3 \sqrt{N} \Gamma{\left(\frac{r-1}{2}  \right)}}} \\
-&&+ \left(\frac{r-1}{2}\right) \log{\left (\frac{N}{2} \right )}
-- \log \Gamma{\left(\frac{r}{2} \right)} + \frac{1}{2} \log{\left (\pi \right )}\nonumber\\
-&&- \frac{r^{2} \Gamma^{2}{\left(\frac{r }{2} \right)}}
-         {9N \Gamma^{2}{\left(\frac{r-1}{2}\right)}}
-+ \frac{2r^3-3r^2-2r+3}{36N}\nonumber.
+    reg(N, r) & \approx & N\left(\log{\alpha} + (\alpha + 2)C_\alpha -
+                \frac{1}{C_\alpha}\right)\nonumber \\
+    && - \frac{1}{2} \log{\left(C_\alpha + \frac{2}{\alpha}\right)},
 \end{eqnarray}
+where $\alpha = \frac{r}{N}$ and
+\begin{equation}
+    C_\alpha = \frac{1}{2} + \frac{1}{2} \sqrt{1 + \frac{4}{\alpha}}.
+\end{equation}
 fNML solves the parameter sensitivity problem and yields predictive
 models superior to BDeu.  However, the criterion does not satisfy the
 property of giving the same score for the models that correspond to
