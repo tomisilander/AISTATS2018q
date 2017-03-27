@@ -115,10 +115,27 @@ code length needed compared to the code length obtained using the (a
 priori unknown) maximum likelihood parameters. The regret for
 $P^1_{NML}$ depends only on the length $N$ of the categorical data
 vector with $r$ different categorical values.  While the naive
-computation of the regret is still prohibitive, it can be approximated
-efficiently using an approximation derived by Szpankowski and
-Weinberger~\cite{Szpankowski2012}:
+computation of the regret is still prohibitive, Silander et al.\
+approximate it efficiently using a so-called Szpankowski
+approximation~\cite{cosco.aistat03}:
 \begin{eqnarray}
+\label{eqn:szp1}
+\lefteqn{reg(N,r) \approx \frac{\sqrt{2} r \Gamma{\left(\frac{r}{2} \right)}}
+                               {3 \sqrt{N} \Gamma{\left(\frac{r-1}{2}  \right)}}} \\
+&&+ \left(\frac{r-1}{2}\right) \log{\left (\frac{N}{2} \right )}
+- \log \Gamma{\left(\frac{r}{2} \right)} + \frac{1}{2} \log{\left (\pi \right )}\nonumber\\
+&&- \frac{r^{2} \Gamma^{2}{\left(\frac{r }{2} \right)}}
+         {9N \Gamma^{2}{\left(\frac{r-1}{2}\right)}}
++ \frac{2r^3-3r^2-2r+3}{36N}\nonumber.
+\end{eqnarray}
+
+However, equation (\ref{eqn:szp1}) is derived only for the case
+where $r$ is constant and $N$ grows. While with
+fNML it is typical that $N$ is large compared to $r$, an
+approximation for all ranges of $N$ and $r$ derived by
+Szpankowski and Weinberger~\cite{Szpankowski2012} can also be used:
+\begin{eqnarray}
+\label{eqn:szp2}
     reg(N, r) & \approx & N\left(\log{\alpha} + (\alpha + 2) \log{C_\alpha}
                 - \frac{1}{C_\alpha}\right)\nonumber \\
     && - \frac{1}{2} \log{\left(C_\alpha + \frac{2}{\alpha}\right)},
@@ -127,8 +144,41 @@ where $\alpha = \frac{r}{N}$ and
 \begin{equation}
     C_\alpha = \frac{1}{2} + \frac{1}{2} \sqrt{1 + \frac{4}{\alpha}}.
 \end{equation}
+These approximations are compared in Table \ref{tbl:regrets}
+to the exact regret for various values of $N$ and $r$.
+For a constant $N$, equation (\ref{eqn:szp1}) provides
+a progressively worse approximation as $r$ grows. Equation
+(\ref{eqn:szp2}) on the other hand is a good approximation of
+the regret regardless of the ratio of $N$ and $r$.
+
 fNML solves the parameter sensitivity problem and yields predictive
 models superior to BDeu.  However, the criterion does not satisfy the
 property of giving the same score for the models that correspond to
 the same dependence statements. Furthermore, the learned structures
 still sometimes appear surprisingly complicated.
+
+\begin{table}
+\centering
+\begin{tabular}{crrrr}
+\toprule
+N & r & eq. (\ref{eqn:szp1}) & eq. (\ref{eqn:szp2}) & exact \\
+\midrule
+\multirow{4}{*}{50} & 10 & 13.24 & 13.26 & 13.24 \\
+& 100 & 62.00 & 60.01 & 60.00 \\
+& 1000 & 491.63 & 153.28 & 153.28 \\
+& 10000 & 25635.15 & 265.28 & 265.28 \\
+\midrule
+\multirow{4}{*}{500} & 10 & 22.67 & 22.69 & 22.67 \\
+& 100 & 144.10 & 144.03 & 144.03 \\
+& 1000 & 624.35 & 603.93 & 603.93 \\
+& 10000 & 4927.24 & 1533.38 & 1533.38 \\
+\midrule
+\multirow{4}{*}{5000} & 10 & 32.74 & 32.76 & 32.74 \\
+& 100 & 247.97 & 247.97 & 247.97 \\
+& 1000 & 1452.51 & 1451.78 & 1451.78 \\
+& 10000 & 6247.83 & 6043.16 & 6043.16 \\
+\bottomrule
+\end{tabular}
+\caption{Regret values for various values of $N$ and $r$.}
+\label{tbl:regrets}
+\end{table}
