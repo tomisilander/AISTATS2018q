@@ -73,11 +73,9 @@ supplementary material.
              \frac{P^1_{NML}(A,G'_{A})}{P^1_{NML}(G'_{B})}\nonumber\\
  && =s_A^{qNML}(D;G')+s_B^{qNML}(D;G'),\nonumber
 \end{eqnarray}
-  due to equations
-  $\{A\}\cup G_A  = G_B$,
-  $\{B\}\cup G'_B = G'_A$,
-  $\{B\}\cup G_B  = \{A\} \cup G'_A$,
-  and $G_A        = G'_B$.
+  due to equations $\{A\}\cup G_A = G_B$, $\{B\}\cup G'_B = G'_A$,
+  $\{B\}\cup G_B = \{A\} \cup G'_A$, and $G_A = G'_B$ that follow
+  easily from the definition of the covered arc.
 \end{proof}
 
 \subsection{qNML is consistent}
@@ -208,9 +206,9 @@ where we have denoted by $P^1$ the model that takes $n$-dimensional
 vectors to be values of the single (collapsed) categorical variable.
 Denoting prefixes of data vector $x$ by $x^{:i}$, and number of times
 such a prefix appears in a $N\times n$ datamatrix $D$ by $n_D(x^{:i})$,
-($n_D(x^0)=N)$, we have
+($n_D(x^{:0})=N)$, we have
 \begin{eqnarray}
-  P(D;\hat\theta(D),G) &=& \prod_{j=1}^{N}P(d_j;\theta(D),G) \nonumber \\
+  P(D;\hat\theta(D),G) &=& \prod_{j=1}^{N}P(d_j;\hat\theta(D),G) \nonumber \\
   &=& \prod_{j=1}^{N} \prod_{i=1}^{n} \frac{n_D(d_j^{:i})}{n_D(d_j^{:i-1})} \nonumber\\
   &=& \prod_{j=1}^{N} \frac{n_D(d_j^{:n})}{N} \nonumber \\
   &=& P^1(D;\hat\theta^1(D),G).
@@ -250,13 +248,9 @@ HERE SOME TEXT ABOUT GROWTH RATE
 
 \subsection{On implementation}
 
-Collapsing many variables into a single one causes $r$ in the
-equation~(\ref{eqn:szp}) to be exponentially large (in our experiments
-around $2^{20}$).  This causes the $\Gamma^2$ terms to grow very large
-calling for care when computing the ratios of such huge numbers. More
-specifically, scoring the $i^\text{th}$ data column, i.e., computing
-$s^{qNML}_i$, requires the difference $dreg(N,q_i,r_i)=reg(N,q_i) -
-reg(N,r_i q_i)$, where $q$ denotes the number of values in the
+REWRITE THIS
+
+$dreg(N,q_i,r_i)=reg(N,q_i) -reg(N,r_i q_i)$, where $q$ denotes the number of values in the
 collapsed parent variable.  A numerically stable approximation is:
 \begin{eqnarray}
 \lefteqn{dreg(N,q,r)\approx\frac{1-r^2}{18 N} q^{2}} \\
