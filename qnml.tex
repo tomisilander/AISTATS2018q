@@ -171,16 +171,22 @@ This concludes our proof since lemmas \ref{MLLemma} and \ref{penaltyLemma} imply
 similar pattern as found in \cite{SilanderIJAR10} where the
 consistency of fNML was proved.
 
-\subsection{qNML equals NML for exponentially many models}
+\subsection{qNML equals NML for many models}
 The fNML criterion equals NML criterion just for the Bayesian network
 with no arcs.  We will next show that the qNML equals NML when the
 connected components of the network are tournaments (complete directed
 acyclic subgraphs of G).
 
+\begin{theorem}
+If $G$ consists of $C$ connected components $(G^1,\ldots,G^C)$ with
+variable sets $(V^1,\ldots,V^C)$, then $\log P_{NML}(D;G) = s^{qNML}(D;G)$
+for all data sets $D$.
+\end{theorem}
+\begin{proof}
 We first note that the NML-criterion for the Bayesian networks
-decomposes by the connected components. Namely, if $G$ consists of $C$
-connected components $(G^1,\ldots,G^C)$ with variable sets $(V^1,\ldots,V^C)$,
-the maximum likelihood for the data $D$ decomposes, and we can write
+decomposes by the connected components.
+
+The maximum likelihood for the data $D$ decomposes, and we can write
 \begin{eqnarray}
   \lefteqn{P_{NML}(D;G)} \nonumber \\
   && = \frac{P(D;\hat\theta(D),G)}
@@ -216,6 +222,7 @@ such a prefix appears in a $N\times n$ datamatrix $D$ by $n_D(x^{:i})$,
 Since both $P^1_{NML}$ and $P_{NML}$ are defined in terms of the
 maximum likelihood probabilities, the equality above implies the equality
 of these distributions.
+\end{proof}
 
 Equality established, we would like to still state the number of
 different networks connected components of which are tournaments.  We
@@ -243,18 +250,6 @@ With $p(n) =$ the number of integer partitions of $n$,
 $$
 a(n) = \sum_{i=1}^{p(n)} \frac{n!}{\prod_{j=1}^{d(i)} m(i,j)!}.
 $$
+For example, $a(4)=\frac{4!}{1!}+\frac{4!}{1!1!}+\frac{4!}{2!}+\frac{4!}{1!2!}+\frac{4!}{4!}=73$.
 
-HERE SOME TEXT ABOUT GROWTH RATE
 
-\subsection{On implementation}
-
-REWRITE THIS
-
-$dreg(N,q_i,r_i)=reg(N,q_i) -reg(N,r_i q_i)$, where $q$ denotes the number of values in the
-collapsed parent variable.  A numerically stable approximation is:
-\begin{eqnarray}
-\lefteqn{dreg(N,q,r)\approx\frac{1-r^2}{18 N} q^{2}} \\
-&&+ \frac{\left(q - 1\right) \sqrt{4 q - 2} + \left(1 - q r\right) \sqrt{4 q r - 2}}{6 \sqrt{N}} \nonumber\\
-&&+\frac{q\left(3 N \left(r \log{r}  - \left(r - 1\right) \left(\log{N} + 1\right)\right) + r\right)}{6 N} \nonumber\\
-&&+ \frac{1}{12}(\log{(r+\frac{1-r}{q+1})}- 7\log{r}).\nonumber
-\end{eqnarray}
