@@ -9,7 +9,7 @@ Despite denoting the values with small integers, the model will treat
 the components of $X$ categorical.
 
 
-\subsection{Likelihood}
+\subsection{LIKELIHOOD}
 \label{ssec:likelihood}
 
 Bayesian network $B=(G,\theta)$ defines a probability distribution for
@@ -39,7 +39,7 @@ P(x|G,\theta)=\prod_{i=1}^{n}P(x_{i}\mid G_{i}(x);\theta_{i})=\prod_{i=1}^{n}\th
 
 
 
-\subsection{Bayesian structure learning}
+\subsection{BAYESIAN STRUCTURE LEARNING}
 
 Bayesian learning of Bayesian network structures is based on the
 posterior probability $P(G|D,\alpha)$, where $\alpha$ denotes the
@@ -68,7 +68,7 @@ In coding terms this means that each data column $D[\cdot,i]$ is first partition
 values in columns $G_i$, and each part is then coded using a Bayesian mixture that can be expressed
 in a closed form~\cite{Bunt91, Heck95}.
 
-\subsection {Problems, solutions and problems}
+\subsection {PROBLEMS, SOLUTIONS AND PROBLEMS}
 
 Finding the satisfactory Dirichlet hyperparameters for the Bayesian
 mixture above has, however, turned out to be problematic. Early on,
@@ -88,7 +88,23 @@ of this hyperparameter~\cite{cosco.uai07} and that for small sample
 sizes this method detects spurious correlations~\cite{Steck08} leading
 to models with suspiciously many parameters. 
 
-Recently, Suzuki~\cite{Suzuki2017} discussed the theoretical properties of the BDeu of score and showed that in certain settings BDeu has tendency to add more and more parent variables for a child node even though the empirical conditional entropy of the child given the parents has already reached zero. More in detail, assume that in our data $D$, the values of $X_i$ are completely determined by variables in set $Z$, so that the entropy $H(X | Z) = 0$. Now, if we can further find one or more variables, denoted by $Y$, whose values are determined completely by the variables in $Z$, then BDeu will prefer the set $Z\cup Y$ over mere $Z$ as the parents of $X_i$. Suzuki argues that this kind of behaviour violates regularity in model selection as the more complex model is preferred over a simpler one even though it does not fit to data any better. The phenomena seems to stem from the way the hyperparameters for the Dirichlet distribution are chosen in BDeu as the  BD score based on the Jeffreys prior does not suffer from this anomaly.    
+Recently, Suzuki~\cite{Suzuki2017} discussed the theoretical
+properties of the BDeu of score and showed that in certain settings
+BDeu has tendency to add more and more parent variables for a child
+node even though the empirical conditional entropy of the child given
+the parents has already reached zero. More in detail, assume that in
+our data $D$, the values of $X_i$ are completely determined by
+variables in set $Z$, so that the entropy $H(X | Z) = 0$. Now, if we
+can further find one or more variables, denoted by $Y$, whose values
+are determined completely by the variables in $Z$, then BDeu will
+prefer the set $Z\cup Y$ over mere $Z$ as the parents of $X_i$. Suzuki
+argues that this kind of behaviour violates regularity in model
+selection as the more complex model is preferred over a simpler one
+even though it does not fit to data any better. The phenomena seems to
+stem from the way the hyperparameters for the Dirichlet distribution
+are chosen in BDeu as the BD score based on the Jeffreys prior does
+not suffer from this anomaly.
+
 
 A natural solution to avoid parameter sensitivity of BDeu would be to
 use a normalized maximum likelihood (NML)
@@ -102,8 +118,10 @@ parameters and the sum in the denominator goes over all the possible
 $N\times n$ data matrices. While it is easy to see that this criterion
 satisfies the requirement of giving equal scores to equal structures,
 the normalizing constant renders the computation
-infeasible. Consequently, Silander et al.~\cite{cosco.pgm08a}
-suggested solving the parameter sensitivity problem by adopting the
+infeasible.
+
+Consequently, Silander et al.~\cite{cosco.pgm08a}
+suggested solving the BDeu parameter sensitivity problem by adopting the
 NML-code to the column partitions, i.e., changing the Bayesian mixture
 in equation~(\ref{eqn:bayesmix}) to
 \begin{equation}

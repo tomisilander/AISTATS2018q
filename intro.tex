@@ -17,16 +17,16 @@ model selection criteria such as the Akaike information
 criterion~\cite{Akai73} and the Bayesian information
 criterion~\cite{Schw78} have also been used for the task, but recent
 comparisons have not been favorable for these criteria in terms of
-structural stability and/or predictive
-performance~\cite{cosco.pgm08a}.  The most popular criterion has been
-the marginal likelihood (usually called BDeu for reasons explained
-later), but recent studies~\cite{cosco.uai07,Steck08} have found this
-criterion to be very sensitive to hyper parameters and to yield
-undesirably complex models for small sample sizes.
+identifying the appropriate structure and/or predictive
+performance~\cite{cosco.pgm08a}. Traditionally, the most popular
+criterion has been the marginal likelihood (usually called BDeu for
+reasons explained later), but recent studies~\cite{cosco.uai07,Steck08}
+have found this criterion to be very sensitive to hyper parameters
+and to yield undesirably complex models for small sample sizes.
 
 The information theoretic normalized maximum likelihood (NML)
 criterion~\cite{Shta87,Riss96a} would otherwise be an ideal candidate
-for a good criterion.  but its exact calculation is likely to be
+for a good criterion,  but its exact calculation is likely to be
 prohibitively demanding. In 2008, Silander et al. introduced a
 hyper-parameter free, NML inspired criterion called a factorized NML
 (fNML)~\cite{cosco.pgm08a} that was shown to yield good predictive
@@ -42,4 +42,8 @@ the qNML is also consistent.
 We will next briefly introduce Bayesian networks and then review the
 BDeu and fNML criteria and introduce the qNML criterion.  We will also
 summarize the results for 20 datasets to back up our claim of qNML
-yielding parsimonious models with good predictive capabilities.
+yielding parsimonious models with good predictive capabilities. The
+experiments with artificial data demonstrate the capability to give
+high scores for the data generating model with relatively small sample
+sizes.
+
