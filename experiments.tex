@@ -1,18 +1,11 @@
-\section{EXPERIMENTAL RESULTS}
-
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[width=8cm,height=5cm]{qNML_images/art4_mean.pdf}
 \caption{Finding generating models of 4 arcs.}
 \label{fig:4arcs}
 \end{figure}
 
-\begin{figure}
-\centering
-\includegraphics[width=8cm,height=5cm]{qNML_images/art7_mean.pdf}
-\caption{Finding generating models of 7 arcs.}
-\label{fig:4arcs}
-\end{figure}
+\section{EXPERIMENTAL RESULTS}
 
 We empirically compare the capacity of qNML to that of BIC, BDeu and
 fNML in identifying the data generating structures, and producing
@@ -41,6 +34,12 @@ studied how different scoring criteria ranked the structure of the
 generating network among all the 5-node networks as a function of
 (sub)sample size.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm,height=5cm]{qNML_images/art7_mean.pdf}
+\caption{Finding generating models of 7 arcs.}
+\label{fig:4arcs}
+\end{figure}
 
 
 Not surprisingly, the results indicate that when the parameter generation
@@ -77,14 +76,6 @@ hyperparameter free, for structures learned by the other model
 selection criteria, we used the predictive conditional NML
 parametrization $\theta_{ijk}\propto e(n_{ijk})(n_{ijk}+1)$, where
 $e(n)=(\frac{n+1}{n})^n$ as suggested in~\cite{Riss07b}.
-
-\begin{figure}
-\centering
-\includegraphics[width=8cm,height=5cm]{qNML_images/breast_cancer_npmean.pdf}
-\caption{Number of parameters in a breast cancer model as a function
-  of sample size for different model selection criteria.}
-\label{fig:bcnpmean}
-\end{figure}
 
 \begin{table}
 \caption{Predictive log losses for small sample sizes for different model selection criteria in 20 different datasets.}

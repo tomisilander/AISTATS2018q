@@ -138,24 +138,21 @@ $$
 
 \begin{proof}
 We can write the terms on the left side of the equation as
-$$
-P(D_{i, G_i} \ | \ \hat{\theta}_{i, G_i}) = \prod_{j,k} \Le \frac{N_{ijk}}{N}  \Ri^{N_{ijk}}
-$$and
-$$
-P(D_{G_i} \ | \ \hat{\theta}_{G_i} ) =  \prod_{j} \Le \frac{N_{ij}}{N}  \Ri^{N_{ij}}.
-$$Here, $N_{ijk}$ denotes the number of times we observe $X_i$ taking value $k$ when its parents are in $j^\text{th}$ configuration in our data matrix $D$. Also, $N_{ij} = \sum_k N_{ijk}$ (and $\sum_{k,j}N_{ijk} = N$ for all $i$).
-
+\begin{eqnarray*}
+P(D_{i, G_i} \ | \ \hat{\theta}_{i, G_i}) &=& \prod_{j,k} \Le \frac{N_{ijk}}{N}  \Ri^{N_{ijk}}, \text{ and }\\
+P(D_{G_i} \ | \ \hat{\theta}_{G_i} ) &=&  \prod_{j} \Le \frac{N_{ij}}{N}  \Ri^{N_{ij}}.
+\end{eqnarray*}
+Here, $N_{ijk}$ denotes the number of times we observe $X_i$ taking value $k$ when its parents are in $j^\text{th}$ configuration in our data matrix $D$. Also, $N_{ij} = \sum_k N_{ijk}$ (and $\sum_{k,j}N_{ijk} = N$ for all $i$).
 Therefore,
 \begin{align*}
 \frac{P(D_{i, G_i} \ | \ \hat{\theta}_{i, G_i} )}{P(D_{G_i} \ | \ \hat{\theta}_{G_i} )} &= \frac{ \prod_{j,k} \Le \frac{N_{ijk}}{N}  \Ri^{N_{ijk}}}{\prod_{j} \Le \frac{N_{ij}}{N}  \Ri^{N_{ij}}} \\
 &= \frac{ \prod_{j,k} \Le \frac{N_{ijk}}{N}  \Ri^{N_{ijk}}}{\prod_{j} \Le \frac{N_{ij}}{N}  \Ri^{\sum_k N_{ijk}}} \\
 &= \frac{ \prod_{j,k} \Le \frac{N_{ijk}}{N}  \Ri^{N_{ijk}}}{\prod_{j}\prod_{k} \Le \frac{N_{ij}}{N}  \Ri^{N_{ijk}}}\\
-&= \prod_{j,k} \Le \frac{N_{ijk}}{N_{ij}} \Ri^{N_{ijk}} \\
+%% &= \prod_{j,k} \Le \frac{N_{ijk}}{N_{ij}} \Ri^{N_{ijk}} \\
 &= P(D_i \ | \ \hat{\theta}_{i | G_i} ).
 \end{align*} 
 
 \end{proof}
-
 Next, we consider the difference of regrets in
 (\ref{qnmlDef2}) which corresponds to the penalty term of BIC. The
 following lemma states that these two are asymptotically equal:
@@ -241,25 +238,26 @@ maximum likelihood probabilities, the equality above implies the equality
 of these distributions.
 \end{proof}
 
-Equality established, we would like to still state the number of
-different networks whose connected components are tournaments.  We
-start by generating all the $p(n)$ integer partitions i.e. ways to
-partition $n$ labelled into parts with different size-profiles.  For
-example, for $n=4$, we have $p(4)=5$ partition profiles $[[4], [3, 1],
-  [2, 2], [2, 1, 1], [1, 1, 1, 1]]$. Each of these partition size
-profiles corresponds to many different networks, apart from the last
-one that corresponds just to the empty network.  We count number of
-networks for one such partition size-profile (and then later sum these
-counts up).  For any such partition profile $(p_1,\ldots,p_k)$ we can
-count the ways we can assign the nodes to different parts
-and then order each part. This leads to the product $n\choose
-p_1$$p_1$!${n-p_1}\choose p_2$$p_2!$${n-p_1-p2}\choose
+Equality established, we would like to still state the number $a(n)$
+of different $n$-node networks whose connected components are
+tournaments.  We start by generating all the $p(n)$ integer partitions
+i.e. ways to partition $n$ labelled into parts with different
+size-profiles.  For example, for $n=4$, we have $p(4)=5$ partition
+profiles $[[4], [3, 1], [2, 2], [2, 1, 1], [1, 1, 1, 1]]$. Each of
+these partition size profiles corresponds to many different networks,
+apart from the last one that corresponds just to the empty network.
+We count number of networks for one such partition size-profile (and
+then later sum these counts up).  For any such partition profile
+$(p_1,\ldots,p_k)$ we can count the ways we can assign the nodes to
+different parts and then order each part. This leads to the product
+$n\choose p_1$$p_1$!${n-p_1}\choose p_2$$p_2!$${n-p_1-p2}\choose
 p_3$$p_3!$$\ldots$${n-\sum_{j=1}^{k-1}p_j}\choose p_k$$p_k!$. However,
 the order of different parts of the same size does not matter, so for
 all groups of parts having the same size, we have to divide the
 product above by the factorial of the size of such group. Notice also,
 that the product above telescopes, leaving us a formula for OEIS
-sequence A000262 as described by Thomas Wieder:
+sequence A000262\footnote{https://oeis.org/A000108} as
+described by Thomas Wieder:
 
 \textit{
 With $p(n) =$ the number of integer partitions of $n$, $d(i)$ = the
@@ -270,6 +268,6 @@ partition of $n$, one has:
 $$
 a(n) = \sum_{i=1}^{p(n)} \frac{n!}{\prod_{j=1}^{d(i)} m(i,j)!}.
 $$
-For example, $a(4)=\frac{4!}{1!}+\frac{4!}{1!1!}+\frac{4!}{2!}+\frac{4!}{1!2!}+\frac{4!}{4!}=73$.
+For example, $a(4)=\frac{4!}{1!}+\frac{4!}{1!1!}+\frac{4!}{2!}+\frac{4!}{1!2!}+\frac{4!}{4!}=73$. In general this sequence grows rapidly; $1, 1, 3, 13, 73, 501, 4051, 37633, 394353, 4596553, \ldots$.
 
 

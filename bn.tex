@@ -118,10 +118,14 @@ P_{NML}(D;G)=\frac{P(D|\hat\theta(D;G))}{\sum_{D'}{P(D'|\hat\theta(D';G))}},
 \end{equation}
 where $\hat\theta$ denotes the (easy to find) maximum likelihood
 parameters and the sum in the denominator goes over all the possible
-$N\times n$ data matrices. While it is easy to see that this criterion
-satisfies the requirement of giving equal scores to equal structures,
-the normalizing constant renders the computation
-infeasible.
+$N\times n$ data matrices. This information theoretic NML criterion
+can be justified from the minimum description length point of view,
+\cite{Riss78,Grun07}. It has been shown to be robust with respect to
+different data generating mechanisms where a good choice of prior
+is challenging, see~\cite{eggeling2014robust,maatta16}. While it is
+easy to see that the NML criterion satisfies the requirement of giving
+equal scores to equal structures, the normalizing constant renders the
+computation infeasible.
 
 Consequently, Silander et al.~\cite{cosco.pgm08a}
 suggested solving the BDeu parameter sensitivity problem by using the
@@ -180,14 +184,29 @@ implementation of the qNML criterion.
 
 fNML solves the parameter sensitivity problem and yields predictive
 models superior to BDeu.  However, the criterion does not satisfy the
-property of giving the same score for models that correspond to
-the same dependence statements. Furthermore, the learned structures
-are often rather complex which hampers their interpretation.
+property of giving the same score for models that correspond to the
+same dependence statements. Furthermore, the learned structures are
+often rather complex (see Figure~\ref{fig:bcnpmean}) which also
+hampers their interpretation. The quest for a model selection
+criterion that would yield more parsimonious, easier to interpret, but
+still predictive Bayesian networks structures is one of the main
+motivations for this work.
+
+\begin{figure}
+\centering
+\includegraphics[width=8cm,height=5cm]{qNML_images/breast_cancer_npmean.pdf}
+\caption{Number of parameters in a breast cancer model as a function
+  of sample size for different model selection criteria.}
+\label{fig:bcnpmean}
+\end{figure}
+
+
 
 \begin{table}
-\centering
+\caption{Regret values for various values of $N$ and $r$.}
+\label{tbl:regrets}
+\begin{center}
 \begin{tabular}{crrrr}
-\toprule
 N & r & eq. (\ref{eqn:szp1}) & eq. (\ref{eqn:szp2}) & exact \\
 \midrule
 \multirow{4}{*}{50} & 10 & 13.24 & 13.26 & 13.24 \\
@@ -206,6 +225,5 @@ N & r & eq. (\ref{eqn:szp1}) & eq. (\ref{eqn:szp2}) & exact \\
 & 10000 & 6247.83 & 6043.16 & 6043.16 \\
 \bottomrule
 \end{tabular}
-\caption{Regret values for various values of $N$ and $r$.}
-\label{tbl:regrets}
+\end{center}
 \end{table}
