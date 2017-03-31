@@ -44,7 +44,7 @@ G_{i}(x);\theta_{i})=\prod_{i=1}^{n}\theta_{iG_{i}(x)x_{i}}.
 
 Bayesian learning of Bayesian network structures is based on the
 posterior probability $P(G|D,\alpha)$, where $\alpha$ denotes the
-hyper\nobreakdash-parameters for the model parameters $\theta$, and
+hyperparameters for the model parameters $\theta$, and
 the $D$ is a collection of $N$ $n$\nobreakdash-dimensional i.i.d. data
 vectors collected to a $N\times n$ design matrix.  We use structure
 $G$ to extend the common matrix indexing notation $D[i,j]$, and allow
@@ -74,14 +74,14 @@ in a closed form~\cite{Bunt91, Heck95}.
 Finding satisfactory Dirichlet hyperparameters for the Bayesian
 mixture above has, however, turned out to be problematic. Early on,
 one of the desiderata for a good model selection criterion was that it
-is score-equivalent, i.e., it would yield equal scores for
+is score equivalent, i.e., it would yield equal scores for
 essentially equivalent models~\cite{Verm90}.  For example, the score
 for the structure $X_1\rightarrow X_2$ should be the same as the score
 for the model $X_2 \rightarrow X_1$ since they both correspond to the
 hypothesis that variables $X_1$ and $X_2$ are statistically dependent
 on each other.  It can be shown~\cite{Heck95} that to achieve this,
 not all the hyperparameters $\alpha$ are possible and for practical
-reasons Buntine~\cite{Bunt91} suggested a so called BDeu score with
+reasons Buntine~\cite{Bunt91} suggested a so-called BDeu score with
 just one hyperparameter $\alpha\in R_{++}$ so that
 $\theta_{ij\cdot}\sim Dir(\frac{\alpha}{q_i
   r_i},\ldots,\frac{\alpha}{q_i r_i})$.  However, it soon turned out
@@ -105,9 +105,9 @@ selection as the more complex model is preferred over a simpler one
 even though it does not fit the data any better. The phenomenon seems
 to stem from the way the hyperparameters for the Dirichlet
 distribution are chosen in BDeu as using Jeffreys' prior,
-$\theta_{ijk}\sim Dir(\frac{1}{2},ldots,\frac{1}{2})$, does not suffer
+$\theta_{ijk}\sim Dir(\frac{1}{2},\ldots,\frac{1}{2})$, does not suffer
 from this anomaly. However, using Jeffreys' prior causes marginal
-likelihood score not to be score-equivalent.
+likelihood score not to be score equivalent.
 
 A natural solution to avoid parameter sensitivity of BDeu would be to
 use a normalized maximum likelihood (NML)
@@ -118,7 +118,7 @@ P_{NML}(D;G)=\frac{P(D|\hat\theta(D;G))}{\sum_{D'}{P(D'|\hat\theta(D';G))}},
 \end{equation}
 where $\hat\theta$ denotes the (easy to find) maximum likelihood
 parameters and the sum in the denominator goes over all the possible
-$N\times n$ data matrices. This information theoretic NML criterion
+$N\times n$ data matrices. This information-theoretic NML criterion
 can be justified from the minimum description length point of view,
 \cite{Riss78,Grun07}. It has been shown to be robust with respect to
 different data generating mechanisms where a good choice of prior

@@ -25,8 +25,8 @@ first scheme exactly matched the assumptions of the BDeu score with
 $\alpha = 1$, i.e., the parameters were distributed by $\theta_{ij}
 \sim Dir(\frac{1}{r_iq_i},\ldots,\frac{1}{r_iq_i})$. The other scheme
 was to generate the parameters independently from a Dirichlet
-distribution $\theta_{ij} \sim Dir(\frac{1}{2},\ldots, \frac{1}{2})$
-that is the Jeffreys' prior for the multinomial model. This distribution
+distribution $\theta_{ij} \sim Dir(\frac{1}{2},\ldots, \frac{1}{2})$,
+that is, the Jeffreys' prior for the multinomial model. This distribution
 was selected instead of the uniform distribution in order to make the
 generating structure more identifiable.  For each network (structure +
 parameters), we generated 100 data sets of 1000 data vectors, and
@@ -49,7 +49,7 @@ also ranks the generating structure higher than the other scores
 Jeffreys' prior, the fNML score appears to rank the generating structure
 highest. This too is not surprising, since the NML distribution for
 multinomial data is known to closely match the marginal distribution of
-the data when the Jefrreys' prior is used.
+the data when the Jeffreys' prior is used.
 
 The underfitting tendency of BIC can also be clearly detected both for
 relatively sparse networks (4 arcs) and for dense ones (7 arcs). The
@@ -65,14 +65,14 @@ To empirically compare the model selection criteria we took 20 UCI
 data sets~\cite{Lichman:2013} and ran 1000 train and test experiments
 for all of them. In each experiment, random 10\% of the original
 dataset was selected as training data and the rest 90\% as test data.
-The training was conducted using a dynamic programming based exact structure
+The training was conducted using dynamic programming based exact structure
 learning~\cite{cosco.uai06} which limited the number $n$ of variables
 to less than 20.
 
 When predicting with structures learned by the BDeu score, we used the
 Bayesian expected parameter values $\theta_{ijk} \propto
 N_{ijk}+\frac{1}{r_iq_i}$.  In the spirit of keeping the scores
-hyperparameter free, for structures learned by the other model
+hyperparameter-free, for structures learned by the other model
 selection criteria, we used the predictive conditional NML
 parametrization $\theta_{ijk}\propto e(n_{ijk})(n_{ijk}+1)$, where
 $e(n)=(\frac{n+1}{n})^n$ as suggested in~\cite{Riss07b}.
