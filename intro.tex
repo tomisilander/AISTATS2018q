@@ -3,15 +3,15 @@
 Bayesian networks~\cite{Pear88} are popular models for presenting
 multivariate statistical dependencies that may have been induced by
 underlying causal mechanisms.  Techniques for learning the structure
-of Bayesian networks from the observational data has therefore been
-used for many tasks such as discovering cell signaling pathways from
-the protein activity data~\cite{bn4sigpath02}, revealing the business
-process structures~\cite{bn4bpmining} from the transaction logs and
-modeling brain region connectivity using fMRI
+of Bayesian networks from observational data have therefore been used
+for many tasks such as discovering cell signaling pathways from
+protein activity data~\cite{bn4sigpath02}, revealing the business
+process structures~\cite{bn4bpmining} from transaction logs and
+modeling brain-region connectivity using fMRI
 data~\cite{bn4brainconnect}.
 
 Learning the structure of statistical dependencies can be seen as a
-model selection task where each model is a different hypothesis about
+model-selection task where each model is a different hypothesis about
 the conditional dependencies between sets of variables. Traditional
 model selection criteria such as the Akaike information
 criterion~\cite{Akai73} and the Bayesian information
@@ -20,29 +20,29 @@ comparisons have not been favorable for these criteria in terms of
 identifying the appropriate structure and/or predictive
 performance~\cite{cosco.pgm08a}. Traditionally, the most popular
 criterion has been the marginal likelihood (usually called BDeu for
-reasons explained later), but recent studies~\cite{cosco.uai07,Steck08}
+reasons explained later), but studies~\cite{cosco.uai07,Steck08}
 have found this criterion to be very sensitive to hyper parameters
 and to yield undesirably complex models for small sample sizes.
 
 The information theoretic normalized maximum likelihood (NML)
 criterion~\cite{Shta87,Riss96a} would otherwise be an ideal candidate
-for a good criterion,  but its exact calculation is likely to be
-prohibitively demanding. In 2008, Silander et al. introduced a
-hyper-parameter free, NML inspired criterion called a factorized NML
+for a good criterion, but its exact calculation is likely to be
+prohibitively expensive. In 2008, Silander et al. introduced a
+hyperparameter free, NML inspired criterion called the factorized NML
 (fNML)~\cite{cosco.pgm08a} that was shown to yield good predictive
-models without sensitivity problems.  However, from the structure
+models without such sensitivity problems. However, from the structure
 learning point of view, the fNML still sometimes appears to yield
 overly complex models. In this paper we introduce another NML related
-criterion, a quotient NML (qNML) that yields simpler models without
-sacrificing predictive accuracy. Furthermore, unlike the fNML, the
-qNML gives equal scores to the structures that encode the same
+criterion, the \textit{quotient NML} (qNML) that yields simpler models
+without sacrificing predictive accuracy. Furthermore, unlike the fNML,
+the qNML gives equal scores to structures that encode the same
 independence statements. Like other common model selection criteria,
-the qNML is also consistent.
+qNML is also consistent.
 
-We will next briefly introduce Bayesian networks and then review the
-BDeu and fNML criteria and introduce the qNML criterion.  We will also
-summarize the results for 20 datasets to back up our claim of qNML
-yielding parsimonious models with good predictive capabilities. The
+We next briefly introduce Bayesian networks and review the BDeu and
+fNML criteria and then introduce the qNML criterion.  We also
+summarize the results for 20 datasets to back up our claim that qNML
+yields parsimonious models with good predictive capabilities. The
 experiments with artificial data demonstrate the capability to give
 high scores for the data generating model with relatively small sample
 sizes.

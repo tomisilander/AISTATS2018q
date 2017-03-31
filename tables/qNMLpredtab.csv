@@ -1,21 +1,21 @@
 ,Data,N,BDeu,BIC,fNML,qNML
-0,Iris,15,3.61,3.56,3.50,\textbf{3.47}
-1,PostOperative,18,10.52,\textbf{7.45},8.35,8.39
-2,Ecoli,34,6.27,6.16,\textbf{5.56},5.63
-3,Liver,35,4.22,\textbf{4.01},4.10,4.03
-4,Wine,36,16.41,\textbf{11.27},12.07,11.86
-5,Glass,44,7.48,6.65,\textbf{6.37},6.43
-6,Thyroid,44,2.92,2.93,\textbf{2.81},2.83
-7,HeartStatlog,54,14.37,\textbf{10.96},11.98,11.65
-8,BreastCancer,58,11.21,\textbf{9.94},10.34,10.37
-9,HeartHungarian,60,9.21,\textbf{8.38},8.80,8.61
-10,HeartCleveland,62,14.88,\textbf{11.76},12.48,12.18
-11,BcWisconsin,70,6.41,\textbf{5.09},5.29,5.28
-12,Diabetes,77,5.11,4.99,5.09,\textbf{4.98}
-13,TicTacToe,96,10.99,\textbf{10.35},10.72,11.04
-14,Balance,126,7.45,7.42,\textbf{7.27},7.73
-15,Yeast,149,5.67,5.80,\textbf{5.48},5.49
-16,Abalone,418,3.93,4.00,\textbf{3.88},3.96
-17,PageBlocks,548,2.36,2.40,\textbf{2.32},2.38
-18,Shuttle,5800,1.69,1.72,\textbf{1.69},1.71
-19,Adult,6513,10.16,10.25,\textbf{10.05},10.08
+0,Iris,15,	extit{3.61},3.56,\underline{3.50},\textbf{3.47}
+1,PostOpe,18,	extit{10.52},\textbf{7.45},\underline{8.35},8.39
+2,Ecoli,34,	extit{6.27},6.16,\textbf{5.56},\underline{5.63}
+3,Liver,35,	extit{4.22},\textbf{4.01},4.10,\underline{4.03}
+4,Wine,36,	extit{16.41},\textbf{11.27},12.07,\underline{11.86}
+5,Glass,44,	extit{7.48},6.65,\textbf{6.37},\underline{6.43}
+6,Thyroid,44,2.92,	extit{2.93},\textbf{2.81},\underline{2.83}
+7,HeartSt,54,	extit{14.37},\textbf{10.96},11.98,\underline{11.65}
+8,BreastC,58,	extit{11.21},\textbf{9.94},\underline{10.34},10.37
+9,HeartHu,60,	extit{9.21},\textbf{8.38},8.80,\underline{8.61}
+10,HeartCl,62,	extit{14.88},\textbf{11.76},12.48,\underline{12.18}
+11,BcWisco,70,	extit{6.41},\textbf{5.09},5.29,\underline{5.28}
+12,Diabete,77,	extit{5.11},\underline{4.99},5.09,\textbf{4.98}
+13,TicTacT,96,10.99,\textbf{10.35},\underline{10.72},	extit{11.04}
+14,Balance,126,7.45,\underline{7.42},\textbf{7.27},	extit{7.73}
+15,Yeast,149,5.67,	extit{5.80},\textbf{5.48},\underline{5.49}
+16,Abalone,418,\underline{3.93},	extit{4.00},\textbf{3.88},3.96
+17,PageBlo,548,\underline{2.36},	extit{2.40},\textbf{2.32},2.38
+18,Shuttle,5800,\underline{1.69},	extit{1.72},\textbf{1.69},1.71
+19,Adult,6513,10.16,	extit{10.25},\textbf{10.05},\underline{10.08}

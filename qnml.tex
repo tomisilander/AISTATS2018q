@@ -2,7 +2,7 @@
 
 We will now introduce a quotient normalized maximum likelihood (qNML)
 criterion for learning Bayesian network structures.  While equally
-efficient to compute than BDeu and fNML, it is free from
+efficient to compute as BDeu and fNML, it is free from
 hyperparameters, and it can be proven to give equal scores to
 equivalent models. Furthermore, it coincides with the actual NML score
 for exponentially many models. In our empirical tests it produces
@@ -23,26 +23,29 @@ conditional independencies among the corresponding variables $S
 \subset X$.  In this case, we can collapse the $\prod_{X_i\in S} r_i$
 value configurations and consider them as values of a single variable
 with $\prod_{X_i\in S} r_i$ different values which can then be modeled
-with a one-dimensional $P^1_{NML}$ code.  The $s^{qNML}$ does not
-necessarily define a distribution for $D$, but it is easy to verify
-that it coincides with the $P_{NML}(D;G)$ for all the networks that
-are composed of fully connected components.  The number of such
-networks equals the number of nonempty partitions of a set of $n$
-elements, i.e., the $n^\text{th}$ Bell number.
+with a one-dimensional $P^1_{NML}$ code.  The $s^{qNML}$-score does
+not necessarily define a distribution for $D$, but it is easy to
+verify that it coincides with the $\log P_{NML}(D;G)$ for all networks
+that are composed of fully connected components.  The number of such
+networks is lower bounded by the number of nonempty partitions of a
+set of $n$ elements, i.e., the $n^\text{th}$ Bell number.
+
+We are now ready to prove some important properties of the qNML-score.
 
 \subsection {qNML IS SCORE EQUIVALENT}
 
-The qNML yields equal scores for network structures that encode same
-sets of independencies. Verma and Pearl~\cite{Verm90} showed that the
-equivalent networks are exactly those who a) are same when directed
-arcs are substituted by undirected ones and b) who have same
-V-structures, i.e.  the variable triplets $(A,B,C)$ where both $A$ and
-$B$ are parents of $C$, but there is no arc between $A$ and $B$ (in
-neither direction).  Later, Chickering~\cite{Chick95} showed that all
-the equivalent network structures, and only them, can be reached from
-each other by reversing, one by one, so called covered arcs, i.e. the
-arcs from node $A$ to $B$, for which $B$'s parents other than $A$ are
-exactly the $A$'s parents ($G_B=\{A\}\cup G_A$).
+qNML yields equal scores for network structures that encode same sets
+of independencies. Verma and Pearl~\cite{Verm90} showed that the
+equivalent networks are exactly those which a) are same when directed
+arcs are substituted by undirected ones and b) which have same
+\textit{V-structures}, i.e. the variable triplets $(A,B,C)$ where both
+$A$ and $B$ are parents of $C$, but there is no arc between $A$ and
+$B$ (in either direction).  Later, Chickering~\cite{Chick95} showed
+that all the equivalent network structures, and only those structures,
+can be reached from each other by reversing, one by one, the so called
+\textit{covered arcs}, i.e. the arcs from node $A$ to $B$, for which
+$B$'s parents other than $A$ are exactly  $A$'s parents
+($G_B=\{A\}\cup G_A$).
 
 We will next state this as a
 theorem and sketch a proof for it. A more detailed proof appears in the
@@ -55,13 +58,13 @@ supplementary material.
   $$s^{qNML}(D;G)=s^{qNML}(D;G').$$
 \end{theorem}
 \begin{proof}
-  Now the scores for structures can be decomposed as the
+  Now the scores for structures can be decomposed as
   $s^{qNML}(D;G)=\sum_{i=1}^{n}s_i^{qNML}(D;G)$ and
   $s^{qNML}(D;G')=\sum_{i=1}^{n}s_i^{qNML}(D;G')$.  Since only the
   terms corresponding to the variables $A$ and $B$ in these sums are
-  different, it is enough to show that sum of these two terms are
+  different, it is enough to show that the sum of these two terms are
   equal for $G$ and $G'$. Since we can assume the data to be fixed we
-  lighten up the notations and write
+  lighten up the notation and write
   $P^1_{NML}(i,G_i) := P^1_{NML}(D[\cdot,(i,G_i)];G)$ and
   $P^1_{NML}(G_i)   := P^1_{NML}(D[\cdot,G_i];G)$.
   \begin{eqnarray}
@@ -73,9 +76,9 @@ supplementary material.
              \frac{P^1_{NML}(A,G'_{A})}{P^1_{NML}(G'_{B})}\nonumber\\
  && =s_A^{qNML}(D;G')+s_B^{qNML}(D;G'),\nonumber
 \end{eqnarray}
-  due to equations $\{A\}\cup G_A = G_B$, $\{B\}\cup G'_B = G'_A$,
-  $\{B\}\cup G_B = \{A\} \cup G'_A$, and $G_A = G'_B$ that follow
-  easily from the definition of the covered arc.
+  using the equations $\{A\}\cup G_A = G_B$, $\{B\}\cup G'_B = G'_A$,
+  $\{B\}\cup G_B = \{A\} \cup G'_A$, and $G_A = G'_B$ which follow
+  easily from the definition of covered arcs.
 \end{proof}
 
 \subsection{qNML IS CONSISTENT}
@@ -87,22 +90,27 @@ some DAG $G$, the qNML will give the highest score to true graph $G$
 with a probability tending to one as $N$ increases. We will show this
 by first proving that qNML is asymptotically equivalent to widely used
 BIC criterion which is known to be consistent \cite{Schw78, Haug88}.
+The outline of this proof follows a similar pattern to that in
+\cite{SilanderIJAR10} where the consistency of fNML was proved.
+
 
 The BIC criterion can be written as
 \begin{equation}\label{BIC}
-\textnormal{BIC}(D,G) = \sum_{i = 1}^n \log P(D_i \ | \ \hat{\theta}_{i | G_i} ) - \frac{q_i(r_i - 1)}{2} \log N,
+\textnormal{BIC}(D;G) = \sum_{i = 1}^n \log P(D_i \ | \ \hat{\theta}_{i | G_i} ) - \frac{q_i(r_i - 1)}{2} \log N,
 \end{equation}
 where $D_i = D[\cdot, i]$ stands for the data on variable $i$,
 $\hat{\theta}_{i | G_i}$ denotes the maximum likelihood parameters of
 the conditional distribution of variable $i$ given its parents in
 $G$. 
 
-Since the both BIC and qNML scores are decomposable, we can focus
-on studying the local scores. We will next show that, asymptotically, the local qNML score equals the local BIC score. This is formulated in the following theorem:
+Since both the BIC and qNML scores are decomposable, we can focus on
+studying the local scores. We will next show that, asymptotically, the
+local qNML score equals the local BIC score. This is formulated in the
+following theorem:
 
 \begin{theorem}\label{consistency}
 Let $r_i$ and $q_i$ denote the number of possible values for variable
-$X_i$ and the possible configurations of parents $X_{G_i}$,
+$X_i$ and its possible configurations of parents $X_{G_i}$,
 respectively. As $N \to \infty$
 $$
 s^{qNML}_i(D;G) =  \log P(D_i \ | \ \hat{\theta}_{i | G_i} )  - \frac{q_i(r_i - 1)}{2} \log N.
@@ -116,7 +124,11 @@ s^{qNML}_i(D;G) &= \log \frac{P(D_{i, G_i} \ | \ \hat{\theta}_{i, G_i}
 r_i) - reg(N,q_i)).
 \end{align}
 
-By comparing the equations (\ref{BIC}) and (\ref{qnmlDef2}), we see that proving our clam boils down to showing two things: 1) the terms involving the maximized likelihoods are equal and 2) the penalty terms are asymptotically equivalent. We will formulate these into two lemmas.
+By comparing the equations (\ref{BIC}) and (\ref{qnmlDef2}), we see
+that proving our clam boils down to showing two things: 1) the terms
+involving the maximized likelihoods are equal and 2) the penalty terms
+are asymptotically equivalent. We will formulate these as two
+lemmas.
 
 \begin{lemma}\label{MLLemma} The maximized likelihood terms in equations (\ref{BIC}) and (\ref{qnmlDef2}) are equal:    
 $$
@@ -125,15 +137,15 @@ $$
 \end{lemma}
 
 \begin{proof}
-We can write the terms in the left hand side of the equation as
+We can write the terms on the left side of the equation as
 $$
 P(D_{i, G_i} \ | \ \hat{\theta}_{i, G_i}) = \prod_{j,k} \Le \frac{N_{ijk}}{N}  \Ri^{N_{ijk}}
 $$and
 $$
 P(D_{G_i} \ | \ \hat{\theta}_{G_i} ) =  \prod_{j} \Le \frac{N_{ij}}{N}  \Ri^{N_{ij}}.
-$$Here, $N_{ijk}$ denotes the number of times we observe $X_i$ taking value $k$ when its parents are in $j$:th configuration in our data matrix $D$. Also, $N_{ij} = \sum_k N_{ijk}$ (and $\sum_{k,j}N_{ijk} = N$ for all $i$).
+$$Here, $N_{ijk}$ denotes the number of times we observe $X_i$ taking value $k$ when its parents are in $j^\text{th}$ configuration in our data matrix $D$. Also, $N_{ij} = \sum_k N_{ijk}$ (and $\sum_{k,j}N_{ijk} = N$ for all $i$).
 
-Now,
+Therefore,
 \begin{align*}
 \frac{P(D_{i, G_i} \ | \ \hat{\theta}_{i, G_i} )}{P(D_{G_i} \ | \ \hat{\theta}_{G_i} )} &= \frac{ \prod_{j,k} \Le \frac{N_{ijk}}{N}  \Ri^{N_{ijk}}}{\prod_{j} \Le \frac{N_{ij}}{N}  \Ri^{N_{ij}}} \\
 &= \frac{ \prod_{j,k} \Le \frac{N_{ijk}}{N}  \Ri^{N_{ijk}}}{\prod_{j} \Le \frac{N_{ij}}{N}  \Ri^{\sum_k N_{ijk}}} \\
@@ -167,15 +179,19 @@ reg(N,q_i r_i)& -  reg(N,q_i) \\
 &= \frac{q_i(r_i - 1)}{2} \log N + O(1).
 \end{align*}
 \end{proof}
-This concludes our proof since lemmas \ref{MLLemma} and \ref{penaltyLemma} imply the Theorem \ref{consistency}. The outline of this proof follows the
-similar pattern as found in \cite{SilanderIJAR10} where the
-consistency of fNML was proved.
+This concludes our proof since Lemmas \ref{MLLemma} and
+\ref{penaltyLemma} imply Theorem \ref{consistency}.
+
+
 
 \subsection{qNML EQUALS NML FOR MANY MODELS}
-The fNML criterion equals NML criterion just for the Bayesian network
-with no arcs.  We will next show that the qNML equals NML when the
-connected components of the network are tournaments (complete directed
-acyclic subgraphs of G).
+The fNML criterion can be seen as a computationally feasible
+approximation of the more desirable NML criterion.  However, the fNML
+criterion equals the NML criterion only for the Bayesian network
+structure with no arcs.  We will next show that the qNML criterion
+equals the NML criterion for all the networks $G$ whose connected
+components tournaments (i.e., complete directed acyclic subgraphs of
+$G$).
 
 \begin{theorem}
 If $G$ consists of $C$ connected components $(G^1,\ldots,G^C)$ with
@@ -183,40 +199,41 @@ variable sets $(V^1,\ldots,V^C)$, then $\log P_{NML}(D;G) = s^{qNML}(D;G)$
 for all data sets $D$.
 \end{theorem}
 \begin{proof}
-We first note that the NML-criterion for the Bayesian networks
+We first show that the NML-criterion for a Bayesian network
 decomposes by the connected components.
 
-The maximum likelihood for the data $D$ decomposes, and we can write
+Because the maximum likelihood for the data $D$ decomposes,
+we can write
 \begin{eqnarray}
   \lefteqn{P_{NML}(D;G)} \nonumber \\
   && = \frac{P(D;\hat\theta(D),G)}
             {\sum_{D_{V_1}}\ldots \sum_{D_{V_C}}\prod_{c=1}^C P(D_{V^c};\hat\theta(D_{V^c}),G)} \nonumber \\
             && = \frac{\prod_{c=1}^C P(D_{V^c};\hat\theta(D_{V^c}),G)} 
-            {\prod_{c=1}^C\sum_D^cP(D_{V^c};\hat\theta(D_{V^c}),G)}.\nonumber \\
+            {\prod_{c=1}^C\sum_{D_{V^c}}P(D_{V^c};\hat\theta(D_{V^c}),G)}.\nonumber \\
             && = \prod_{c=1}^CP_{NML}(D_{V^c};G).
 \end{eqnarray}
 
 Clearly, the qNML score also decomposes by the connected components,
 so it remains to show that if the (sub)network $G$ is a tournament,
 then for any data $D$, $s^{qNML}(D;G)=\log P_{NML}(D;G)$.  Due to the
-score equivalence of both the NML criterion and the qNML criterion, we
-may pick such a tournament $G$ that linear ordering defined by $G$
-matches the ordering of the data columns, i.e., $i<j$ implies $G_i
-\subset G_j$. Now from the definition~(\ref{eqn:qnmldef}) of the qNML
+score equivalence of the NML criterion and the qNML criterion, we may
+pick a tournament $G$ such that the linear ordering defined by $G$ matches
+the ordering of the data columns, i.e., $i<j$ implies $G_i \subset
+G_j$. Now from the definition~(\ref{eqn:qnmldef}) of the qNML
 criterion we see that for the tournament $G$, the sum telescopes
 leaving us with $s^{qNML}(D;G) = \log P^1_{NML}(D[\cdot,G];G)$, thus
-it is enough to show that $P^1_{NML}(D;G)=P_{NML}(D;G)$.
-This follows, since for any data vector $x$ in data $D$, the
-$P^1(x;\hat\theta(D),G) = P(x;\hat\theta(D),G)$,
-where we have denoted by $P^1$ the model that takes $n$-dimensional
-vectors to be values of the single (collapsed) categorical variable.
-Denoting prefixes of data vector $x$ by $x^{:i}$, and number of times
-such a prefix appears in a $N\times n$ datamatrix $D$ by $n_D(x^{:i})$,
-($n_D(x^{:0})=N)$, we have
+it is enough to show that $P^1_{NML}(D;G)=P_{NML}(D;G)$.  This
+follows, since for any data vector $x$ in data $D$, we have
+$P^1(x;\hat\theta(D),G) = P(x;\hat\theta(D),G)$, where $P^1$ denotes
+the model that takes $n$-dimensional vectors to be values of the
+single (collapsed) categorical variable.  Denoting prefixes of data
+vector $x$ by $x^{:i}$, and the number of times such a prefix appears
+in a $N\times n$ data matrix $D=[d_1,\ldots,d_N]$ by $N_D(x^{:i})$,
+(so that $N_D(x^{:0})=N)$, we have
 \begin{eqnarray}
   P(D;\hat\theta(D),G) &=& \prod_{j=1}^{N}P(d_j;\hat\theta(D),G) \nonumber \\
-  &=& \prod_{j=1}^{N} \prod_{i=1}^{n} \frac{n_D(d_j^{:i})}{n_D(d_j^{:i-1})} \nonumber\\
-  &=& \prod_{j=1}^{N} \frac{n_D(d_j^{:n})}{N} \nonumber \\
+  &=& \prod_{j=1}^{N} \prod_{i=1}^{n} \frac{N_D(d_j^{:i})}{N_D(d_j^{:i-1})} \nonumber\\
+  &=& \prod_{j=1}^{N} \frac{N_D(d_j^{:n})}{N} \nonumber \\
   &=& P^1(D;\hat\theta^1(D),G).
 \end{eqnarray}
 Since both $P^1_{NML}$ and $P_{NML}$ are defined in terms of the
@@ -225,28 +242,31 @@ of these distributions.
 \end{proof}
 
 Equality established, we would like to still state the number of
-different networks connected components of which are tournaments.  We
+different networks whose connected components are tournaments.  We
 start by generating all the $p(n)$ integer partitions i.e. ways to
 partition $n$ labelled into parts with different size-profiles.  For
 example, for $n=4$, we have $p(4)=5$ partition profiles $[[4], [3, 1],
-  [2, 2], [2, 1, 1], [1, 1, 1, 1]]$.  Each of these partition size
+  [2, 2], [2, 1, 1], [1, 1, 1, 1]]$. Each of these partition size
 profiles corresponds to many different networks, apart from the last
 one that corresponds just to the empty network.  We count number of
-networks for one such partition size profile (and then later sum these
+networks for one such partition size-profile (and then later sum these
 counts up).  For any such partition profile $(p_1,\ldots,p_k)$ we can
-(think we can) count the ways we can pick the nodes to different parts
+count the ways we can assign the nodes to different parts
 and then order each part. This leads to the product $n\choose
 p_1$$p_1$!${n-p_1}\choose p_2$$p_2!$${n-p_1-p2}\choose
-p_3$$p3!$$\ldots$${n-\sum_{j=1}^{k-1}p_j}\choose p_k$$p_k!$. However,
+p_3$$p_3!$$\ldots$${n-\sum_{j=1}^{k-1}p_j}\choose p_k$$p_k!$. However,
 the order of different parts of the same size does not matter, so for
 all groups of parts having the same size, we have to divide the
 product above by the factorial of the size of such group. Notice also,
 that the product above telescopes, leaving us a formula for OEIS
 sequence A000262 as described by Thomas Wieder:
 
-With $p(n) =$ the number of integer partitions of $n$, 
-     $d(i)$ = the number of different parts of the $i$-th partition of $n$, $m(i,j) =$ multiplicity of the $j$-th part of the $i$-th partition of $n$,  one has: 
-
+\textit{
+With $p(n) =$ the number of integer partitions of $n$, $d(i)$ = the
+number of different parts of the $i^\text{th}$ partition of $n$,
+$m(i,j) =$ multiplicity of the $j^\text{th}$ part of the $i^\text{th}$
+partition of $n$, one has:
+}
 $$
 a(n) = \sum_{i=1}^{p(n)} \frac{n!}{\prod_{j=1}^{d(i)} m(i,j)!}.
 $$

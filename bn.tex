@@ -6,13 +6,13 @@ between the components of an $n$\nobreakdash-dimensional discrete data
 vector $X=(X_{1},\ldots,X_{n})$ in which the component $X_{i}$ may
 take any of the discrete values in a set $\{1,\ldots,r_{i}\}$.
 Despite denoting the values with small integers, the model will treat
-the components of $X$ categorical.
+the components of $X$ as categorical variables.
 
 
 \subsection{LIKELIHOOD}
 \label{ssec:likelihood}
 
-Bayesian network $B=(G,\theta)$ defines a probability distribution for
+A Bayesian network $B=(G,\theta)$ defines a probability distribution for
 $X$. The component $G$ defines the structure of the model as a
 directed acyclic graph that has exactly one node for each component of
 $X$. The structure $G=(G_{1},\ldots,G_{n})$ defines for each
@@ -21,7 +21,7 @@ the nodes from which there are a directed edges to the variable
 $X_{i}$.
 
 Given a realization $x$ of $X$, we denote the sub\nobreakdash-vector
-of $x$ that consists of the values of the parents of $X_{i}$ in $x$ as
+of $x$ that consists of the values of the parents of $X_{i}$ in $x$ by
 $G_{i}(x)$. It is customary to enumerate all the possible
 sub\nobreakdash-vectors $G_{i}(X)$ from $1$ to $q_{i}=\prod_{h\in
   G_{i}}r_{h}.$ In case $G_{i}$ is empty, we define $q_{i}=1$ and
@@ -34,7 +34,8 @@ $P(X_{i}=k\mid G_{i}(X)=j;\theta)=\theta_{ijk}$.  With structure $G$
 and parameters $\theta$, we can now express the likelihood function of
 the model as
 \begin{equation}
-P(x|G,\theta)=\prod_{i=1}^{n}P(x_{i}\mid G_{i}(x);\theta_{i})=\prod_{i=1}^{n}\theta_{iG_{i}(x)x_{i}}.
+P(x|G,\theta)=\prod_{i=1}^{n}P(x_{i}\mid
+G_{i}(x);\theta_{i})=\prod_{i=1}^{n}\theta_{iG_{i}(x)x_{i}}.
 \end{equation}
 
 
@@ -60,7 +61,7 @@ assumed to have no missing values, the marginal likelihood can be
 decomposed as
 \begin{eqnarray}
 \label{eqn:bayesmix}
-P(D|G,\alpha) & = & \prod_{i=1}^{n}\prod_{j=1}^{q_i}\int
+P(D|G,\alpha) & = & \prod_{i=1}^{n}\prod_{j=1}^{q_i}
 P(D[G_i=j,i]|\alpha)\\ & = & \prod_{i=1}^{n}\prod_{j=1}^{q_i}\int
 P([G_i=j,i]|\theta)P(\theta|\alpha) d\theta.\nonumber
 \end{eqnarray}
@@ -70,41 +71,43 @@ in a closed form~\cite{Bunt91, Heck95}.
 
 \subsection {PROBLEMS, SOLUTIONS AND PROBLEMS}
 
-Finding the satisfactory Dirichlet hyperparameters for the Bayesian
+Finding satisfactory Dirichlet hyperparameters for the Bayesian
 mixture above has, however, turned out to be problematic. Early on,
 one of the desiderata for a good model selection criterion was that it
-would yield equal scores for essentially equivalent
-models~\cite{Verm90}.  For example, the score for the structure
-$X_1\rightarrow X_2$ should be the same as the score for the model
-$X_2 \rightarrow X_1$ since they both correspond to the hypothesis
-that variables $X_1$ and $X_2$ are statistically dependent on each
-other.  It can be shown~\cite{Heck95} that to achieve this, not all
-the hyperparameters $\alpha$ are possible and for practical reasons
-Buntine~\cite{Bunt91} suggested a so called BDeu score with just one
-hyperparameter $\alpha\in R_{++}$ so that $\theta_{ij\cdot}\sim
-Dir(\frac{\alpha}{q_i r_i},\ldots,\frac{\alpha}{q_i r_i})$.  However,
-it soon turned out that BDeu score was very sensitive to the selection
-of this hyperparameter~\cite{cosco.uai07} and that for small sample
-sizes this method detects spurious correlations~\cite{Steck08} leading
-to models with suspiciously many parameters. 
+is score-equivalent, i.e., it would yield equal scores for
+essentially equivalent models~\cite{Verm90}.  For example, the score
+for the structure $X_1\rightarrow X_2$ should be the same as the score
+for the model $X_2 \rightarrow X_1$ since they both correspond to the
+hypothesis that variables $X_1$ and $X_2$ are statistically dependent
+on each other.  It can be shown~\cite{Heck95} that to achieve this,
+not all the hyperparameters $\alpha$ are possible and for practical
+reasons Buntine~\cite{Bunt91} suggested a so called BDeu score with
+just one hyperparameter $\alpha\in R_{++}$ so that
+$\theta_{ij\cdot}\sim Dir(\frac{\alpha}{q_i
+  r_i},\ldots,\frac{\alpha}{q_i r_i})$.  However, it soon turned out
+that the BDeu score was very sensitive to the selection of this
+hyperparameter~\cite{cosco.uai07} and that for small sample sizes this
+method detects spurious correlations~\cite{Steck08} leading to models
+with suspiciously many parameters.
 
 Recently, Suzuki~\cite{Suzuki2017} discussed the theoretical
-properties of the BDeu of score and showed that in certain settings
-BDeu has tendency to add more and more parent variables for a child
-node even though the empirical conditional entropy of the child given
-the parents has already reached zero. More in detail, assume that in
-our data $D$, the values of $X_i$ are completely determined by
-variables in set $Z$, so that the entropy $H(X | Z) = 0$. Now, if we
-can further find one or more variables, denoted by $Y$, whose values
-are determined completely by the variables in $Z$, then BDeu will
-prefer the set $Z\cup Y$ over mere $Z$ as the parents of $X_i$. Suzuki
+properties of the BDeu score and showed that in certain settings BDeu
+has tendency to add more and more parent variables for a child node
+even though the empirical conditional entropy of the child given the
+parents has already reached zero. In more detail, assume that in our
+data $D$, the values of $X_i$ are completely determined by variables
+in set $Z$, so that the entropy $H(X | Z) = 0$. Now, if we can further
+find one or more variables, denoted by $Y$, whose values are
+determined completely by the variables in $Z$, then BDeu will prefer
+the set $Z\cup Y$ over $Z$ alone as the parents of $X_i$. Suzuki
 argues that this kind of behaviour violates regularity in model
 selection as the more complex model is preferred over a simpler one
-even though it does not fit to data any better. The phenomena seems to
-stem from the way the hyperparameters for the Dirichlet distribution
-are chosen in BDeu as the BD score based on the Jeffreys prior does
-not suffer from this anomaly.
-
+even though it does not fit the data any better. The phenomenon seems
+to stem from the way the hyperparameters for the Dirichlet
+distribution are chosen in BDeu as using Jeffreys' prior,
+$\theta_{ijk}\sim Dir(\frac{1}{2},ldots,\frac{1}{2})$, does not suffer
+from this anomaly. However, using Jeffreys' prior causes marginal
+likelihood score not to be score-equivalent.
 
 A natural solution to avoid parameter sensitivity of BDeu would be to
 use a normalized maximum likelihood (NML)
@@ -121,8 +124,8 @@ the normalizing constant renders the computation
 infeasible.
 
 Consequently, Silander et al.~\cite{cosco.pgm08a}
-suggested solving the BDeu parameter sensitivity problem by adopting the
-NML-code to the column partitions, i.e., changing the Bayesian mixture
+suggested solving the BDeu parameter sensitivity problem by using the
+NML-code for the column partitions, i.e., changing the Bayesian mixture
 in equation~(\ref{eqn:bayesmix}) to
 \begin{equation}
 P^1_{NML}(D[G_i=j,i];G)=\frac{P(D|\hat\theta(D[G_i=j,i];G))}{\sum_{D'}{P(D';\hat\theta(D'|G))}},
@@ -132,7 +135,11 @@ denominator is often called a regret, since it indicates the extra
 code length needed compared to the code length obtained using the (a
 priori unknown) maximum likelihood parameters. The regret for
 $P^1_{NML}$ depends only on the length $N$ of the categorical data
-vector with $r$ different categorical values.  While the naive
+vector with $r$ different categorical values,
+\begin{equation}
+reg(N,r)=\log \sum_{D\in \{1,\ldots,r\}^N} P(D|\hat\theta(D)).
+\end{equation}
+While the naive
 computation of the regret is still prohibitive, Silander et al.\
 approximate it efficiently using a so-called Szpankowski
 approximation~\cite{cosco.aistat03}:
@@ -162,18 +169,20 @@ where $\alpha = \frac{r}{N}$ and
 \begin{equation}
     C_\alpha = \frac{1}{2} + \frac{1}{2} \sqrt{1 + \frac{4}{\alpha}}.
 \end{equation}
-These approximations are compared in Table \ref{tbl:regrets}
-to the exact regret for various values of $N$ and $r$.
-For a constant $N$, equation (\ref{eqn:szp1}) provides
-a progressively worse approximation as $r$ grows. Equation
-(\ref{eqn:szp2}) on the other hand is a good approximation of
-the regret regardless of the ratio of $N$ and $r$.
+These approximations are compared in Table \ref{tbl:regrets} to the
+exact regret for various values of $N$ and $r$.  For a constant $N$,
+equation (\ref{eqn:szp1}) provides a progressively worse approximation
+as $r$ grows. Equation (\ref{eqn:szp2}) on the other hand is a good
+approximation of the regret regardless of the ratio of $N$ and $r$.
+In our experiments, we will use this approximation for 
+implementation of the qNML criterion.
+
 
 fNML solves the parameter sensitivity problem and yields predictive
 models superior to BDeu.  However, the criterion does not satisfy the
-property of giving the same score for the models that correspond to
+property of giving the same score for models that correspond to
 the same dependence statements. Furthermore, the learned structures
-still sometimes appear surprisingly complicated.
+are often rather complex which hampers their interpretation.
 
 \begin{table}
 \centering
