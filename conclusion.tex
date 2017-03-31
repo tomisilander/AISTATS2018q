@@ -3,8 +3,13 @@
 We have presented qNML, a new model selection criterion for learning
 structures of Bayesian networks.  While being competitive in
 predictive terms, it often yields significantly simpler models than
-other common model selection criteria.  The computational cost of qNML
-equals the cost of earlier criteria.  The criterion also gives equal
-scores for models that encode same independence hypotheses about the
-joint probability distribution.  qNML also coincides with NML
-criterion for exponentially many models.
+other common model selection criteria other than BIC that has a very strong
+bias for simplicity. The computational cost of qNML
+equals the cost of the current state-of-the-art criteria. The
+criterion also gives equal scores for models that encode same
+independence hypotheses about the joint probability distribution.
+qNML also coincides with NML criterion for many models.
+In our experiments, the qNML criterion appears as a safe choice for a
+model selection criterion that balances
+parsimony, predictive capability and the ability to quickly converge to the
+generating model.
