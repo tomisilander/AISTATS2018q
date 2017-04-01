@@ -14,15 +14,15 @@ Learning the structure of statistical dependencies can be seen as a
 model selection task where each model is a different hypothesis about
 the conditional dependencies between sets of variables. Traditional
 model selection criteria such as the Akaike information
-criterion~\cite{Akai73} and the Bayesian information
-criterion~\cite{Schw78} have also been used for the task, but recent
-comparisons have not been favorable for these criteria in terms of
-identifying the appropriate structure and/or predictive
-performance~\cite{cosco.pgm08a}. Traditionally, the most popular
+criterion (AIC)~\cite{Akai73} and the Bayesian information
+criterion (BIC)~\cite{Schw78} have also been used for the task, but recent
+comparisons have not been favorable for AIC, and BIC appears to
+require large sample sizes in order to identify appropriate
+structures~\cite{cosco.pgm08a,Liu2012}. Traditionally, the most popular
 criterion has been the marginal likelihood (usually called BDeu for
-reasons explained later), but studies~\cite{cosco.uai07,Steck08}
-have found this criterion to be very sensitive to hyperparameters
-and to yield undesirably complex models for small sample sizes.
+reasons explained later), but studies~\cite{cosco.uai07,Steck08} have
+found this criterion to be very sensitive to hyperparameters and to
+yield undesirably complex models for small sample sizes.
 
 The information-theoretic normalized maximum likelihood (NML)
 criterion~\cite{Shta87,Riss96a} would otherwise be a potential candidate

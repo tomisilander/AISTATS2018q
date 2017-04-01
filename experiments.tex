@@ -70,10 +70,10 @@ learning~\cite{cosco.uai06} which limited the number $n$ of variables
 to less than 20.
 
 When predicting with structures learned by the BDeu score, we used the
-Bayesian expected parameter values $\theta_{ijk} \propto
+Bayesian predictive parameter values (BPP) $\theta_{ijk} \propto
 N_{ijk}+\frac{1}{r_iq_i}$.  In the spirit of keeping the scores
 hyperparameter-free, for structures learned by the other model
-selection criteria, we used the predictive conditional NML
+selection criteria, we used the sequential predictive NML (sNML)
 parametrization $\theta_{ijk}\propto e(n_{ijk})(n_{ijk}+1)$, where
 $e(n)=(\frac{n+1}{n})^n$ as suggested in~\cite{Riss07b}.
 
@@ -81,9 +81,14 @@ $e(n)=(\frac{n+1}{n})^n$ as suggested in~\cite{Riss07b}.
 \caption{Predictive log losses for small sample sizes for different model selection criteria in 20 different data sets.}
 \label{tbl:preds}
 \begin{center}
- \begin{tabular}{crrrrr}
-    Data &     N &              BDeu &               BIC &               fNML &               qNML \\
-\midrule
+\begin{tabular}{crrrrr}
+       Data
+    & N
+    & \multicolumn{1}{p{0.7cm}}{\centering BDeu \\ BPP}
+    & \multicolumn{1}{p{0.8cm}}{\centering BIC \\ sNML}
+    & \multicolumn{1}{p{0.9cm}}{\centering fNML \\ sNML}
+    & \multicolumn{1}{p{0.9cm}}{\centering qNML \\ sNML}\\
+       \midrule
     Iris &    15 &     \textit{3.61} &              3.56 &   \underline{3.50} &      \textbf{3.47} \\
  PostOpe &    18 &    \textit{10.52} &     \textbf{7.45} &   \underline{8.35} &               8.39 \\
    Ecoli &    34 &     \textit{6.27} &              6.16 &      \textbf{5.56} &   \underline{5.63} \\
@@ -131,7 +136,13 @@ simple models. qNML usually (18/20) beats fNML that performs worst in
 \label{tbl:nofparams}
 \begin{center}
 \begin{tabular}{crrrrr}
-    Data &     N &              BDeu &               BIC &           fNML &              qNML \\
+%%    Data &     N &              BDeu &               BIC &           fNML &              qNML \\
+       Data
+    & N
+    & \multicolumn{1}{p{0.7cm}}{\centering BDeu\\ }
+    & \multicolumn{1}{p{0.8cm}}{\centering BIC\\ }
+    & \multicolumn{1}{p{0.9cm}}{\centering fNML\\}
+    & \multicolumn{1}{p{0.9cm}}{\centering qNML\\}\\
 \midrule
     Iris &    15 &              0.84 &     \textbf{0.63} &  \textit{0.87} &  \underline{0.82} \\
  PostOpe &    18 &              1.35 &     \textbf{0.11} &  \textit{1.66} &  \underline{1.29} \\

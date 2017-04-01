@@ -132,7 +132,7 @@ suggested solving the BDeu parameter sensitivity problem by using the
 NML-code for the column partitions, i.e., changing the Bayesian mixture
 in equation~(\ref{eqn:bayesmix}) to
 \begin{equation}
-P^1_{NML}(D[G_i=j,i];G)=\frac{P(D|\hat\theta(D[G_i=j,i];G))}{\sum_{D'}{P(D';\hat\theta(D'|G))}},
+P^1_{NML}(D[G_i=j,i];G)=\frac{P(D|\hat\theta(D[G_i=j,i];G))}{\sum_{D'}{P(D';\hat\theta(D';G))}},
 \end{equation}
 where $D'\in{\{1,\ldots,r_i\}}^{|D[G_i=j,i]|}$.  The logarithm of the
 denominator is often called a regret, since it indicates the extra
