@@ -14,7 +14,7 @@ the components of $X$ as categorical variables.
 
 A Bayesian network $B=(G,\theta)$ defines a probability distribution for
 $X$. The component $G$ defines the structure of the model as a
-directed acyclic graph that has exactly one node for each component of
+directed acyclic graph (DAG) that has exactly one node for each component of
 $X$. The structure $G=(G_{1},\ldots,G_{n})$ defines for each
 variable/node $X_{i}$ its (possibly empty) parent set $G_{i}$, i.e.,
 the nodes from which there are a directed edges to the variable
@@ -96,7 +96,7 @@ has tendency to add more and more parent variables for a child node
 even though the empirical conditional entropy of the child given the
 parents has already reached zero. In more detail, assume that in our
 data $D$, the values of $X_i$ are completely determined by variables
-in set $Z$, so that the entropy $H(X | Z) = 0$. Now, if we can further
+in set $Z$, so that the empirical entropy $H(X_i | Z) = 0$. Now, if we can further
 find one or more variables, denoted by $Y$, whose values are
 determined completely by the variables in $Z$, then BDeu will prefer
 the set $Z\cup Y$ over $Z$ alone as the parents of $X_i$. Suzuki
@@ -185,7 +185,7 @@ implementation of the qNML criterion.
 fNML solves the parameter sensitivity problem and yields predictive
 models superior to BDeu.  However, the criterion does not satisfy the
 property of giving the same score for models that correspond to the
-same dependence statements. Furthermore, the learned structures are
+same dependence statements. The score equivalence is usually viewed desirable when DAGs are considered only as models for conditional independence, without any causal interpretation. Furthermore, the learned structures are
 often rather complex (see Figure~\ref{fig:bcnpmean}) which also
 hampers their interpretation. The quest for a model selection
 criterion that would yield more parsimonious, easier to interpret, but
