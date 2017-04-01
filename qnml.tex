@@ -15,8 +15,8 @@ further partitioning the corresponding data column
 \begin{eqnarray}
 \label{eqn:qnmldef}
 s^{qNML}(D;G) & := & \sum_{i=1}^n s^{qNML}_i(D;G)\\
-& := & \sum_{i=1}^n \log \frac{P^1_{NML}(D[\cdot,(i,G_i)];G)}
-                             {P^1_{NML}(D[\cdot,G_i];G)}.\nonumber
+& := & \sum_{i=1}^n \log \frac{P^1_{NML}(D_{i,G_i};G)}
+                             {P^1_{NML}(D_{G_i};G)}.\nonumber
 \end{eqnarray}
 The trick here is to model a subset of columns as though there were no
 conditional independencies among the corresponding variables $S
@@ -65,8 +65,8 @@ supplementary material.
   different, it is enough to show that the sum of these two terms are
   equal for $G$ and $G'$. Since we can assume the data to be fixed we
   lighten up the notation and write
-  $P^1_{NML}(i,G_i) := P^1_{NML}(D[\cdot,(i,G_i)];G)$ and
-  $P^1_{NML}(G_i)   := P^1_{NML}(D[\cdot,G_i];G)$.
+  $P^1_{NML}(i,G_i) := P^1_{NML}(D_{i,G_i};G)$ and
+  $P^1_{NML}(G_i)   := P^1_{NML}(D_{G_i};G)$.
   \begin{eqnarray}
     \lefteqn{s_A^{qNML}(D;G)+s_B^{qNML}(D;G)} \nonumber\\
     && =\log\frac{P^1_{NML}(A,G_{A})}{P^1_{NML}(G_{A})}
@@ -98,8 +98,7 @@ The BIC criterion can be written as
 \begin{equation}\label{BIC}
 \textnormal{BIC}(D;G) = \sum_{i = 1}^n \log P(D_i \ | \ \hat{\theta}_{i | G_i} ) - \frac{q_i(r_i - 1)}{2} \log N,
 \end{equation}
-where $D_i = D[\cdot, i]$ stands for the data on variable $i$,
-$\hat{\theta}_{i | G_i}$ denotes the maximum likelihood parameters of
+where $\hat{\theta}_{i | G_i}$ denotes the maximum likelihood parameters of
 the conditional distribution of variable $i$ given its parents in
 $G$. 
 
@@ -214,19 +213,19 @@ Clearly, the qNML score also decomposes by the connected components,
 so it remains to show that if the (sub)network $G$ is a tournament,
 then for any data $D$, $s^{qNML}(D;G)=\log P_{NML}(D;G)$.  Due to the
 score equivalence of the NML criterion and the qNML criterion, we may
-pick a tournament $G$ such that the linear ordering defined by $G$ matches
-the ordering of the data columns, i.e., $i<j$ implies $G_i \subset
-G_j$. Now from the definition~(\ref{eqn:qnmldef}) of the qNML
+pick a tournament $G$ such that the linear ordering defined by $G$
+matches the ordering of the data columns, i.e., $i<j$ implies $G_i
+\subset G_j$. Now from the definition~(\ref{eqn:qnmldef}) of the qNML
 criterion we see that for the tournament $G$, the sum telescopes
-leaving us with $s^{qNML}(D;G) = \log P^1_{NML}(D[\cdot,G];G)$, thus
+leaving us with $s^{qNML}(D;G) = \log P^1_{NML}(D_G;G)$, thus
 it is enough to show that $P^1_{NML}(D;G)=P_{NML}(D;G)$.  This
 follows, since for any data vector $x$ in data $D$, we have
 $P^1(x;\hat\theta(D),G) = P(x;\hat\theta(D),G)$, where $P^1$ denotes
 the model that takes $n$-dimensional vectors to be values of the
 single (collapsed) categorical variable.  Denoting prefixes of data
 vector $x$ by $x^{:i}$, and the number of times such a prefix appears
-in a $N\times n$ data matrix $D=[d_1,\ldots,d_N]$ by $N_D(x^{:i})$,
-(so that $N_D(x^{:0})=N)$, we have
+on $N$ rows $[d_1,\ldots,d_N]$ of the $N\times n$ data matrix $D$ by
+$N_D(x^{:i})$, (so that $N_D(x^{:0})=N)$, we have
 \begin{eqnarray}
   P(D;\hat\theta(D),G) &=& \prod_{j=1}^{N}P(d_j;\hat\theta(D),G) \nonumber \\
   &=& \prod_{j=1}^{N} \prod_{i=1}^{n} \frac{N_D(d_j^{:i})}{N_D(d_j^{:i-1})} \nonumber\\

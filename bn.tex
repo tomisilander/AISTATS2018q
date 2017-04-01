@@ -23,16 +23,16 @@ $X_{i}$.
 Given a realization $x$ of $X$, we denote the sub\nobreakdash-vector
 of $x$ that consists of the values of the parents of $X_{i}$ in $x$ by
 $G_{i}(x)$. It is customary to enumerate all the possible
-sub\nobreakdash-vectors $G_{i}(X)$ from $1$ to $q_{i}=\prod_{h\in
+sub\nobreakdash-vectors $G_{i}(x)$ from $1$ to $q_{i}=\prod_{h\in
   G_{i}}r_{h}.$ In case $G_{i}$ is empty, we define $q_{i}=1$ and
 $P(G_{i}(x)=1)=1$ for all vectors $x$.
 
 For each variable $X_{i}$ there is a $q_{i}\times r_{i}$ table
-$\theta_{i}$ of parameters whose $j^{\textnormal{th}}$ row and
-$k^{\textnormal{th}}$ column defines the conditional probability
-$P(X_{i}=k\mid G_{i}(X)=j;\theta)=\theta_{ijk}$.  With structure $G$
-and parameters $\theta$, we can now express the likelihood function of
-the model as
+$\theta_{i}$ of parameters whose $k^{\textnormal{th}}$ column
+on the $j^{\textnormal{th}}$ row $\theta_{ij}$ defines the conditional
+probability $P(X_{i}=k\mid G_{i}(X)=j;\theta)=\theta_{ijk}$.  With
+structure $G$ and parameters $\theta$, we can now express the
+likelihood function of the model as
 \begin{equation}
 P(x|G,\theta)=\prod_{i=1}^{n}P(x_{i}\mid
 G_{i}(x);\theta_{i})=\prod_{i=1}^{n}\theta_{iG_{i}(x)x_{i}}.
@@ -44,13 +44,14 @@ G_{i}(x);\theta_{i})=\prod_{i=1}^{n}\theta_{iG_{i}(x)x_{i}}.
 
 Bayesian learning of Bayesian network structures is based on the
 posterior probability $P(G|D,\alpha)$, where $\alpha$ denotes the
-hyperparameters for the model parameters $\theta$, and
-the $D$ is a collection of $N$ $n$\nobreakdash-dimensional i.i.d. data
-vectors collected to a $N\times n$ design matrix.  We use structure
-$G$ to extend the common matrix indexing notation $D[i,j]$, and allow
-more general row selectors.  Notably the notation $D[G_i=j,i]$ is used
-to denote those rows of the column $i$ in which the parents $G_i$
-contain the value configuration number $j\in\{1,\ldots,q_i\}$.
+hyperparameters for the model parameters $\theta$, and the $D$ is a
+collection of $N$ $n$\nobreakdash-dimensional i.i.d. data vectors
+collected to a $N\times n$ design matrix. We use the notation $D_i$ to
+denote the $i^\text{th}$ column of the data matrix and notation $D_V$ to denote
+the columns that correspond to the variable subset $V$. We also write
+$D_{i,G_i}$ for $D_{\{i\}\cup G_i}$ and denote the entries of the
+column $i$ on the rows on which the parents $G_i$ contain the value
+configuration number by $D_{i,G_i=j}$, $j\in\{1,\ldots,q_i\}$.
 
 It is common to assume the uniform prior for structures, in which case
 the objective function for structure learning is reduced to the
@@ -62,12 +63,22 @@ decomposed as
 \begin{eqnarray}
 \label{eqn:bayesmix}
 \lefteqn{P(D|G,\alpha)}\nonumber\\
-&&=\prod_{i=1}^{n}\prod_{j=1}^{q_i}P(D[G_i=j,i]|\alpha)\nonumber\\
-&&=\prod_{i=1}^{n}\prod_{j=1}^{q_i}\int P([G_i=j,i]|\theta)P(\theta|\alpha) d\theta.
+&&=\prod_{i=1}^{n}\prod_{j=1}^{q_i}P(D_{i,G_i=j};\alpha)\nonumber\\
+&&=\prod_{i=1}^{n}\prod_{j=1}^{q_i}\int P(D_{i,G_i=j}|\theta_{ij})P(\theta_{ij};\alpha) d\theta_{ij}.
 \end{eqnarray}
-In coding terms this means that each data column $D[\cdot,i]$ is first partitioned based on the
-values in columns $G_i$, and each part is then coded using a Bayesian mixture that can be expressed
-in a closed form~\cite{Bunt91, Heck95}.
+In coding terms this means that each data column $D_i$ is first
+partitioned based on the values in columns $G_i$, and each part is
+then coded using a Bayesian mixture that can be expressed in a closed
+form~\cite{Bunt91, Heck95}. 
+
+\begin{figure}
+\centering
+\includegraphics[width=8cm,height=5cm]{qNML_images/breast_cancer_npmean.pdf}
+\caption{Number of parameters in a breast cancer model as a function
+  of sample size for different model selection criteria.}
+\label{fig:bcnpmean}
+\end{figure}
+
 
 \subsection {PROBLEMS, SOLUTIONS AND PROBLEMS}
 
@@ -132,9 +143,9 @@ suggested solving the BDeu parameter sensitivity problem by using the
 NML-code for the column partitions, i.e., changing the Bayesian mixture
 in equation~(\ref{eqn:bayesmix}) to
 \begin{equation}
-P^1_{NML}(D[G_i=j,i];G)=\frac{P(D|\hat\theta(D[G_i=j,i];G))}{\sum_{D'}{P(D';\hat\theta(D';G))}},
+P^1_{NML}(D_{i,G_i=j};G)=\frac{P(D|\hat\theta(D_{i,G_i=j};G))}{\sum_{D'}{P(D';\hat\theta(D';G))}},
 \end{equation}
-where $D'\in{\{1,\ldots,r_i\}}^{|D[G_i=j,i]|}$.  The logarithm of the
+where $D'\in{\{1,\ldots,r_i\}}^{|D_{i,G_i=j}|}$.  The logarithm of the
 denominator is often called a regret, since it indicates the extra
 code length needed compared to the code length obtained using the (a
 priori unknown) maximum likelihood parameters. The regret for
@@ -170,9 +181,9 @@ Szpankowski and Weinberger~\cite{Szpankowski2012} can also be used:
     && - \frac{1}{2} \log{\left(C_\alpha + \frac{2}{\alpha}\right)},
 \end{eqnarray}
 where $\alpha = \frac{r}{N}$ and
-\begin{equation}
-    C_\alpha = \frac{1}{2} + \frac{1}{2} \sqrt{1 + \frac{4}{\alpha}}.
-\end{equation}
+%\begin{equation}
+    $C_\alpha = \frac{1}{2} + \frac{1}{2} \sqrt{1 + \frac{4}{\alpha}}$.
+%\end{equation}
 These approximations are compared in Table \ref{tbl:regrets} to the
 exact regret for various values of $N$ and $r$.  For a constant $N$,
 equation (\ref{eqn:szp1}) provides a progressively worse approximation
@@ -191,15 +202,6 @@ hampers their interpretation. The quest for a model selection
 criterion that would yield more parsimonious, easier to interpret, but
 still predictive Bayesian networks structures is one of the main
 motivations for this work.
-
-\begin{figure}
-\centering
-\includegraphics[width=8cm,height=5cm]{qNML_images/breast_cancer_npmean.pdf}
-\caption{Number of parameters in a breast cancer model as a function
-  of sample size for different model selection criteria.}
-\label{fig:bcnpmean}
-\end{figure}
-
 
 
 \begin{table}

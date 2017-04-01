@@ -30,7 +30,7 @@ that is the Jeffreys' prior for the multinomial model. This distribution
 was selected instead of the uniform distribution in order to make the
 generating structure more identifiable.  For each network (structure +
 parameters), we generated 100 data sets of 1000 data vectors, and
-studied how different scoring criteria ranked the structure of the
+studied how different scoring criteria ranked, on average, the structure of the
 generating network among all the 5-node networks as a function of
 (sub)sample size.
 
@@ -53,11 +53,11 @@ the data when the Jeffreys' prior is used.
 
 The underfitting tendency of BIC can also be clearly detected both for
 relatively sparse networks (4 arcs) and for dense ones (7 arcs). The
-ranking ability of the qNML criterion appears to be between fNML and BDeu
-in 3 out of 4 settings which is good considering that one of these
-criteria is always the winner. For dense networks with the BDeu prior,
-qNML appears to perform worse than BDeu and fNML but still much
-better than BIC.
+ranking ability of the qNML criterion appears to be between
+fNML and BDeu in 3 out of 4 settings which is good considering that
+one of these criteria is always the winner. For dense networks with
+the BDeu prior, qNML appears to perform worse than BDeu and fNML but
+still much better than BIC.
 
 \subsection{PREDICTION AND PARSIMONY}
 
@@ -113,9 +113,8 @@ $e(n)=(\frac{n+1}{n})^n$ as suggested in~\cite{Riss07b}.
 \end{center}
 \end{table}
 
-Table~\ref{tbl:preds} features predictive losses for the small sample
-sizes.  (The results for large sample sizes converge for all sensible
-criteria.) BIC's bias for simplicity makes it often win (written bold
+Table~\ref{tbl:preds} features the average predictive losses for different
+data sets.  BIC's bias for simplicity makes it often win (written bold
 in the table) with small sample sizes, but it performs worst (in
 italics) for the large sample sizes. the qNML seems to achieve a lot
 of runner-up positions (underlined) making it a rather safe choice.
@@ -125,10 +124,11 @@ strangely in terms of model complexity here measured by the number of
 parameters in the model. qNML, instead, appears to yield more
 parsimonious models.
 
-Looking at the number of parents for our 20 data sets and sample
-sizes (Table~\ref{tbl:nofparams}) again features BIC's preference for
-simple models. qNML usually (18/20) beats fNML that performs worst in
-14 out of 20 data sets.
+Looking at the number of parents for the same 20 data sets again
+features BIC's preference for simple models
+(Table~\ref{tbl:nofparams}).  qNML usually (18/20) yields more
+parsimonious models than fNML that selects the most complex model for 14
+out of 20 data sets.
 
 \begin{table}
   \caption{Average number of parents per node 
