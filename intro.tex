@@ -13,31 +13,33 @@ data~\cite{bn4brainconnect}.
 Learning the structure of statistical dependencies can be seen as a
 model selection task where each model is a different hypothesis about
 the conditional dependencies between sets of variables. Traditional
-model selection criteria such as the Akaike information
-criterion (AIC)~\cite{Akai73} and the Bayesian information
-criterion (BIC)~\cite{Schw78} have also been used for the task, but recent
+model selection criteria such as the Akaike information criterion
+(AIC)~\cite{Akai73} and the Bayesian information criterion
+(BIC)~\cite{Schw78} have also been used for the task, but recent
 comparisons have not been favorable for AIC, and BIC appears to
 require large sample sizes in order to identify appropriate
-structures~\cite{cosco.pgm08a,Liu2012}. Traditionally, the most popular
-criterion has been the marginal likelihood (usually called BDeu for
-reasons explained later), but studies~\cite{cosco.uai07,Steck08} have
+structures~\cite{cosco.pgm08a,Liu2012}. Traditionally, the most
+popular criterion has been the Bayesian marginal
+likelihood~\cite{Heck95b} and its BDeu variant (see
+section~\ref{sec:bns}), but studies~\cite{cosco.uai07,Steck08} have
 found this criterion to be very sensitive to hyperparameters and to
 yield undesirably complex models for small sample sizes.
 
 The information-theoretic normalized maximum likelihood (NML)
-criterion~\cite{Shta87,Riss96a} would otherwise be a potential candidate
-for a good criterion, but its exact calculation is likely to be
-prohibitively expensive. In 2008, Silander et al. introduced a
+criterion~\cite{Shta87,Riss96a} would otherwise be a potential
+candidate for a good criterion, but its exact calculation is likely to
+be prohibitively expensive. In 2008, Silander et al. introduced a
 hyperparameter free, NML inspired criterion called the factorized NML
 (fNML)~\cite{cosco.pgm08a} that was shown to yield good predictive
 models without such sensitivity problems. However, from the structure
-learning point of view, the fNML still sometimes appears to yield
+learning point of view, fNML still sometimes appears to yield
 overly complex models. In this paper we introduce another NML related
 criterion, the \textit{quotient NML} (qNML) that yields simpler models
-without sacrificing predictive accuracy. Furthermore, unlike the fNML,
-the qNML gives equal scores to structures that encode the same
-independence statements. Like other common model selection criteria,
-qNML is also consistent.
+without sacrificing predictive accuracy. Furthermore, unlike fNML,
+qNML is \textit{score equivalent}, i.e., it gives equal scores to
+structures that encode the same independence and dependence
+statements. Like other common model selection criteria, qNML is also
+consistent.
 
 We next briefly introduce Bayesian networks and review the BDeu and
 fNML criteria and then introduce the qNML criterion.  We also

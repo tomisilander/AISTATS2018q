@@ -61,9 +61,9 @@ assumed to have no missing values, the marginal likelihood can be
 decomposed as
 \begin{eqnarray}
 \label{eqn:bayesmix}
-P(D|G,\alpha) & = & \prod_{i=1}^{n}\prod_{j=1}^{q_i}
-P(D[G_i=j,i]|\alpha)\\ & = & \prod_{i=1}^{n}\prod_{j=1}^{q_i}\int
-P([G_i=j,i]|\theta)P(\theta|\alpha) d\theta.\nonumber
+\lefteqn{P(D|G,\alpha)}\nonumber\\
+&&=\prod_{i=1}^{n}\prod_{j=1}^{q_i}P(D[G_i=j,i]|\alpha)\nonumber\\
+&&=\prod_{i=1}^{n}\prod_{j=1}^{q_i}\int P([G_i=j,i]|\theta)P(\theta|\alpha) d\theta.
 \end{eqnarray}
 In coding terms this means that each data column $D[\cdot,i]$ is first partitioned based on the
 values in columns $G_i$, and each part is then coded using a Bayesian mixture that can be expressed

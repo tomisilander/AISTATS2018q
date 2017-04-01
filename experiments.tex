@@ -38,14 +38,14 @@ generating network among all the 5-node networks as a function of
 \centering
 \includegraphics[width=8cm,height=5cm]{qNML_images/art7_mean.pdf}
 \caption{Finding generating models of 7 arcs.}
-\label{fig:4arcs}
+\label{fig:7arcs}
 \end{figure}
 
 
 Not surprisingly, the results indicate that when the parameter generation
 mechanism matches the assumptions of the BDeu-score, BDeu usually
-also ranks the generating structure higher than the other scores
-(Figure X).  On the other hand, when the parameters are drawn from the
+also ranks the generating structure higher than the other scores (see Figure
+~\ref{fig:4arcs} and \ref{fig:7arcs}).  On the other hand, when the parameters are drawn from the
 Jeffreys' prior, the fNML score appears to rank the generating structure
 highest. This too is not surprising, since the NML distribution for
 multinomial data is known to closely match the marginal distribution of
@@ -53,9 +53,9 @@ the data when the Jeffreys' prior is used.
 
 The underfitting tendency of BIC can also be clearly detected both for
 relatively sparse networks (4 arcs) and for dense ones (7 arcs). The
-ranking ability the qNML criterion appears to be between fNML and BDeu
+ranking ability of the qNML criterion appears to be between fNML and BDeu
 in 3 out of 4 settings which is good considering that one of these
-criteria is always the winner. For the dense networks with BDeu prior,
+criteria is always the winner. For dense networks with the BDeu prior,
 qNML appears to perform worse than BDeu and fNML but still much
 better than BIC.
 
