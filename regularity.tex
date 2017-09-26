@@ -150,8 +150,8 @@ Let us now consider the situation where $n < i \leq 2n-1$. We start with the spe
 &= \sum_{k=1}^{\lfloor n - i/2 \rfloor}(n-k+1)c_{i-n+k} +  (i-n+k)c_{n-k+1} \\
 &= \sum_{k=1}^{\lfloor n - i/2 \rfloor}(n-k+1)c_{i-n+k} -  (i-n+k)c_{i-n+k} \\
 &= \sum_{k=1}^{\lfloor n - i/2 \rfloor}(n-k+1-(i-n+k))c_{i-n+k} \\
-&= \sum_{k=1}^{\lfloor n - i/2 \rfloor}(2n-i-2k+1))c_{i-n+k}.
-\end{align*}It is now easy to verify that $(2n-i-2k+1)$ and $c_{i-n+k}$ are positive if $k \leq n - (i+2)/2$ which holds since $k$ ranges from $1$ to $\lfloor n - i/2 \rfloor$. The floor function is again used when we sum over pairs of terms since if $i$ is odd there is zero-term. 
+&= \sum_{k=1}^{\lfloor n - i/2 \rfloor}(2n-i-2k+1)c_{i-n+k}.
+\end{align*}It is now easy to verify that $(2n-i-2k+1)$ and $c_{i-n+k}$ are positive if $k \leq n - (i-1)/2$ which holds since $k$ ranges from $1$ to $\lfloor n - i/2 \rfloor$. The floor function is again used when we sum over pairs of terms since if $i$ is odd there is zero-term. 
 Since all the coefficients are non-negative and the $k \geq 2$, the derivative is positive. This implies that the original function is increasing.
 
 
@@ -164,4 +164,12 @@ Since all the coefficients are non-negative and the $k \geq 2$, the derivative i
 %$$
 %\frac{d}{dk}C(n,rk) = \sum_{l=0}^{n-1} b_l \Le \sum_{j=1}^{l+1}j \ r^{j} \ |s(l + 1,j)| \ k^{j-1}\Ri.
 %$$
+\section{Terms $a_j$ sum to one}
+\begin{align*}
+\sum_{j=1}^{n}a_j &=\sum_{j=1}^{n} \Le \sum_{l=0}^{n-1} \frac{(n-1)^{\underline{l}}}{n^{l+1}l!} \ |s(l + 1,j)| \Ri \\
+&= \sum_{l=0}^{n-1} \frac{(n-1)^{\underline{l}}}{n^{l+1}l!} \Le \sum_{j=1}^{n} |s(l + 1,j)| \Ri \\
+&= \sum_{l=0}^{n-1} \frac{(n-1)^{\underline{l}}}{n^{l+1}l!} \Le \sum_{j=0}^{l-1} |s(l + 1,j)| \Ri \\
+&= \sum_{l=0}^{n-1} \frac{(n-1)^{\underline{l}}}{n^{l+1}l!} \ (l+1)! \\
+& =  \sum_{l=0}^{n-1} \frac{(n-1)^{\underline{l}}}{n^{l+1}}(l+1)
+\end{align*}
 \end{document}
