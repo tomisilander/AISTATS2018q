@@ -172,4 +172,22 @@ Since all the coefficients are non-negative and the $k \geq 2$, the derivative i
 &= \sum_{l=0}^{n-1} \frac{(n-1)^{\underline{l}}}{n^{l+1}l!} \ (l+1)! \\
 & =  \sum_{l=0}^{n-1} \frac{(n-1)^{\underline{l}}}{n^{l+1}}(l+1)
 \end{align*}
+\section{ML terms}
+Assume we have $n$ samples of $X,Y$ and $Z$. We can write the logarithm of the maximized likelihood, $\hat{P}_n(X \mid Y)$, as follows
+\begin{align*}
+\log \hat{P}_n(X \mid Y) & = -n \Le H_n(X) - I_n(X;Y) \Ri \\
+&= -n \  H_n(X\mid Y),
+\end{align*}where $I_n(\cdot;\cdot)$ is the empirical mutual information. This implies that the assumption
+$$
+H_n(X \mid Y) \leq H_n(X \mid Y \cup Z)
+$$ is equivalent to
+$$
+\log \hat{P}_n(X \mid Y) \geq \log \hat{P}_n(X \mid Y \cup Z). 
+$$Actually we must have the equality holding in the above expression, since
+$$
+H_n(X \mid Y) < H_n(X \mid Y \cup Z)
+$$ would imply that
+$$
+I_n(X ; Z \mid Y ) < 0
+$$which is impossible.
 \end{document}
