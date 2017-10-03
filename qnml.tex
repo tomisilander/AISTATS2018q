@@ -270,7 +270,7 @@ For example, $a(4)=\frac{4!}{1!}+\frac{4!}{1!1!}+\frac{4!}{2!}+\frac{4!}{1!2!}+\
 \begin{definition}
 Assume $H_N(X \mid Y') \leq H_N(X \mid Y)$, where $Y' \subset Y.$ We say that $Q_N(\cdot \mid \cdot)$ is regular if $Q_n(X \mid Y') \geq Q_N(X \mid Y)$.
 \end{definition}
-In the definition, $N$ denotes the sample size, $X$ is some random variable, $Y$ denotes the proposed parent set for $X$, and $H_N(\cdot \mid \cdot)$ refers to the empirical conditional entropy. \cite{Suzuki2017} shows that BDeu violates this principle and demonstrates that this causes the score to prefer more complex networks even though data do not support this. In \cite{Suzuki2017_2}, the authors also suggest that regular scores are computationally more efficient when applied with branch-and-bound type algorithms for Bayesian network structure learning. 
+In the definition, $N$ denotes the sample size, $X$ is some random variable, $Y$ denotes the proposed parent set for $X$, and $H_N(\cdot \mid \cdot)$ refers to the empirical conditional entropy. \cite{Suzuki2017} shows that BDeu violates this principle and demonstrates that this can cause the score to prefer more complex networks even though data do not support this. In \cite{Suzuki2017_2}, the authors also suggest that regular scores are computationally more efficient when applied with branch-and-bound type algorithms for Bayesian network structure learning. 
 
 By analyzing the penalty term of the qNML scoring function, one can prove the following statement:
 \begin{theorem}
