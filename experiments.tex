@@ -1,10 +1,9 @@
-\begin{figure}[h]
-\centering
-\includegraphics[width=8cm,height=5cm]{qNML_images/art4_mean.pdf}
-\caption{Finding generating models of 4 arcs.}
-\label{fig:4arcs}
-\end{figure}
-
+%\begin{figure}[h]
+%\centering
+%\includegraphics[width=8cm,height=5cm]{qNML_images/art4_mean.pdf}
+%\caption{Finding generating models of 4 arcs.}
+%\label{fig:4arcs}
+%\end{figure}
 \section{EXPERIMENTAL RESULTS}
 
 We empirically compare the capacity of qNML to that of BIC, BDeu and
@@ -15,59 +14,70 @@ aspects of model selection criteria.
 
 \subsection{FINDING GENERATING STRUCTURE}
 
-We first compare the ability of the different scoring criteria to
-discover the structure that generated the data. For this purpose we
-create 100 random 5-node Bayesian network structures with 4
-edges and another 100 structures with 7 edges.  The variables were
-randomly assigned to have 2 -- 4 values ($r_i \in \{2, 3, 4\}$). For
-each network, we generated parameters by two different schemes. The
-first scheme exactly matched the assumptions of the BDeu score with
-$\alpha = 1$, i.e., the parameters were distributed by $\theta_{ij}
-\sim Dir(\frac{1}{r_iq_i},\ldots,\frac{1}{r_iq_i})$. The other scheme
-was to generate the parameters independently from a Dirichlet
-distribution $\theta_{ij} \sim Dir(\frac{1}{2},\ldots, \frac{1}{2})$
-that is the Jeffreys' prior for the multinomial model. This distribution
-was selected instead of the uniform distribution in order to make the
-generating structure more identifiable.  For each network (structure +
-parameters), we generated 100 data sets of 1000 data vectors, and
-studied how different scoring criteria ranked, on average, the structure of the
-generating network among all the 5-node networks as a function of
-(sub)sample size.
+In our first experiment, we took five widely used benchmark Bayesian networks\footnote{Bayesian Network Repository: \url{http://www.bnlearn.com/bnrepository/}} (Asia, Cancer, Earthquake, Sachs and Survey), sampled data from them, and tried to learn the generating structure with the different scoring functions using various sample sizes. These networks were picked in order to use the dynamic programming based exact structure learning~\cite{cosco.uai06} which limited the number $n$ of variables
+to less than 20. We measured the quality of the learned structures using structural Hamming distance (SHD, \cite{Tsamardinos2006}). 
+
+Figure \ref{fig:all_shd} shows SHDs for all the scoring criteria for each network. Sample sizes range from $10$ to $10000$ and the shown results are averages computed from $1000$ repetitions. None of the scores dominates in all settings considered. BIC fares well when the sample size is low, as it tends to produce nearly empty graph which is a good answer in terms of SHD when the generating networks are relatively sparse. qNML obtains strong results in 'Earthquake' and 'Asia' networks, being the best or the second to best with all the sample sizes considered.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=8cm,height=5cm]{qNML_images/art7_mean.pdf}
-\caption{Finding generating models of 7 arcs.}
-\label{fig:7arcs}
+\includegraphics[width=\columnwidth]{qNML_images/shd_all.pdf}
+\caption{Sample size versus SHD with data generated from real world DAGs.}
+\label{fig:all_shd}
+\end{figure}
+
+Figure \ref{fig:shd_ranks} summarizes the SHD results in all networks by showing the average rank for each score. The ranking was done by giving the score with the least SHD rank $1$ and the worst one rank $4$. The shown results are averages computed from $5000$ values ($5$ networks, $1000$ repetitions). From this, we can see that qNML has never the worst average ranking, and it has the best ranking with sample sizes greater than $300$. This suggests that qNML is overall a safe choice in structure learning, especially with moderate sample sizes.
+
+%We first compare the ability of the different scoring criteria to
+%discover the structure that generated the data. For this purpose we
+%create 100 random 5-node Bayesian network structures with 4
+%edges and another 100 structures with 7 edges.  The variables were
+%randomly assigned to have 2 -- 4 values ($r_i \in \{2, 3, 4\}$). For
+%each network, we generated parameters by two different schemes. The
+%first scheme exactly matched the assumptions of the BDeu score with
+%$\alpha = 1$, i.e., the parameters were distributed by $\theta_{ij}
+%\sim Dir(\frac{1}{r_iq_i},\ldots,\frac{1}{r_iq_i})$. The other scheme
+%was to generate the parameters independently from a Dirichlet
+%distribution $\theta_{ij} \sim Dir(\frac{1}{2},\ldots, \frac{1}{2})$
+%that is the Jeffreys' prior for the multinomial model. This distribution
+%was selected instead of the uniform distribution in order to make the
+%generating structure more identifiable.  For each network (structure +
+%parameters), we generated 100 data sets of 1000 data vectors, and
+%studied how different scoring criteria ranked, on average, the structure of the
+%generating network among all the 5-node networks as a function of
+%(sub)sample size.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm,height=5cm]{qNML_images/shd_rank_all.pdf}
+\caption{Average ranks for the scoring functions in structure learning experiments.}
+\label{fig:shd_ranks}
 \end{figure}
 
 
-Not surprisingly, the results indicate that when the parameter generation
-mechanism matches the assumptions of the BDeu-score, BDeu usually
-also ranks the generating structure higher than the other scores (see Figure
-~\ref{fig:4arcs} and \ref{fig:7arcs}).  On the other hand, when the parameters are drawn from the
-Jeffreys' prior, the fNML score appears to rank the generating structure
-highest. This too is not surprising, since the NML distribution for
-multinomial data is known to closely match the marginal distribution of
-the data when the Jeffreys' prior is used.
-
-The underfitting tendency of BIC can also be clearly detected both for
-relatively sparse networks (4 arcs) and for dense ones (7 arcs). The
-ranking ability of the qNML criterion appears to be between
-fNML and BDeu in 3 out of 4 settings which is good considering that
-one of these criteria is always the winner. For dense networks with
-the BDeu prior, qNML appears to perform worse than BDeu and fNML but
-still much better than BIC.
+%Not surprisingly, the results indicate that when the parameter generation
+%mechanism matches the assumptions of the BDeu-score, BDeu usually
+%also ranks the generating structure higher than the other scores (see Figure
+%~\ref{fig:4arcs} and \ref{fig:7arcs}).  On the other hand, when the parameters are drawn from the
+%Jeffreys' prior, the fNML score appears to rank the generating structure
+%highest. This too is not surprising, since the NML distribution for
+%multinomial data is known to closely match the marginal distribution of
+%the data when the Jeffreys' prior is used.
+%
+%The underfitting tendency of BIC can also be clearly detected both for
+%relatively sparse networks (4 arcs) and for dense ones (7 arcs). The
+%ranking ability of the qNML criterion appears to be between
+%fNML and BDeu in 3 out of 4 settings which is good considering that
+%one of these criteria is always the winner. For dense networks with
+%the BDeu prior, qNML appears to perform worse than BDeu and fNML but
+%still much better than BIC.
 
 \subsection{PREDICTION AND PARSIMONY}
 
 To empirically compare the model selection criteria we took 20 UCI
 data sets~\cite{Lichman:2013} and ran 1000 train and test experiments
 for all of them. In each experiment, random 10\% of the original
-data set was selected as training data and the rest 90\% as test data.
-The training was conducted using dynamic programming based exact structure
-learning~\cite{cosco.uai06} which limited the number $n$ of variables
-to less than 20.
+data set was selected as training data and the rest 90\% as test data. The training was conducted using the same dynamic programming based exact structure learning algorithm.
 
 When predicting with structures learned by the BDeu score, we used the
 Bayesian predictive parameter values (BPP) $\theta_{ijk} \propto
