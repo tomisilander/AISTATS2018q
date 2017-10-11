@@ -16,7 +16,7 @@
 \newtheorem{lemma}{Lemma}
 
 \date{}
-\title{Supplementary Materials for the article \textit{Quotient Normalized Maximum Likelihood Criterion for Learning Bayesian Network Structures} }
+\title{Supplementary Material for the article \textit{Quotient Normalized Maximum Likelihood Criterion for Learning Bayesian Network Structures} }
 \begin{document}
 \maketitle
 
@@ -104,7 +104,7 @@ C(N,k) &=  \sum_{l=0}^{N-1}\frac{(N-1)^{\underline{l}}k^{\overline{l + 1}}}{N^{l
 \end{align*}where $s(i,j)$ denotes the (signed) Stirling number of the first kind and
 $$
 a_j = \Le \sum_{l=0}^{N-1} \frac{(N-1)^{\underline{l}}}{N^{l+1}l!} \ |s(l + 1,j)| \Ri,
-$$ $a_j > 0$ for all $j$. On the row 4, we used the property of Stirling numbers: $s(i,j) = 0$ for all $j > i$. 
+$$ $a_j > 0$ for all $j$. On the second row, we denoted $b_l = (N-1)^{\underline{l}}/(N^{l+1} l!)$. On the row 4, we used the property of Stirling numbers: $s(i,j) = 0$ for all $j > i$. 
 \end{proof}
 \begin{lemma}
 Assume $H_N(X \mid Y') \leq H_N(X \mid Y)$, where $Y' \subset Y$. Now $\log P(x_N \mid \hat{\theta}_{X\mid Y} \ ) = \log P(x_N \mid \hat{\theta}_{X\mid Y'})$.
@@ -168,7 +168,7 @@ Subtracting these two expression yields
 \begin{align*}
 &\Le\frac{d}{dk}C(N,rk)\Ri C(N,k)-\Le\frac{d}{dk}C(N,k)\Ri C(N,rk) \\&= \sum_{i = 1}^{2N-1} \Le \sum_{j+l = i} (j+1)a_{j+1}r^{j+1}a_l  \Ri k^i - \sum_{i = 1}^{2N-1} \Le \sum_{j+l = i}(j+1)a_{j+1}a_l  r^l   \Ri k^i \\
 &= \sum_{i = 1}^{2N-1} \Le \sum_{j+l = i}(j+1)a_{j+1}a_l  (r^{j+1}- r^l)   \Ri k^i
-\end{align*}which is the polynomial in the denominator of the derivative of $C(N,rk)/C(N,k)$.
+\end{align*}which is the polynomial in the numerator of the derivative of $C(N,rk)/C(N,k)$.
 Next, we study the coefficient of $k^i$, if $i \leq N$
 \begin{align*}
 \sum_{j+l = i}(j+1)a_{j+1}a_l  (r^{j+1}- r^l) &= \sum_{l=1}^{i}(i-l+1)a_{i-l+1}a_l  (r^{i-l+1}- r^l) \\
