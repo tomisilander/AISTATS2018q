@@ -12,7 +12,7 @@ models that are predictive and parsimonious.  It seems that none of
 the criteria uniformly outperform the others in all these desirable
 aspects of model selection criteria.
 
-\subsection{FINDING GENERATING STRUCTURE}
+\subsection{Finding Generating Structure}
 
 In our first experiment, we took five widely used benchmark Bayesian networks\footnote{Bayesian Network Repository: \url{http://www.bnlearn.com/bnrepository/}} (Asia, Cancer, Earthquake, Sachs and Survey), sampled data from them, and tried to learn the generating structure with the different scoring functions using various sample sizes. These networks were picked in order to use the dynamic programming based exact structure learning~\cite{cosco.uai06} which limited the number $n$ of variables
 to less than 20. We measured the quality of the learned structures using structural Hamming distance (SHD, \cite{Tsamardinos2006}). 
@@ -72,14 +72,19 @@ Figure \ref{fig:shd_ranks} summarizes the SHD results in all networks by showing
 %the BDeu prior, qNML appears to perform worse than BDeu and fNML but
 %still much better than BIC.
 
-\subsection{PREDICTION AND PARSIMONY}
+\subsection{Prediction and Parsimony}
 
 To empirically compare the model selection criteria we took 20 UCI
-data sets~\cite{Lichman:2013} and ran 1000 train and test experiments
-for all of them. In each experiment, random 10\% of the original
-data set was selected as training data and the rest 90\% as test data. The training was conducted using the same dynamic programming based exact structure learning algorithm.
+data sets~\cite{Lichman:2013} and ran train and test experiments for
+all of them. To better compare the performance over different sample
+sizes, we picked different fractions ($10\%, 20\%, \ldots, 90\%$) of
+the data sets as training data and the rest as the test data.
+This was done for 1000 different permutations of each dataset.
+The training was conducted using the dynamic
+programming based exact structure learning algorithm.
 
-When predicting with structures learned by the BDeu score, we used the
+When predicting $P(d_{test}|D_{train},S,\theta)$,
+with structures $S$ learned by the BDeu score, we used the
 Bayesian predictive parameter values (BPP) $\theta_{ijk} \propto
 N_{ijk}+\frac{1}{r_iq_i}$.  In the spirit of keeping the scores
 hyperparameter-free, for structures learned by the other model
@@ -88,7 +93,7 @@ parametrization $\theta_{ijk}\propto e(n_{ijk})(n_{ijk}+1)$, where
 $e(n)=(\frac{n+1}{n})^n$ as suggested in~\cite{Riss07b}.
 
 \begin{table}
-\caption{Predictive log losses for small sample sizes for different model selection criteria in 20 different data sets.}
+\caption{Average predictive performance rank over different sample sizes for different model selection criteria in 20 different data sets.}
 \label{tbl:preds}
 \begin{center}
 \begin{tabular}{crrrrr}
@@ -99,49 +104,66 @@ $e(n)=(\frac{n+1}{n})^n$ as suggested in~\cite{Riss07b}.
     & \multicolumn{1}{p{0.9cm}}{\centering fNML \\ sNML}
     & \multicolumn{1}{p{0.9cm}}{\centering qNML \\ sNML}\\
        \midrule
-    Iris &    15 &     \textit{3.61} &              3.56 &   \underline{3.50} &      \textbf{3.47} \\
- PostOpe &    18 &    \textit{10.52} &     \textbf{7.45} &   \underline{8.35} &               8.39 \\
-   Ecoli &    34 &     \textit{6.27} &              6.16 &      \textbf{5.56} &   \underline{5.63} \\
-   Liver &    35 &     \textit{4.22} &     \textbf{4.01} &               4.10 &   \underline{4.03} \\
-    Wine &    36 &    \textit{16.41} &    \textbf{11.27} &              12.07 &  \underline{11.86} \\
-   Glass &    44 &     \textit{7.48} &              6.65 &      \textbf{6.37} &   \underline{6.43} \\
- Thyroid &    44 &              2.92 &     \textit{2.93} &      \textbf{2.81} &   \underline{2.83} \\
- HeartSt &    54 &    \textit{14.37} &    \textbf{10.96} &              11.98 &  \underline{11.65} \\
- BreastC &    58 &    \textit{11.21} &     \textbf{9.94} &  \underline{10.34} &              10.37 \\
- HeartHu &    60 &     \textit{9.21} &     \textbf{8.38} &               8.80 &   \underline{8.61} \\
- HeartCl &    62 &    \textit{14.88} &    \textbf{11.76} &              12.48 &  \underline{12.18} \\
- BcWisco &    70 &     \textit{6.41} &     \textbf{5.09} &               5.29 &   \underline{5.28} \\
- Diabete &    77 &     \textit{5.11} &  \underline{4.99} &               5.09 &      \textbf{4.98} \\
- TicTacT &    96 &             10.99 &    \textbf{10.35} &  \underline{10.72} &     \textit{11.04} \\
- Balance &   126 &              7.45 &  \underline{7.42} &      \textbf{7.27} &      \textit{7.73} \\
-   Yeast &   149 &              5.67 &     \textit{5.80} &      \textbf{5.48} &   \underline{5.49} \\
- Abalone &   418 &  \underline{3.93} &     \textit{4.00} &      \textbf{3.88} &               3.96 \\
- PageBlo &   548 &  \underline{2.36} &     \textit{2.40} &      \textbf{2.32} &               2.38 \\
- Shuttle &  5800 &  \underline{1.69} &     \textit{1.72} &      \textbf{1.69} &               1.71 \\
-   Adult &  6513 &             10.16 &    \textit{10.25} &     \textbf{10.05} &  \underline{10.08} \\
+ PostOpe &     90 &              2.79 &     \textbf{1.20} &  \underline{3.06} &           2.94 \\
+    Iris &    150 &  \underline{2.82} &              2.37 &     \textbf{2.27} &           2.54 \\
+    Wine &    178 &  \underline{3.23} &     \textbf{1.88} &              2.67 &           2.22 \\
+   Glass &    214 &  \underline{3.61} &              3.09 &     \textbf{1.42} &           1.88 \\
+ Thyroid &    215 &              2.55 &  \underline{3.21} &     \textbf{1.80} &           2.44 \\
+ HeartSt &    270 &  \underline{3.12} &     \textbf{1.39} &              3.12 &           2.37 \\
+ BreastC &    286 &  \underline{3.09} &     \textbf{1.41} &              2.97 &           2.53 \\
+ HeartHu &    294 &  \underline{3.18} &     \textbf{1.66} &              2.90 &           2.27 \\
+ HeartCl &    303 &  \underline{3.46} &     \textbf{1.38} &              2.99 &           2.17 \\
+   Ecoli &    336 &              3.20 &  \underline{3.53} &     \textbf{1.24} &           2.04 \\
+   Liver &    345 &  \underline{3.17} &              2.39 &              2.69 &  \textbf{1.75} \\
+ Balance &    625 &  \underline{3.35} &              1.91 &     \textbf{1.59} &           3.16 \\
+ BcWisco &    699 &  \underline{3.06} &              2.03 &              2.89 &  \textbf{2.02} \\
+ Diabete &    768 &  \underline{2.91} &              2.70 &              2.68 &  \textbf{1.71} \\
+ TicTacT &    958 &  \underline{3.44} &              2.71 &     \textbf{1.31} &           2.53 \\
+   Yeast &   1484 &              2.60 &  \underline{3.76} &     \textbf{1.55} &           2.10 \\
+ Abalone &   4177 &              2.60 &  \underline{3.64} &     \textbf{1.04} &           2.72 \\
+ PageBlo &   5473 &              2.24 &  \underline{3.61} &     \textbf{1.31} &           2.83 \\
+   Adult &  32561 &              3.23 &  \underline{3.77} &     \textbf{1.00} &           2.00 \\
+ Shuttle &  58000 &     \textbf{1.44} &  \underline{3.78} &              1.56 &           3.22 \\
 \end{tabular}
 \end{center}
 \end{table}
 
-Table~\ref{tbl:preds} features the average predictive losses for different
-data sets.  BIC's bias for simplicity makes it often win (written bold
-in the table) with small sample sizes, but it performs worst (in
-italics) for the large sample sizes. the qNML seems to achieve a lot
-of runner-up positions (underlined) making it a rather safe choice.
+For each train/test sample, we ranked the predictive performance of
+the models learned by different four structure learning criteria (rank
+1 being the best and 4 the worst). Table~\ref{tbl:preds} features the
+average rank for different data sets, the average being taken over
+1000 different train test samples for each 9 sample sizes for each
+data.  BIC's bias for simplicity makes it often win (written bold in
+the table) with small sample sizes, but it often performs worst
+(underlined) for the larger sample sizes (for the same reason), while
+fNML seems to be good for large sample sizes. The striking feature
+about the qNML is its robustness.  It is usually between BIC and fNML
+for all the sample sizes making it a ``safe choice''. This can be
+quantified if we further average the columns of the
+table~\ref{tbl:preds}.  This yields the average ranks of $2.95, 2.57,
+2.10$, and $2.37$, with standard deviations $0.49, 0.90, 0.76$, and
+$0.43$.  While fNML achieves on average the best rank, the runner-up
+qNML has the lowest standard deviation.
 
 Figure~\ref{fig:bcnpmean} shows how fNML still sometimes behaves
 strangely in terms of model complexity here measured by the number of
 parameters in the model. qNML, instead, appears to yield more
-parsimonious models.
+parsimonious models. To study the concern of fNML producing too
+complex models for small sample sizes, we studied the number of
+parameters in models produced by different model selection criteria
+when using 10\% of each data set for structure learning.
 
-Looking at the number of parents for the same 20 data sets again
+Looking at the number of parameters for the same 20 data sets again
 features BIC's preference for simple models
-(Table~\ref{tbl:nofparams}).  qNML usually (18/20) yields more
-parsimonious models than fNML that selects the most complex model for 14
-out of 20 data sets.
+(Table~\ref{tbl:nofparams}).  qNML usually (19/20) yields more
+parsimonious models than fNML that selects the most complex model for
+7 out of 20 data sets.
+
+The graphs for different sample sizes for both predictive accuracy and
+the number of parameters can be found in the Supplementary Material.
 
 \begin{table}
-  \caption{Average number of parents per node 
+  \caption{Average number of parameters in models 
     for different model selection criteria in 20 different data sets.}
 \label{tbl:nofparams}
 \begin{center}
@@ -154,26 +176,26 @@ out of 20 data sets.
     & \multicolumn{1}{p{0.9cm}}{\centering fNML\\}
     & \multicolumn{1}{p{0.9cm}}{\centering qNML\\}\\
 \midrule
-    Iris &    15 &              0.84 &     \textbf{0.63} &  \textit{0.87} &  \underline{0.82} \\
- PostOpe &    18 &              1.35 &     \textbf{0.11} &  \textit{1.66} &  \underline{1.29} \\
-   Ecoli &    34 &              0.83 &     \textbf{0.30} &  \textit{0.96} &  \underline{0.77} \\
-   Liver &    35 &              0.60 &     \textbf{0.10} &  \textit{0.88} &  \underline{0.43} \\
-    Wine &    36 &     \textit{2.11} &     \textbf{0.75} &           1.86 &  \underline{1.44} \\
-   Glass &    44 &              1.32 &     \textbf{0.38} &  \textit{1.41} &  \underline{0.85} \\
- Thyroid &    44 &              0.84 &     \textbf{0.48} &  \textit{0.97} &  \underline{0.66} \\
- HeartSt &    54 &              1.81 &     \textbf{0.56} &  \textit{2.06} &  \underline{1.50} \\
- BreastC &    58 &  \underline{1.27} &     \textbf{0.42} &  \textit{1.71} &              1.39 \\
- HeartHu &    60 &  \underline{0.93} &     \textbf{0.56} &  \textit{1.55} &              1.04 \\
- HeartCl &    62 &              1.69 &     \textbf{0.41} &  \textit{1.96} &  \underline{1.33} \\
- BcWisco &    70 &     \textit{2.02} &     \textbf{0.76} &           1.96 &  \underline{1.14} \\
- Diabete &    77 &  \underline{0.55} &     \textbf{0.23} &  \textit{1.04} &              0.58 \\
- TicTacT &    96 &  \underline{1.60} &     \textbf{0.21} &           2.32 &     \textit{2.47} \\
- Balance &   126 &     \textbf{0.06} &  \underline{0.15} &           0.71 &     \textit{1.18} \\
-   Yeast &   149 &              0.54 &     \textbf{0.14} &  \textit{0.78} &  \underline{0.45} \\
- Abalone &   418 &              1.20 &     \textbf{0.78} &  \textit{1.49} &  \underline{0.93} \\
- PageBlo &   548 &     \textit{1.67} &     \textbf{0.38} &           1.17 &  \underline{0.49} \\
- Shuttle &  5800 &     \textit{2.02} &     \textbf{1.05} &           1.84 &  \underline{1.14} \\
-   Adult &  6513 &  \underline{1.34} &     \textbf{1.11} &  \textit{1.59} &              1.36 \\
+    Iris &    15 &     \underline{37} &   \textbf{23} &                33 &               29 \\
+ PostOpe &    18 &   \underline{1217} &   \textbf{19} &               397 &              146 \\
+   Ecoli &    34 &    \underline{182} &   \textbf{31} &               162 &               77 \\
+   Liver &    35 &                 45 &   \textbf{15} &    \underline{61} &               24 \\
+    Wine &    36 &  \underline{16521} &   \textbf{70} &               807 &              205 \\
+   Glass &    44 &   \underline{1677} &   \textbf{48} &               506 &               97 \\
+ Thyroid &    44 &                 40 &   \textbf{23} &    \underline{66} &               28 \\
+ HeartSt &    54 &  \underline{16861} &   \textbf{44} &              1110 &              256 \\
+ BreastC &    58 &  \underline{25797} &   \textbf{49} &              3767 &              844 \\
+ HeartHu &    60 &   \underline{1634} &   \textbf{43} &               792 &               90 \\
+ HeartCl &    62 &  \underline{34381} &   \textbf{47} &              1433 &              404 \\
+ BcWisco &    70 &   \underline{4630} &   \textbf{42} &               603 &               89 \\
+ Diabete &    77 &                 39 &   \textbf{22} &   \underline{216} &               34 \\
+ TicTacT &    96 &  \underline{13701} &   \textbf{25} &              1969 &              767 \\
+ Balance &   126 &        \textbf{20} &            24 &                49 &  \underline{611} \\
+   Yeast &   149 &                 71 &   \textbf{31} &   \underline{265} &               75 \\
+ Abalone &   418 &                 91 &   \textbf{46} &   \underline{150} &               63 \\
+ PageBlo &   548 &    \underline{703} &   \textbf{45} &               380 &               56 \\
+ Shuttle &  5800 &                535 &   \textbf{99} &   \underline{717} &              130 \\
+   Adult &  6513 &                699 &  \textbf{479} &  \underline{1555} &              945 \\
 \end{tabular}
 \end{center}
 \end{table}
