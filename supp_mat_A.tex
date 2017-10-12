@@ -1,26 +1,3 @@
-\documentclass[12pt]{article}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{bm}
-\usepackage[round]{natbib}
-\usepackage{bm}
-\newcommand{\Le}{\left(}
-\newcommand{\Ri}{\right)}
-\newcommand{\N}{\mathbb{N}}
-\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
-\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
-\newtheorem{theorem}{Theorem}
-\newtheorem{definition}{Definition}
-\newtheorem{corollary}{Corollary}
-\newtheorem{lemma}{Lemma}
-
-\date{}
-\title{Supplementary Material for the article \textit{Quotient Normalized Maximum Likelihood Criterion for Learning Bayesian Network Structures} }
-\begin{document}
-\maketitle
-
-\appendix
 \section{Regularity proof}
 
 \subsection{Preliminaries}
@@ -198,6 +175,3 @@ Let us now consider the situation where $n < i \leq 2N-1$. We start with the spe
 \end{align*}It is now easy to verify that $(2N-i-2k+1)$ and $c_{i-N+k}$ are positive if $k \leq N - (i-1)/2$ which holds since $k$ ranges from $1$ to $\lfloor N - i/2 \rfloor$. The floor function is again used when we sum over pairs of terms since if $i$ is odd there is zero-term. 
 Since all the coefficients are non-negative and the $k \geq 2$, the derivative is positive. This implies that the original function is increasing.
 \end{proof}
-\bibliographystyle{apalike}
-\bibliography{cosco}
-\end{document}

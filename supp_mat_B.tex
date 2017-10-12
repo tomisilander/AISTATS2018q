@@ -1,26 +1,3 @@
-\documentclass[12pt]{article}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{bm}
-\usepackage[round]{natbib}
-\usepackage{bm}
-\newcommand{\Le}{\left(}
-\newcommand{\Ri}{\right)}
-\newcommand{\N}{\mathbb{N}}
-\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
-\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
-\newtheorem{theorem}{Theorem}
-\newtheorem{definition}{Definition}
-\newtheorem{corollary}{Corollary}
-\newtheorem{lemma}{Lemma}
-
-\date{}
-\title{Supplementary Material for the article \textit{Quotient Normalized Maximum Likelihood Criterion for Learning Bayesian Network Structures} }
-\begin{document}
-\maketitle
-
-\appendix
 \section{qNML coincides with NML for many models}
 
 
@@ -110,7 +87,3 @@ $$
 a(n) = \sum_{i=1}^{p(n)} \frac{n!}{\prod_{j=1}^{d(i)} m(i,j)!}.
 $$
 For example, $a(4)=\frac{4!}{1!}+\frac{4!}{1!1!}+\frac{4!}{2!}+\frac{4!}{1!2!}+\frac{4!}{4!}=73$. In general this sequence grows rapidly; $1, 1, 3, 13, 73, 501, 4051, 37633, 394353, 4596553, \ldots$.
-
-\bibliographystyle{apalike}
-\bibliography{cosco}
-\end{document}
