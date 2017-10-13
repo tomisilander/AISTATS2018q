@@ -107,18 +107,18 @@ has tendency to add more and more parent variables for a child node
 even though the empirical conditional entropy of the child given the
 parents has already reached zero. In more detail, assume that in our
 data $D$, the values of $X_i$ are completely determined by variables
-in set $Z$, so that the empirical entropy $H(X_i | Z) = 0$. Now, if we can further
+in set $Z$, so that the empirical entropy $H_N(X_i | Z) = 0$. Now, if we can further
 find one or more variables, denoted by $Y$, whose values are
 determined completely by the variables in $Z$, then BDeu will prefer
 the set $Z\cup Y$ over $Z$ alone as the parents of $X_i$. Suzuki
-argues that this kind of behaviour violates regularity in model
+argues that this kind of behaviour violates \textit{regularity} in model
 selection as the more complex model is preferred over a simpler one
 even though it does not fit the data any better. The phenomenon seems
 to stem from the way the hyperparameters for the Dirichlet
 distribution are chosen in BDeu as using Jeffreys' prior,
 $\theta_{ijk}\sim Dir(\frac{1}{2},\ldots,\frac{1}{2})$, does not suffer
 from this anomaly. However, using Jeffreys' prior causes marginal
-likelihood score not to be score equivalent.
+likelihood score not to be score equivalent. In Section \ref{sec:regularity}, we will give the formal definition of regularity and state that qNML is regular. In addition, we provide a proof of regularity for fNML criterion, which has not appeared in the literature before. The detailed proofs can be found in Appendix A in the Supplementary Material.     
 
 A natural solution to avoid parameter sensitivity of BDeu would be to
 use a normalized maximum likelihood (NML)

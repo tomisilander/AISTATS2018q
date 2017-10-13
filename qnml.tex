@@ -80,7 +80,7 @@ theorem and sketch a proof for it. A more detailed proof appears in Appendix A t
   easily from the definition of covered arcs.
 \end{proof}
 
-\subsection{qNML Is Consistent}
+\subsection{qNML is Consistent}
 
 One important property possessed by nearly every model selection
 criterion is consistency. In our context, consistency means that given
@@ -208,7 +208,7 @@ In general this sequence grows rapidly; $1, 1, 3, 13, 73, 501, 4051,
 37633, 394353, 4596553, \ldots$.
 \end{proof}
 
-\subsection{qNML Is Regular}
+\subsection{qNML is Regular}\label{sec:regularity}
 
 Suzuki \cite{Suzuki2017} defines regularity for a scoring function $Q_n(X \mid Y)$ as follows:
 \begin{definition}
@@ -222,5 +222,12 @@ qNML score is regular.
 \end{theorem}
 \begin{proof}
 The proof is given in Appendix B in the Supplementary Material.
+\end{proof}
+As fNML criterion differs from qNML only by how the penalty term is defined, we obtain the following result with little extra work:
+\begin{theorem}
+fNML score is regular.
+\end{theorem}
+\begin{proof}
+The proof is given in the Appendix A in Supplementary Material.
 \end{proof}
 
