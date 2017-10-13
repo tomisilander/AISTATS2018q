@@ -118,7 +118,7 @@ to stem from the way the hyperparameters for the Dirichlet
 distribution are chosen in BDeu as using Jeffreys' prior,
 $\theta_{ijk}\sim Dir(\frac{1}{2},\ldots,\frac{1}{2})$, does not suffer
 from this anomaly. However, using Jeffreys' prior causes marginal
-likelihood score not to be score equivalent. In Section \ref{sec:regularity}, we will give the formal definition of regularity and state that qNML is regular. In addition, we provide a proof of regularity for fNML criterion, which has not appeared in the literature before. The detailed proofs can be found in Appendix A in the Supplementary Material.     
+likelihood score not to be score equivalent. In Section \ref{sec:regularity}, we will give the formal definition of regularity and state that qNML is regular. In addition, we provide a proof of regularity for fNML criterion, which has not appeared in the literature before. The detailed proofs can be found in Appendix B in the Supplementary Material.     
 
 A natural solution to avoid parameter sensitivity of BDeu would be to
 use a normalized maximum likelihood (NML)
@@ -143,7 +143,7 @@ suggested solving the BDeu parameter sensitivity problem by using the
 NML-code for the column partitions, i.e., changing the Bayesian mixture
 in equation~(\ref{eqn:bayesmix}) to
 \begin{equation}
-P^1_{NML}(D_{i,G_i=j};G)=\frac{P(D|\hat\theta(D_{i,G_i=j};G))}{\sum_{D'}{P(D';\hat\theta(D';G))}},
+P^1_{NML}(D_{i,G_i=j};G)=\frac{P(D|\hat\theta(D_{i,G_i=j};G))}{\sum_{D'}{P(D'|\hat\theta(D';G))}},
 \end{equation}
 where $D'\in{\{1,\ldots,r_i\}}^{|D_{i,G_i=j}|}$.  The logarithm of the
 denominator is often called a regret, since it indicates the extra
