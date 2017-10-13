@@ -1,213 +1,108 @@
-\section{Regularity proof}
+\section{Score equivalency proof}
 
-\subsection{Preliminaries}
-We start by recalling the definition of regularity \citep{Suzuki2017}:
+Chickering showed that any equivalent structure can be reached from
+another by a series of arc reversal operations without leaving the
+equivalence class~\cite{Chick95}. This means that in order to show
+that equivalent structures leads to the same qNML score, we only need
+to prove that this is the case for equivalent structures that differ
+by a single arc reversal. 
 
-\begin{definition}
-Assume $H_N(X \mid Y') \leq H_N(X \mid Y)$, where $Y' \subset Y.$ We say that the scoring function $Q_N(\cdot \mid \cdot)$ is regular if $Q_n(X \mid Y') \geq Q_N(X \mid Y)$.
-\end{definition}
-In the definition, $N$ denotes the sample size, $X$ is some random variable, $Y$ denotes the proposed parent set for $X$, and $H_N(X \mid Y)$ refers to the empirical conditional entropy based on $N$ samples of variables $X$ and $Y$.
+The network without any arcs is the sole member of its equivalence
+class. All the other networks have at least one arc. We will first
+presents some lemmas that characterize the relations of the parent sets
+before and after the arc reversal. Let $G$ be a network structure
+and $G'$ an equivalent network structure after the arc from $A$
+to $B$ has been reversed to point from $B$ to $A$. We
+will denote the parent sets of $A$ and $B$ in $G$ by $G_{A}$
+and $G_{B}$, and the parent sets of $A$ and $B$ in $G'$ by $G'_{A}$
+and $G'_{B}$. Note that not all the arc reversals lead to the equivalent
+structures. By saying that $G$ and $G'$ are equivalent we imply
+that our arc reversal does not destroy existing V-structures or create
+new ones. The crucial observation is that if reversing the arc that
+goes from $A$ to $B$ does not create or destroy V-structures, it
+must be that the parents of $B$ other than $A$ are exactly the same
+as parents of $A$ (statement 3 below). 
 
-Let $X$ be a categorical random variable with $r$ possible values. Let $U$ denote a possible parent set with $q$ different combinations of values for the variables, and $V$ a parent set with $m$ different configurations. Assume that we have observed $N$ samples of $(X,U,V)$ (denoted by $x_N,u_N$ and $v_N$) and $H_N(X \mid U) \leq H_N(X \mid U \cup V)$ holds.
-
-Recall the definition of the qNML score:
-\begin{align*}
-Q^{qnml}_N(X\mid U) &= \log P(x_n \mid \hat{\theta}_{X\mid U} \ ) - \Le reg(N,rq) - reg(N,q) \Ri \\
-&= \log P(x_N \mid \hat{\theta}_{X\mid U} \ ) - \log \frac{C(N,rq)}{C(N,q)},
-\end{align*}where $C(N,r)$ is the normalizing constant the of the NML distribution for a categorical variable with $r$ possible values and sample size $N$ and $ \hat{\theta}_{X\mid U}$ denotes the maximum likelihood parameters of the conditional distribution of $X$ given $U$ which are computed from the data $(x_N,u_N)$. 
-
-
-In order to prove the regularity, we need the following three lemmas:
-\begin{lemma}\label{Cpolynom} We can write $C(N,k)$ as a polynomial of $k$, formally
-$$
-C(N,k) = \sum_{j=1}^N a_j k^j,
-$$where $a_j > 0$. 
+\begin{lemma}\label{thm:sameparents}
+\item $G_{B}=G_{A}\cup\{A\}$
 \end{lemma}
-\begin{lemma}\label{MLterms}
-Assume $H_N(X \mid Y') \leq H_N(X \mid Y)$, where $Y' \subset Y$. Now $\log P(x_N \mid \hat{\theta}_{X\mid Y} \ ) = \log P(x_N \mid \hat{\theta}_{X\mid Y'} \ )$.
-\end{lemma}
-\begin{lemma}\label{increasing}
-Let $r \in \N, r \geq 2$.  The function $k \mapsto \frac{C(N,rk)}{C(N,k)}$ is increasing for every $k \geq 2$.
-\end{lemma}
-\noindent We present the proofs of these lemmas in Section \ref{lemmaproofs}.  
 
-\subsection{The main proof}
+\begin{proof}
+We show the direction $G_{A}\cup\{A\}\subset G_{B}$ 
+by contradiction. First of all, a parent of $A$ cannot be a child
+of $B$ or otherwise there would be a loop in $G.$ If $A$ had a
+parent $Z$ that is not a parent of $B$, then $B$ and $Z$ were
+not adjacent and the reversal of the arc would create a new V-structure
+$(B,A,Z)$. Since this was forbidden by the equivalence of $G$ and
+$G'$, $Z$ must also be a parent of $B$. 
+
+Also, $B$ cannot have parents other than $A$ that are not also parents
+of $A$, i.e., $G_{B}\subset G_{A}\cup{A}$ . If there were such
+a parent $Z$ it should be anyway adjacent to $A$, otherwise the
+V-structure $(A,B,Z)$ would be destroyed in the reversal. Since the
+$Z$ was not a parent of $A$, the only possibility for adjacency
+is that $Z$ were a child of $A$. However, in this case arc reversal
+would lead to a loop $B,A,Z,B$.
+\end{proof}
+
+We wil next list some simple consequences of the equivalence preserving
+arc reversal:
+
+\begin{lemma}
+\label{thm:reveqs}
+\hangindent\leftmargini
+\hspace{1mm}
+\begin{enumerate}
+\item $G'_{B}=G_{B}\setminus\{A\}$
+\item $G'_{A}=G_{A}\cup\{B\}$ 
+\item $G'_{B}=G_{A}$
+\item $\{B\}\cup G_{B}=\{B\}\cup G_{A}\cup\{A\}=G'_{A}\cup\{A\}$
+\item $G'_{A}=G_{A}\cup\{B\}=G'_{B}\cup\{B\}$
+\end{enumerate}
+\end{lemma}
+
+
+\begin{proof}
+
+The statements 1 and 2 are trivial since they just state the fact
+that an arc reversal removes $A$ from the parents of $B$ and adds
+$B$ to the parents of $A$. 
+
+The
+statement 3 follows directly by using the lemma \ref{thm:sameparents}
+to the statement 1. Combining these equalities we can generate more of them 
+such as statements 4 and 5. 
+\end{proof}
+
+Let us take structures $G$ and $G'$. Since we can assume the data to be fixed we lighten
+up the notations and write 
+$P^1_{NML}(i,G_i) := P^1_{NML}(D[\cdot,(i,G_i)];G)$ and
+$P^1_{NML}(G_i) := P^1_{NML}(D[\cdot,G_i];G)$.
+
 \begin{theorem}
-qNML score is regular.
+$  s^{qNML}(D;G)=s^{qNML}(D;G').$
 \end{theorem}
-\begin{proof}
-We want to show that
-$$
-Q^{qnml}_N(X\mid U) \geq Q^{qnml}_N(X \mid U \cup V).
-$$assuming $H_N(X \mid U) \leq H_N(X \mid U \cup V)$. Using the entropy assumption and Lemma \ref{MLterms} implies that the maximized likelihood terms are equal. In order to prove the claim, it suffices to study the penalty terms, and we want to show that
-\begin{align*}
-- \Le reg(N,rq) - reg(N,q) \Ri \ &\geq \  -\Le reg(N,rqm) - reg(N,qm) \Ri \\
-\log \frac{C(N,rq)}{C(N,q)} \ &\leq \log \frac{C(N,rqm)}{C(N,qm)}.
-\end{align*}This holds, since logarithm is an increasing function, and $q \leq qm$, so we can apply Lemma \ref{increasing} to conclude the proof. 
-
-
-\end{proof}
-
-
-\subsection{Proofs of lemmas}\label{lemmaproofs}
-%We want to show that
-%$$
-%\quad  Q^{qnml}_N(X\mid U) \geq Q^{qnml}_N(X \mid U \cup V)
-%$$which, by using the definition of qNML, is equivalent to 
-%\begin{equation}\label{statement}
-%\log P(X \mid )
-%\end{equation}
-%The assumption about entropy implies that the maximized likelihood terms of the qnml-score are equal. 
-\setcounter{lemma}{0}
-\begin{lemma} $C(N,k)$ can be written as a polynomial of $k$, formally
-$$
-C(N,k) = \sum_{j=1}^N a_j k^j,
-$$where $a_j > 0$. 
-\end{lemma}
-\begin{proof} \cite{cosco.itsl08} derive the following representation for the normalizing constant
-\begin{align*}  
-C(N,k) = \sum_{l=0}^{N-1}\frac{(N-1)^{\underline{l}}k^{\overline{l + 1}}}{N^{l+1} \ l!} ,
-\end{align*}where $x^{\underline{l}}$ and $x^{\overline{l}}$ denote falling and rising factorials, respectively. 
-
-We utilize the fact that the rising factorial can be represented as polynomial using unsigned Stirling numbers of the first kind (see \cite{Adamchik1997}, for instance)
-\begin{align*}
-C(N,k) &=  \sum_{l=0}^{N-1}\frac{(N-1)^{\underline{l}}k^{\overline{l + 1}}}{N^{l+1} \ l!} \\
-&= \sum_{l=0}^{N-1} b_l \ k^{\overline{l+1}} \\
-&= \sum_{l=0}^{N-1} b_l \Le \sum_{j=1}^{l+1}|s(l + 1,j)| \ k^j \Ri \\
-&= \sum_{l=0}^{N-1} \Le \sum_{j=1}^{N}b_l \ |s(l + 1,j)| \ k^j \Ri \\
-&= \sum_{j=1}^{N} \Le \sum_{l=0}^{N-1} b_l \ |s(l + 1,j)| \ k^j \Ri \\
-&= \sum_{j=1}^{N} \Le \sum_{l=0}^{N-1} b_l \ |s(l + 1,j)| \Ri k^j \\
-&= \sum_{j=1}^{N} a_j  k^j,
-\end{align*}where $s(i,j)$ denotes the (signed) Stirling number of the first kind and
-$$
-a_j = \Le \sum_{l=0}^{N-1} \frac{(N-1)^{\underline{l}}}{N^{l+1}l!} \ |s(l + 1,j)| \Ri,
-$$ $a_j > 0$ for all $j$. On the second row, we denoted $b_l = (N-1)^{\underline{l}}/(N^{l+1} l!)$. On the row 4, we used the property of Stirling numbers: $s(i,j) = 0$ for all $j > i$. 
-\end{proof}
-\begin{lemma}
-Assume $H_N(X \mid Y') \leq H_N(X \mid Y)$, where $Y' \subset Y$. Now $\log P(x_N \mid \hat{\theta}_{X\mid Y} \ ) = \log P(x_N \mid \hat{\theta}_{X\mid Y'})$.
-\end{lemma}
-\begin{proof}
-We can write the logarithm of the maximized likelihood, \\ $\log P(x_N \mid \hat{\theta}_{X\mid Y} \ )$, as follows \citep{KOLLER}
-\begin{align*}
-\log P(x_N \mid \hat{\theta}_{X\mid Y} \ ) & = -N \Le H_N(X) - I_N(X;Y) \Ri \\
-&= -N \  H_N(X\mid Y),
-\end{align*}where $I_N(\cdot;\cdot)$ is the empirical mutual information. This implies that the assumption
-$$
-H_N(X \mid Y') \leq H_N(X \mid Y)
-$$ is equivalent to
-$$
-\log P(x_N \mid \hat{\theta}_{X\mid Y} \ ) \geq \log P(x_N \mid \hat{\theta}_{X\mid Y'} \ ) .
-$$Actually we must have the equality holding in the above expression, since
-$$
-H_N(X \mid Y') < H_N(X \mid Y)
-$$ would imply that
-$$
-I_N(X ; Z \mid Y ) < 0,
-$$where $Z = Y \setminus Y'$, which is impossible.
-\end{proof}
-\begin{lemma}
-Let $r \in \N, r \geq 2$.  The function $k \mapsto \frac{C(N,rk)}{C(N,k)}$ is increasing for every $k \geq 2$.
-\end{lemma}
 
 \begin{proof}
-Lemma \ref{Cpolynom} lets us to write
-\begin{equation}\label{C1}
-C(N,k) = \sum_{j=1}^{N} a_j k^j
-\end{equation}and, similarly,
-\begin{equation}\label{C2}
-C(N,rk) = \sum_{j=1}^{N} a_j  r^jk^j.
-\end{equation}
 
-From this, it it easy see that the derivative of the quotient, \\ $d/dk (C(N,rk)/C(N,k))$, will be a ratio of two polynomials of $k$. Our goal is to show that the polynomial in the numerator has positive coefficients, which will guarantee the positivity of derivative for every $k > 0$, and thus imply that the original function is increasing (polynomial in the denominator is squared and non-zero for $k > 0$, so it can be ignored).  
+  Now the scores for structures can be decomposed as the
+  $s^{qNML}(D;G)=\sum_{i=1}^{n}s_i^{qNML}(D;G)$ and 
+  $s^{qNML}(D;G')=\sum_{i=1}^{n}s_i^{qNML}(D;G')$.
 
-Derivatives of (\ref{C1}) and (\ref{C2}) are obtained easily:
+Since only the terms corresponding to the variables $A$ and $B$
+in these sums are different, it is enough to show that
+
+$$
+s_A^{qNML}(D;G)+s_B^{qNML}(D;G) = s_A^{qNML}(D;G')+s_B^{qNML}(D;G')
+$$
+Now 
+
 \begin{align*}
-\frac{d}{dk}C(N,k) &= \sum_{j=1}^{N}ja_jk^{j-1} \\
-&= \sum_{j=0}^{N-1}(j+1) a_{j+1}k^{j}
-\end{align*}and
-\begin{align*}
-\frac{d}{dk}C(N,rk) &= \sum_{j=1}^{N}ja_jr^jk^{j-1} \\
-&= \sum_{j=0}^{N-1}(j+1)a_{j+1}r^{j+1}k^{j}. 
-\end{align*}Consider next the products found in the derivative of the quotient. We obtain
-\begin{align*}
-\Le\frac{d}{dk}C(N,rk)\Ri C(N,k) &= \Le \sum_{j=0}^{N-1}(j+1)a_{j+1}r^{j+1}k^{j} \Ri \Le \sum_{l=1}^{N} a_l  k^l \Ri \\
-&= \sum_{i = 1}^{2N-1} \Le \sum_{j+l = i} (j+1)a_{j+1}r^{j+1}a_l  \Ri k^i
-\end{align*}and
-%\begin{align*}
-%\Le\frac{d}{dk}C(n,k)\Ri C(n,rk) &= \Le \sum_{j=0}^{n-1}(j+1)a_{j+1}k^{j} \Ri \Le %\sum_{l=1}^{n} a_l  r^lk^l  \Ri \\
-%&= \sum_{i = 1}^{2n-1} \Le \sum_{m=0}^i (m+1)a_{m+1}a_{i-m}r^{i-m}   \Ri k^i
-%\end{align*}
-\begin{align*}
-\Le\frac{d}{dk}C(N,k)\Ri C(N,rk) &= \Le \sum_{j=0}^{N-1}(j+1)a_{j+1}k^{j} \Ri \Le \sum_{l=1}^{N} a_l  r^lk^l  \Ri \\
-&= \sum_{i = 1}^{2N-1} \Le \sum_{j+l = i}(j+1)a_{j+1}a_l  r^l   \Ri k^i.
+s_A^{qNML}(D;G)+s_B^{qNML}(D;G)& =\log\frac{P^1_{NML}(A,G_{A})}{P^1_{NML}(G_{A})}\frac{P^1_{NML}(B,G_{B})}{P^1_{NML}(G_{B})}\\
+ & =\log 1\cdot\frac{P^1_{NML}(B,G_{B})}{P^1_{NML}(G_{A})}\\
+ & =\log \frac{P^1_{NML}(B,G'_{B})}{P^1_{NML}(G'_{A})}\frac{P^1_{NML}(A,G'_{A})}{P^1_{NML}(G'_{B})}\\
+ & =s_A^{qNML}(D;G')+s_B^{qNML}(D;G').
 \end{align*}
-Subtracting these two expression yields
-\begin{align*}
-&\Le\frac{d}{dk}C(N,rk)\Ri C(N,k)-\Le\frac{d}{dk}C(N,k)\Ri C(N,rk) \\&= \sum_{i = 1}^{2N-1} \Le \sum_{j+l = i} (j+1)a_{j+1}r^{j+1}a_l  \Ri k^i - \sum_{i = 1}^{2N-1} \Le \sum_{j+l = i}(j+1)a_{j+1}a_l  r^l   \Ri k^i \\
-&= \sum_{i = 1}^{2N-1} \Le \sum_{j+l = i}(j+1)a_{j+1}a_l  (r^{j+1}- r^l)   \Ri k^i
-\end{align*}which is the polynomial in the numerator of the derivative of $C(N,rk)/C(N,k)$.
-Next, we study the coefficient of $k^i$, if $i \leq N$
-\begin{align*}
-\sum_{j+l = i}(j+1)a_{j+1}a_l  (r^{j+1}- r^l) &= \sum_{l=1}^{i}(i-l+1)a_{i-l+1}a_l  (r^{i-l+1}- r^l) \\
-& = \sum_{l=1}^{i}(i-l+1)c_l \\
-&= \sum_{k =1}^{\lfloor i / 2 \rfloor}(i-k+1)c_k + (i-(i-k + 1)+1)c_{i-k+1} \\
-&=  \sum_{k =1}^{\lfloor i / 2 \rfloor}(i-k+1)c_k + kc_{i-k+1} \\
-&=  \sum_{k =1}^{\lfloor i / 2 \rfloor}(i-k+1)c_k - kc_{k} \\
-&= \sum_{k =1}^{\lfloor i / 2 \rfloor}(i-2k+1)c_k.
-\end{align*} On the first row, we re-wrote sum using only one running index. On the second row we denoted $c_l =a_{i-l+1}a_l  (r^{i-l+1}- r^l)$. On the third row, we re-arranged the sum so that we are summing over pairs of terms of the original sum: the first and the last term, the second and the second to last, and so on.  This resulting sum has $\lfloor i / 2 \rfloor$ terms. We have to use the floor-function since if $i$ is odd, there exists an index $l'$ in the original sum such that $r^{i-l'+1}-r^{l'} = 0$. On the fifth row, we make use of the identity $c_k = -c_{i-k+1}$ which is straightforward to verify. From the last row, we can observe that every term of the sum is positive since $i-2k+1$ and $r^{i-k+1}- r^k$ are both positive if $k \leq (i+1)/2$ which holds since $k$ ranges from $1$ to $\lfloor i / 2 \rfloor$.
-
-Let us now consider the situation where $n < i \leq 2N-1$. We start with the special case where $i = 2N-1$. Then, we have only one term in the sum
-\begin{align*}
-\sum_{j+l = i}(j+1)a_{j+1}a_l  (r^{j+1}- r^l) &= \sum_{l=N}^{N}(2N-1-l+1)a_{2N-1-l+1}a_l  (r^{2N-1-l+1}- r^l) \\
-&= Na_{N}a_N  (r^{N}- r^N) \\
-& = 0.
-\end{align*}Now, let $N < i < 2N-1$, we follow a similar procedure as before to manipulate the sum
-\begin{align*}
-\sum_{j+l = i}(j+1)a_{j+1}a_l  (r^{j+1}- r^l) &= \sum_{l=i-N + 1}^{N}(i-l+1)a_{i-l+1}a_l  (r^{i-l+1}- r^l) \\
-& = \sum_{l=i-N + 1}^{N}(i-l+1)c_l \\
-& = \sum_{k=1}^{2N-i}(N-k+1)c_{i-N+k} \\
-& = \sum_{k=1}^{\lfloor N - i/2 \rfloor}(N-k+1)c_{i-N+k}\\
-&+  (N-(2N-i-k+1)+1)c_{i-N+(2N-i-k+1)} \\
-&= \sum_{k=1}^{\lfloor N - i/2 \rfloor}(N-k+1)c_{i-N+k} +  (i-N+k)c_{N-k+1} \\
-&= \sum_{k=1}^{\lfloor N - i/2 \rfloor}(N-k+1)c_{i-N+k} -  (i-N+k)c_{i-N+k} \\
-&= \sum_{k=1}^{\lfloor N - i/2 \rfloor}(N-k+1-(i-N+k))c_{i-N+k} \\
-&= \sum_{k=1}^{\lfloor N - i/2 \rfloor}(2N-i-2k+1)c_{i-N+k}.
-\end{align*}It is now easy to verify that $(2N-i-2k+1)$ and $c_{i-N+k}$ are positive if $k \leq N - (i-1)/2$ which holds since $k$ ranges from $1$ to $\lfloor N - i/2 \rfloor$. The floor function is again used when we sum over pairs of terms since if $i$ is odd there is zero-term. 
-Since all the coefficients are non-negative and the $k \geq 2$, the derivative is positive. This implies that the original function is increasing.
+The second equation follows from the lemma \ref{thm:sameparents}, and the third from
+the statements 5 and 4 of the lemma \ref{thm:reveqs}.
 \end{proof}
-
-
-\subsection{fNML is Regular}
-In this section, we will show that fNML score is regular. Recall first the definition of fNML local score
-\begin{equation}
-Q^{fnml}_N(X  \vert \ U) = \log P(x_n \mid \hat{\theta}_{X\mid U} \ ) - \sum_{j = 1}^{r_U} reg(N_j,r_X),
-\end{equation}where $r_X$ is the number of categories for $X$, $r_U$ denotes the number of possible configurations of variables in $U$, and $N_j$ is the number of times the $j$:th configuration is observed in our samples $u_N$. Note that $reg(r_X, N_j) = 0$ for any configuration not observed in our sample. 
-fNML criterion differs from qNML only by how the penalty term is defined. We can follow a highly similar strategy in order to prove the regularity for fNML. To this end, we need the following Lemma:
-\begin{lemma}\label{regineq}
-Let $N = N_1 + N_2$ and $r \in\N, r > 2$. Now,
-$$
-reg(N,r) \leq reg(N_1,r) + reg(N_2,r).
-$$
-\end{lemma}
-\begin{proof}
-We start with the definition of $C(N_1,r) = \exp(reg(N_1,r))$,
-\begin{align*}
-C(N_1,r)C(N_2,r) &= \sum_{x_{N_1}}P(x_{N_1} \vert \hat{\theta}(x_{N_1} ))\sum_{x_{N_2}}P(x_{N_2} \vert \hat{\theta}(x_{N_2} ))\\ & \geq
-\sum_{x_{N_1}}P(x_{N_1} \vert \hat{\theta}(x_{N} ))\sum_{x_{N_2}}P(x_{N_2} \vert \hat{\theta}(x_{N} )) \\ &=
-\sum_{x_{N}}P(x_{N} \vert \hat{\theta}(x_{N} )) \\ & = C(N,r).
-\end{align*}Taking the logarithm on the both sides yields our claim. On the second row, we used the definition of maximum likelihood parameters: the probability of data vector $x_{N_1}$ is maximized under parameters $\hat{\theta}(x_{N_1})$, and if we use different parameters, $\hat{\theta}(x_{N_1}$, probability can only go down or stay the same. On the third row, we used the i.i.d, assumption, which allows us to take the single sum over data vectors of length $N = N_1 + N_2$.     
-\end{proof}
-Now we can proceed to the actual proof.
-\begin{theorem}
-fNML score is regular.
-\end{theorem}
-\begin{proof}
-Using the entropy assumption and Lemma \ref{C2}, we can ignore the maximized likelihood terms and study the penalty terms. We want show that
-\begin{equation}\label{fnmlPenalty}
-\sum_{j = 1}^{r_{Y'}} reg(N'_j,r_X) \leq \sum_{l = 1}^{r_{Y}} reg(N_l,r_X),
-\end{equation}where we used $r_{Y'}$ and $r_Y$ to denote the numbers of possible configurations for variables in $Y'$ and $Y$, respectively. Also, $N_j$ refers to the number times the $j$:th configuration of variables $Y$ is observed in our sample, and $N'_l$ denotes the same for $Y'$. 
-
-Now, since $r_{Y'} \leq r_Y$, and we know that $\sum_j N'_j = \sum_l N_l = N$, we can just apply Lemma (\ref{regineq}) multiple times to conclude our proof. 
-\end{proof}
-
-
