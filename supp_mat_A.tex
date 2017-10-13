@@ -175,3 +175,39 @@ Let us now consider the situation where $n < i \leq 2N-1$. We start with the spe
 \end{align*}It is now easy to verify that $(2N-i-2k+1)$ and $c_{i-N+k}$ are positive if $k \leq N - (i-1)/2$ which holds since $k$ ranges from $1$ to $\lfloor N - i/2 \rfloor$. The floor function is again used when we sum over pairs of terms since if $i$ is odd there is zero-term. 
 Since all the coefficients are non-negative and the $k \geq 2$, the derivative is positive. This implies that the original function is increasing.
 \end{proof}
+
+
+\subsection{fNML is Regular}
+In this section, we will show that fNML score is regular. Recall first the definition of fNML local score
+\begin{equation}
+Q^{fnml}_N(X  \vert \ U) = \log P(x_n \mid \hat{\theta}_{X\mid U} \ ) - \sum_{j = 1}^{r_U} reg(N_j,r_X),
+\end{equation}where $r_X$ is the number of categories for $X$, $r_U$ denotes the number of possible configurations of variables in $U$, and $N_j$ is the number of times the $j$:th configuration is observed in our samples $u_N$. Note that $reg(r_X, N_j) = 0$ for any configuration not observed in our sample. 
+fNML criterion differs from qNML only by how the penalty term is defined. We can follow a highly similar strategy in order to prove the regularity for fNML. To this end, we need the following Lemma:
+\begin{lemma}\label{regineq}
+Let $N = N_1 + N_2$ and $r \in\N, r > 2$. Now,
+$$
+reg(N,r) \leq reg(N_1,r) + reg(N_2,r).
+$$
+\end{lemma}
+\begin{proof}
+We start with the definition of $C(N_1,r) = \exp(reg(N_1,r))$,
+\begin{align*}
+C(N_1,r)C(N_2,r) &= \sum_{x_{N_1}}P(x_{N_1} \vert \hat{\theta}(x_{N_1} ))\sum_{x_{N_2}}P(x_{N_2} \vert \hat{\theta}(x_{N_2} ))\\ & \geq
+\sum_{x_{N_1}}P(x_{N_1} \vert \hat{\theta}(x_{N} ))\sum_{x_{N_2}}P(x_{N_2} \vert \hat{\theta}(x_{N} )) \\ &=
+\sum_{x_{N}}P(x_{N} \vert \hat{\theta}(x_{N} )) \\ & = C(N,r).
+\end{align*}Taking the logarithm on the both sides yields our claim. On the second row, we used the definition of maximum likelihood parameters: the probability of data vector $x_{N_1}$ is maximized under parameters $\hat{\theta}(x_{N_1})$, and if we use different parameters, $\hat{\theta}(x_{N_1}$, probability can only go down or stay the same. On the third row, we used the i.i.d, assumption, which allows us to take the single sum over data vectors of length $N = N_1 + N_2$.     
+\end{proof}
+Now we can proceed to the actual proof.
+\begin{theorem}
+fNML score is regular.
+\end{theorem}
+\begin{proof}
+Using the entropy assumption and Lemma \ref{C2}, we can ignore the maximized likelihood terms and study the penalty terms. We want show that
+\begin{equation}\label{fnmlPenalty}
+\sum_{j = 1}^{r_{Y'}} reg(N'_j,r_X) \leq \sum_{l = 1}^{r_{Y}} reg(N_l,r_X),
+\end{equation}where we used $r_{Y'}$ and $r_Y$ to denote the numbers of possible configurations for variables in $Y'$ and $Y$, respectively. Also, $N_j$ refers to the number times the $j$:th configuration of variables $Y$ is observed in our sample, and $N'_l$ denotes the same for $Y'$. 
+
+Now, since $r_{Y'} \leq r_Y$, and we know that $\sum_j N'_j = \sum_l N_l = N$, we can just apply Lemma (\ref{regineq}) multiple times to conclude our proof. 
+\end{proof}
+
+
