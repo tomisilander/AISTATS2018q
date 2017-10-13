@@ -195,7 +195,7 @@ We start with the definition of $C(N_1,r) = \exp(reg(N_1,r))$,
 C(N_1,r)C(N_2,r) &= \sum_{x_{N_1}}P(x_{N_1} \vert \hat{\theta}(x_{N_1} ))\sum_{x_{N_2}}P(x_{N_2} \vert \hat{\theta}(x_{N_2} ))\\ & \geq
 \sum_{x_{N_1}}P(x_{N_1} \vert \hat{\theta}(x_{N} ))\sum_{x_{N_2}}P(x_{N_2} \vert \hat{\theta}(x_{N} )) \\ &=
 \sum_{x_{N}}P(x_{N} \vert \hat{\theta}(x_{N} )) \\ & = C(N,r).
-\end{align*}Taking the logarithm on the both sides yields our claim. On the second row, we used the definition of maximum likelihood parameters: the probability of data vector $x_{N_1}$ is maximized under parameters $\hat{\theta}(x_{N_1})$, and if we use different parameters, $\hat{\theta}(x_{N_1})$, probability can only go down or stay the same. On the third row, we used the i.i.d, assumption, which allows us to take the single sum over data vectors of length $N = N_1 + N_2$.     
+\end{align*}Taking the logarithm on both sides yields our claim. On the second row, we used the definition of maximum likelihood parameters: the probability of the data vector $x_{N_1}$ is maximized under parameters $\hat{\theta}(x_{N_1})$, and if we use different parameters, $\hat{\theta}(x_{N_1})$, the probability can only go down or stay the same. On the third row, we used the i.i.d., assumption, which allows us to take the single sum over data vectors of length $N = N_1 + N_2$.
 \end{proof}
 Now we can proceed to the actual proof.
 \begin{theorem}
