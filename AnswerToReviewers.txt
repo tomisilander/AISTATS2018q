@@ -1,0 +1,15 @@
+﻿We thank reviewers for their feedback. While there appears to be a big spread in overall ratings, we are happy to see that the reviews are unanimously positive about the theoretical properties of the proposed model selection criterion, qNML, that is decomposable (unlike NML), consistent, score equivalent (unlike fNML), parameter free (unlike BDeu or BDq), regular (unlike BDeu) and possibly a reasonable approximation to the NML criterion. 
+
+Our original motivation for looking for a new model selection criterion was, however, extremely practical. Most of our "clients" want to use Bayesian networks due to their intuitive interpretability, and for the insight Bayesian networks provide to the domain. Unfortunately, that is where existing methods too often appear to fail us. To practitioner's disappointment, BIC often yields an empty network that is hard to sell, say, to a social scientist that has spent months to painstakingly collect his/her (often not very big) data set. Unfortunately, our experiments using Structural Hamming Distance (SHD) does not fully reveal this situation, since the empty network can on average still be relatively competitive in terms of SHD. 
+Naturally, providing very "false insight" is also undesirable so the models should also be reasonably good in prediction. To our experience, the  qNML is closest to strike a good balance for providing insight while still being predictively well performing, the fact that for example reviewer 1 appears to have appreciated. While probably chosen for communicative clarity, we feel that 
+"it does not work in practice" by reviewer 2 is not a best possible summary of the practical value of qNML, which unlike other methods(!), never performs very poorly.
+
+Clearly, none of the criteria perform the best for all sample sizes and purposes (prediction vs. SHD), which might even suggest picking different criteria for different situations and needs. We like, like reviewer 3, feel that in this situation, proposing a theoretically well behaved and empirically validated criterion is indeed an interesting contribution to the field.
+
+Reviewer 1 gave some detailed comments that are easy to take into account in the final version of the paper. In the longer version of the paper, the comparison with the BDq, as suggested by reviewer 3, is a natural thing to do. The issue with BDq is that it features a hyper-parameter and our preliminary results indicate that BDq can be very sensitive to this parameter. Therefore, for more meaningful comparison, the not yet thoroughly studied parameter sensitivity issue must also be addressed. For including it to this conference paper might be to much of a squeeze.
+
+
+
+
+
+
