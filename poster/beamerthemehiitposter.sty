@@ -1,0 +1,178 @@
+\ProvidesPackage{beamerthemehiitposter}
+\usepackage{url}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectcolormodel{rgb}
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% custom colors
+%\definecolor{gppmblue}{cmyk}{1,0.305,0,0.06}
+%\definecolor{gppmbluedark}{rgb}{0.0156,0.2578,0.5625} 
+% http://www.colorsontheweb.com/colorwizard.asp#wizard, used start set: #0066cc
+\definecolor{gppmcolorscheme1}{HTML}{BFCDE6}  % e.g. for block title
+\definecolor{gppmcolorscheme5}{HTML}{E0E0E0}  % e.g. for block background
+\definecolor{gppmcolorscheme2}{HTML}{000000}  % e.g. title in headline
+\definecolor{gppmcolorscheme3}{HTML}{0033cc}  % e.g. for poster background
+\definecolor{gppmcolorscheme4}{HTML}{000000}
+\definecolor{gppmcolorscheme6}{cmyk}{0.72,1,0,0}
+\definecolor{gppmcolorschemeHeadline}{HTML}{000000}  % for headline bg
+\definecolor{gppmcolorschemeFootline}{HTML}{000000}  % for headline bg
+\definecolor{HIITgreen}{RGB}{2, 71, 49}
+
+% headline colors and fonts
+\setbeamercolor{headline}{bg=white,fg=gppmcolorschemeHeadline}
+\setbeamercolor{title in headline}{fg=black}
+\setbeamercolor{author in headline}{fg=black}
+\setbeamercolor{institute in headline}{fg=black}
+\setbeamercolor{author in head/foot}{fg=black, bg=white}
+\setbeamercolor{logo in headline}{fg=black,bg=lightgray}
+\setbeamercolor{separation line}{bg=black}
+
+% footline colors and fonts
+\setbeamercolor{footline}{bg=white,fg=black}
+%\setbeamerfont{footline}{bg=white, size=\footnotesize}
+\setbeamerfont{footline}{size=\Large}
+
+\setbeamercolor{itemize item}{fg=HIITgreen,bg=white}
+\setbeamercolor{enumerate item}{fg=HIITgreen,bg=white}
+\setbeamercolor{description item}{fg=HIITgreen,bg=white}
+
+\setbeamercolor{caption name}{fg=HIITgreen,bg=white}
+
+
+% body colors and fonts
+\setbeamercolor*{normal text}{fg=black,bg=gppmcolorscheme5}
+
+% block environment
+\setbeamercolor*{block body}{bg=white,fg=black}
+%\setbeamerfont*{block body}{size=\small}
+\setbeamerfont*{block body}{size={\fontsize{28}{33}}}
+\setbeamercolor*{block title}{fg=white,bg=HIITgreen}
+%\setbeamerfont{block title}{size=\small,series=\bf}
+\setbeamerfont{block title}{size={\fontsize{28}{33}},series=\bf}
+
+% example environment
+\setbeamercolor*{example title}{fg=white,bg=gppmcolorscheme1}
+\setbeamerfont{example title}{size=\large,series=\bf}
+
+
+%\setbeamercolor*{example body}{fg=white,bg=gppmcolorscheme4}
+%\setbeamercolor*{example title}{fg=white,bg=gppmcolorscheme1}
+
+
+%  \setbeamercolor{framesubtitle}{fg=ta3orange, bg=ta2gray}
+%  \setbeamercolor{author in head/foot}{fg=tabutter, bg=black}
+%  \setbeamercolor{title in head/foot}{bg=tabutter, fg=black}
+
+
+\setbeamercolor{alerted text}{fg=HIITgreen}
+%\setbeamercolor{structure}{fg=gppmblue}
+
+%  \setbeamertemplate{itemize/enumerate body begin}{
+%  }
+%  \setbeamertemplate{itemize/enumerate body end}{
+%  }
+
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{navigation symbols}{}  % no navigation on a poster
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{block begin}{
+  \vskip1.5ex
+  \begin{beamercolorbox}[rounded=true,leftskip=1cm,colsep*=.75ex]{block title}%
+    \usebeamerfont*{block title}\insertblocktitle
+  \end{beamercolorbox}%
+      {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[rounded=true,colsep*=.45ex,sep=1ex,vmode]{block body}%
+    \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+  }
+  \setbeamertemplate{block end}{
+  \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{headline}{  
+  \leavevmode
+
+  \begin{beamercolorbox}[wd=\paperwidth]{headline}
+    \vskip1ex
+    \begin{columns}[T]
+      \begin{column}{.03\paperwidth}
+      \end{column}
+      \begin{column}{.78\paperwidth}
+        \vskip5ex
+	%\begin{center}
+          \usebeamercolor{title in headline}{\color{fg}\textbf{\huge\inserttitle }}
+          \vskip5ex
+        \usebeamercolor{author in headline}{\color{fg}\large{\insertauthor}\\[10mm]}
+%        \usebeamercolor{author in headline}{\color{fg}\large{\insertauthor}}
+   \usebeamercolor{institute in headline}{\color{fg}\small{\insertinstitute}\\[1ex]}
+\vspace{+0.5mm}
+	%\end{center}
+      \end{column}
+      \begin{column}{.18\paperwidth}
+        \begin{center}
+          \includegraphics[height=50mm]{hiit.pdf} \\[1ex]
+          %\includegraphics[height=50mm,trim=21mm 21mm 21mm 21mm]{Aalto_EN_21_CMYK-COATED_2.pdf}\hspace{0.5em}
+          \includegraphics[height=50mm]{HY_mLD01_LogoFP_EN_V8__CMYK.pdf}\\[1ex]
+          \vspace{1ex}
+        \end{center}
+%        \vskip1ex
+      \end{column}
+      \begin{column}{.010\paperwidth}
+      ~
+      \end{column}
+    \end{columns}
+  \end{beamercolorbox}
+
+  \begin{beamercolorbox}[wd=\paperwidth]{lower separation line head}
+	\rule{0pt}{3pt}
+
+  \end{beamercolorbox}
+
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \setbeamertemplate{footline}{
+%   \begin{beamercolorbox}[wd=\paperwidth]{lower separation line head}
+%     \rule{0pt}{3pt}
+
+%   \end{beamercolorbox}
+
+%   \leavevmode%
+%   \begin{beamercolorbox}[ht=2ex,leftskip=1em,rightskip=1em]{author in head/foot}%
+%     \texttt{\normalsize{\url{http://www.cs.man.ac.uk/~glausp/}}}
+%     \hfill
+%     \texttt{\normalsize{glaus@cs.man.ac.uk}}
+%     \vskip0.5ex
+%   \end{beamercolorbox}
+%   \vskip0pt%
+%   \begin{beamercolorbox}[wd=\paperwidth]{lower separation line foot}
+%     \rule{0pt}{3pt}
+%   \end{beamercolorbox}
+% }
+
+%\AtBeginDocument
+%{
+  %\addtobeamertemplate{enumerate item}{\llap\bgroup}{\normalsize\itemindent5cm\egroup}
+  %\addtobeamertemplate{enumerate subitem}{\llap\bgroup}{\normalsize\kern1.5ex\kern\leftmarginii\egroup}
+  %\addtobeamertemplate{enumerate subsubitem}{\llap\bgroup}{\normalsize\kern1.5ex\kern\leftmarginii\kern\leftmarginiii\egroup}
+  %\addtobeamertemplate{itemize item}{\llap\bgroup}{\normalsize\kern1.5ex\egroup}
+  %\addtobeamertemplate{itemize subitem}{\llap\bgroup}{\normalsize\kern1.125ex\kern\leftmarginii\egroup}
+  %\addtobeamertemplate{itemize subsubitem}{\llap\bgroup}{\small\kern0.75ex\kern\leftmarginii\kern\leftmarginiii\egroup}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<all>
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "poster"
+%%% TeX-PDF-mode: t
+%%% End: 

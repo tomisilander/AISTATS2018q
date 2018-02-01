@@ -1,0 +1,228 @@
+\documentclass[final]{beamer}
+
+\mode<presentation>
+{
+  \usetheme{hiitposter}
+}
+%\graphicspath{{imgs/}}
+\usepackage{amsmath,amsthm, amssymb,mathrsfs}
+\usepackage{color}
+\usepackage{times}
+\usepackage{subfigure}
+\usepackage{bm}
+\usepackage{url}
+%\usepackage[orientation=portrait,size=a0,scale=1.4,debug]{beamerposter}        
+\usepackage[orientation=portrait,width = 91 ,height = 122 ,scale=1.39,debug]{beamerposter} 
+%\setbeamerfont{itemize/enumerate body}{size={\fontsize{25}{31}}}
+%\setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}
+
+\graphicspath{{../qNML_images/}}
+
+\def\newblock{\hskip .11em plus .33em minus 3.07em}
+
+\definecolor{DRed}{rgb}{0.8,0.6,0.6}
+\definecolor{DGreen}{rgb}{0.6,0.7,0.6}
+\definecolor{BRed}{rgb}{0.7,0,0}
+\definecolor{BGreen}{rgb}{0,0.7,0}
+
+\newcommand{\mechanism}{\mathcal{M}}
+\newcommand{\dataset}{\mathcal{D}}
+
+\newcommand{\myred}[1]{{\color{BRed}#1}}
+\newcommand{\mygreen}[1]{{\color{BGreen}#1}}
+
+
+\newcommand{\heading}[1]{\alert{\large #1}\\}
+\definecolor{myPurple}{RGB}{174, 206, 195}
+
+\usepackage{textpos}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usepackage{mathtools}
+\usepackage{empheq}
+
+\theoremstyle{plain}
+\newtheorem{assumption}{Assumption}
+
+\newcommand{\vOmega}{\bm{\Omega}}
+\newcommand{\bBeta}{\bm{\beta}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vA}{\bm{A}}
+\newcommand{\vx}{\bm{x}}
+\newcommand{\vy}{\bm{y}}
+\definecolor{myblue}{rgb}{.85, .85, 1.0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlength\mytemplen
+\newsavebox\mytempbox
+
+\makeatletter
+\newcommand\mybluebox{%
+    \@ifnextchar[%]
+       {\@mybluebox}%
+       {\@mybluebox[0pt]}}
+
+\def\@mybluebox[#1]{%
+    \@ifnextchar[%]
+       {\@@mybluebox[#1]}%
+       {\@@mybluebox[#1][0pt]}}
+
+\def\@@mybluebox[#1][#2]#3{
+    \sbox\mytempbox{#3}%
+    \mytemplen\ht\mytempbox
+    \advance\mytemplen #1\relax
+    \ht\mytempbox\mytemplen
+    \mytemplen\dp\mytempbox
+    \advance\mytemplen #2\relax
+    \dp\mytempbox\mytemplen
+    \colorbox{myblue}{\hspace{1em}\usebox{\mytempbox}\hspace{1em}}}
+
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\newcommand\mathcircled[1]{%
+  \mathpalette\@mathcircled{#1}%
+}
+\newcommand\@mathcircled[2]{%
+  \tikz[baseline=(math.base)] \node[red,draw,circle,inner sep=1pt] (math) {$\m@th#1#2$};%
+}
+\makeatother
+
+
+\title{Quotient Normalized Maximum Likelihood Criterion for Learning Bayesian Network Structures}
+\author{Tomi Silander$^1$, Janne Lepp{\"a}-aho$^2$, Elias J{\"a}{\"a}saari$^2$, and Teemu Roos$^2$}
+\institute{$^{1}$ NAVER LABS Europe, France \\ 
+$^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
+
+\begin{document}
+\begin{frame}{}
+\vskip-1.0ex
+
+{
+\setbeamercolor{block body}{bg=myPurple}
+\begin{block}{Abstract}
+	\large
+  	We introduce an information theoretic criterion for Bayesian network
+  	structure learning which we call quotient normalized maximum
+	likelihood (qNML). In contrast to the closely related factorized
+	normalized maximum likelihood criterion, qNML satisfies the property
+	of score equivalence. It is also decomposable and completely free
+	of adjustable hyperparameters. For practical computations, we identify
+	a remarkably accurate approximation proposed earlier by Szpankowski
+	and Weinberger. Experiments on both simulated and real data
+	demonstrate that the new criterion leads to parsimonious models with
+	good predictive accuracy.
+\end{block}
+}
+
+\begin{block}{Section 1}
+\begin{columns}[T]
+   \begin{column}{0.3\textwidth} % first column {{{
+     \heading{Subsection 1}
+     
+   \end{column}
+  
+   \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
+      \color{myPurple} \line(0,1){400}
+   \end{column} % }}}
+   
+   \begin{column}{0.3\textwidth} % second column {{{
+     \heading{Subsection 2}
+   \end{column}
+   
+   \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
+      \color{myPurple} \line(0,1){400}
+   \end{column} % }}}
+   \begin{column}{0.3\textwidth}% third column {{{
+     \heading{Subsection 3}
+     
+   \end{column} % end of first column }}}
+\end{columns}
+\end{block}
+
+
+\begin{block}{Section 2}
+\begin{columns}[T]
+   \begin{column}{0.25\textwidth} % first column {{{
+	\heading{Subsection 1}
+     
+     
+   \end{column}
+   
+   \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
+      \color{myPurple} \line(0,1){650}
+   \end{column} % }}}
+   
+   \begin{column}{0.3\textwidth} % second column {{{
+	\heading{Subsection 2}
+	
+   \end{column}
+   
+   \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
+      \color{myPurple} \line(0,1){650}
+   \end{column} % }}}
+   
+   
+   \begin{column}{0.3\textwidth}% third column {{{
+   
+      \heading{Subsection 3}
+   
+   \end{column} % end of first column }}}
+   % \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
+   %    \color{myPurple} \line(0,1){600}
+   % \end{column} % }}}
+   % \begin{column}{0.3\textwidth} % third column {{{
+   % \end{column} % end of third column }}}
+   
+\end{columns}
+\end{block}
+
+\begin{block}{Section 3}
+  \begin{columns}[T]
+    \begin{column}{0.35\textwidth}
+      \heading{Subsection 1}
+
+    \end{column}
+   \begin{column}{0.005\textwidth}\linethickness{0.3ex}
+      \color{myPurple} \line(0,1){800}
+   \end{column} % }}}
+   
+    \begin{column}{0.23\textwidth}
+    \heading{Subsection 2}
+      
+    \end{column}
+    
+    \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
+      \color{myPurple} \line(0,1){800}
+   \end{column} % }}}
+    \begin{column}{0.3\textwidth}
+    \heading{Subsection 3}
+  
+    \end{column}
+  \end{columns}
+\end{block}
+
+\vskip-1.0ex
+\begin{columns}[T]
+  \begin{column}{0.63\paperwidth}
+\begin{block}{References} %{{{
+%\scriptsize
+\tiny
+{
+[1] 
+}
+\end{block} %}}}
+  \end{column}
+  \begin{column}{0.33\paperwidth}
+\begin{block}{Acknowledgements} %{{{
+%\scriptsize
+\tiny
+{
+..........
+}
+\end{block} %}}}
+  \end{column}
+\end{columns}
+\end{frame}
+\end{document}
+ 
