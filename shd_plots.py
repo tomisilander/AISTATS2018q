@@ -223,7 +223,7 @@ def rank_shd_from_single_tests(folder = "results/real_dag_shd/", save = False):
         ax.plot(ns,avg_ranks[:,ii],linestyles[ii],label = methods[ii], linewidth = 6)
             
       
-    ax.set_ylabel("Avgerage rank")
+    ax.set_ylabel("Average rank")
     ax.set_xlabel("Sample size")    
     
     plt.legend(loc = "best")
@@ -253,10 +253,10 @@ def score_to_rank(x):
     return(ranks)
     
 if __name__ == "__main__":
-    save = False
+    save = True
     folder = "results/real_dag_shd/"
-    subplots(folder = folder, save = save)
+    #subplots(folder = folder, save = save)
     #rank_shd(folder = folder, save = save)
-    #rank_shd_from_single_tests(folder = folder, save = save)
+    rank_shd_from_single_tests(folder = folder, save = save)
     
     
