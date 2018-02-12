@@ -4,15 +4,15 @@
 We start by recalling the definition of regularity \citep{Suzuki2017}:
 
 \begin{definition}
-Assume $H_N(X \mid Y') \leq H_N(X \mid Y)$, where $Y' \subset Y.$ We say that the scoring function $Q_N(\cdot \mid \cdot)$ is regular if $Q_n(X \mid Y') \geq Q_N(X \mid Y)$.
+Assume $H_N(X \mid Y') \leq H_N(X \mid Y)$, where $Y' \subset Y.$ We say that the scoring function $Q_N(\cdot \mid \cdot)$ is regular if $Q_N(X \mid Y') \geq Q_N(X \mid Y)$.
 \end{definition}
 In the definition, $N$ denotes the sample size, $X$ is some random variable, $Y$ denotes the proposed parent set for $X$, and $H_N(X \mid Y)$ refers to the empirical conditional entropy based on $N$ samples of variables $X$ and $Y$.
 
-Let $X$ be a categorical random variable with $r$ possible values. Let $U$ denote a possible parent set with $q$ different combinations of values for the variables, and $V$ a parent set with $m$ different configurations. Assume that we have observed $N$ samples of $(X,U,V)$ (denoted by $x_N,u_N$ and $v_N$) and $H_N(X \mid U) \leq H_N(X \mid U \cup V)$ holds.
+Let $X$ be a categorical random variable with $r$ possible values. Let $U$ denote a possible parent set with $q$ different combinations of values for the variables, and $V$ a set with $m$ different configurations. Assume that we have observed $N$ samples of $(X,U,V)$ (denoted by $x_N,u_N$ and $v_N$) and $H_N(X \mid U) \leq H_N(X \mid U \cup V)$ holds.
 
 Recall the definition of the qNML score:
 \begin{align*}
-Q^{qnml}_N(X\mid U) &= \log P(x_n \mid \hat{\theta}_{X\mid U} \ ) - \Le reg(N,rq) - reg(N,q) \Ri \\
+Q^{qnml}_N(X\mid U) &= \log P(x_N \mid \hat{\theta}_{X\mid U} \ ) - \Le reg(N,rq) - reg(N,q) \Ri \\
 &= \log P(x_N \mid \hat{\theta}_{X\mid U} \ ) - \log \frac{C(N,rq)}{C(N,q)},
 \end{align*}where $C(N,r)$ is the normalizing constant the of the NML distribution for a categorical variable with $r$ possible values and sample size $N$ and $ \hat{\theta}_{X\mid U}$ denotes the maximum likelihood parameters of the conditional distribution of $X$ given $U$ which are computed from the data $(x_N,u_N)$. 
 
@@ -96,7 +96,7 @@ $$
 H_N(X \mid Y') \leq H_N(X \mid Y)
 $$ is equivalent to
 $$
-\log P(x_N \mid \hat{\theta}_{X\mid Y} \ ) \geq \log P(x_N \mid \hat{\theta}_{X\mid Y'} \ ) .
+\log P(x_N \mid \hat{\theta}_{X\mid Y} \ ) \leq \log P(x_N \mid \hat{\theta}_{X\mid Y'} \ ) .
 $$Actually we must have the equality holding in the above expression, since
 $$
 H_N(X \mid Y') < H_N(X \mid Y)
@@ -118,7 +118,7 @@ C(N,k) = \sum_{j=1}^{N} a_j k^j
 C(N,rk) = \sum_{j=1}^{N} a_j  r^jk^j.
 \end{equation}
 
-From this, it it easy see that the derivative of the quotient, \\ $d/dk (C(N,rk)/C(N,k))$, will be a ratio of two polynomials of $k$. Our goal is to show that the polynomial in the numerator has positive coefficients, which will guarantee the positivity of derivative for every $k > 0$, and thus imply that the original function is increasing (polynomial in the denominator is squared and non-zero for $k > 0$, so it can be ignored).  
+In the following, we assume that $k$ is a real number. From (\ref{C1}) and (\ref{C2}), it is easy see that the derivative of the quotient, $d/dk (C(N,rk)/C(N,k))$, will be a ratio of two polynomials of $k$. Our goal is to show that the polynomial in the numerator has positive coefficients, which will guarantee the positivity of derivative for every $k > 0$, and thus imply that the original function is increasing (polynomial in the denominator is squared and non-zero for $k > 0$, so it can be ignored).  
 
 Derivatives of (\ref{C1}) and (\ref{C2}) are obtained easily:
 \begin{align*}
@@ -150,11 +150,11 @@ Next, we study the coefficient of $k^i$, if $i \leq N$
 \begin{align*}
 \sum_{j+l = i}(j+1)a_{j+1}a_l  (r^{j+1}- r^l) &= \sum_{l=1}^{i}(i-l+1)a_{i-l+1}a_l  (r^{i-l+1}- r^l) \\
 & = \sum_{l=1}^{i}(i-l+1)c_l \\
-&= \sum_{k =1}^{\lfloor i / 2 \rfloor}(i-k+1)c_k + (i-(i-k + 1)+1)c_{i-k+1} \\
-&=  \sum_{k =1}^{\lfloor i / 2 \rfloor}(i-k+1)c_k + kc_{i-k+1} \\
-&=  \sum_{k =1}^{\lfloor i / 2 \rfloor}(i-k+1)c_k - kc_{k} \\
-&= \sum_{k =1}^{\lfloor i / 2 \rfloor}(i-2k+1)c_k.
-\end{align*} On the first row, we re-wrote sum using only one running index. On the second row we denoted $c_l =a_{i-l+1}a_l  (r^{i-l+1}- r^l)$. On the third row, we re-arranged the sum so that we are summing over pairs of terms of the original sum: the first and the last term, the second and the second to last, and so on.  This resulting sum has $\lfloor i / 2 \rfloor$ terms. We have to use the floor-function since if $i$ is odd, there exists an index $l'$ in the original sum such that $r^{i-l'+1}-r^{l'} = 0$. On the fifth row, we make use of the identity $c_k = -c_{i-k+1}$ which is straightforward to verify. From the last row, we can observe that every term of the sum is positive since $i-2k+1$ and $r^{i-k+1}- r^k$ are both positive if $k \leq (i+1)/2$ which holds since $k$ ranges from $1$ to $\lfloor i / 2 \rfloor$.
+&= \sum_{t =1}^{\lfloor i / 2 \rfloor}(i-t+1)c_t + (i-(i-t + 1)+1)c_{i-t+1} \\
+&=  \sum_{t =1}^{\lfloor i / 2 \rfloor}(i-t+1)c_t + tc_{i-t+1} \\
+&=  \sum_{t =1}^{\lfloor i / 2 \rfloor}(i-t+1)c_t - tc_{t} \\
+&= \sum_{t =1}^{\lfloor i / 2 \rfloor}(i-2t+1)c_t.
+\end{align*} On the first row, we re-wrote sum using only one running index. On the second row we denoted $c_l =a_{i-l+1}a_l  (r^{i-l+1}- r^l)$. On the third row, we re-arranged the sum so that we are summing over pairs of terms of the original sum: the first and the last term, the second and the second to last, and so on.  This resulting sum has $\lfloor i / 2 \rfloor$ terms. We have to use the floor-function since if $i$ is odd, there exists an index $l'$ in the original sum such that $r^{i-l'+1}-r^{l'} = 0$. On the fifth row, we make use of the identity $c_t = -c_{i-t+1}$ which is straightforward to verify. From the last row, we can observe that every term of the sum is positive since $i-2t+1$ and $r^{i-t+1}- r^t$ are both positive if $t \leq (i+1)/2$ which holds since $t$ ranges from $1$ to $\lfloor i / 2 \rfloor$.
 
 Let us now consider the situation where $n < i \leq 2N-1$. We start with the special case where $i = 2N-1$. Then, we have only one term in the sum
 \begin{align*}
@@ -165,14 +165,14 @@ Let us now consider the situation where $n < i \leq 2N-1$. We start with the spe
 \begin{align*}
 \sum_{j+l = i}(j+1)a_{j+1}a_l  (r^{j+1}- r^l) &= \sum_{l=i-N + 1}^{N}(i-l+1)a_{i-l+1}a_l  (r^{i-l+1}- r^l) \\
 & = \sum_{l=i-N + 1}^{N}(i-l+1)c_l \\
-& = \sum_{k=1}^{2N-i}(N-k+1)c_{i-N+k} \\
-& = \sum_{k=1}^{\lfloor N - i/2 \rfloor}(N-k+1)c_{i-N+k}\\
-&+  (N-(2N-i-k+1)+1)c_{i-N+(2N-i-k+1)} \\
-&= \sum_{k=1}^{\lfloor N - i/2 \rfloor}(N-k+1)c_{i-N+k} +  (i-N+k)c_{N-k+1} \\
-&= \sum_{k=1}^{\lfloor N - i/2 \rfloor}(N-k+1)c_{i-N+k} -  (i-N+k)c_{i-N+k} \\
-&= \sum_{k=1}^{\lfloor N - i/2 \rfloor}(N-k+1-(i-N+k))c_{i-N+k} \\
-&= \sum_{k=1}^{\lfloor N - i/2 \rfloor}(2N-i-2k+1)c_{i-N+k}.
-\end{align*}It is now easy to verify that $(2N-i-2k+1)$ and $c_{i-N+k}$ are positive if $k \leq N - (i-1)/2$ which holds since $k$ ranges from $1$ to $\lfloor N - i/2 \rfloor$. The floor function is again used when we sum over pairs of terms since if $i$ is odd there is zero-term. 
+& = \sum_{t=1}^{2N-i}(N-t+1)c_{i-N+t} \\
+& = \sum_{t=1}^{\lfloor N - i/2 \rfloor}(N-t+1)c_{i-N+t}\\
+&+  (N-(2N-i-t+1)+1)c_{i-N+(2N-i-t+1)} \\
+&= \sum_{t=1}^{\lfloor N - i/2 \rfloor}(N-t+1)c_{i-N+t} +  (i-N+t)c_{N-t+1} \\
+&= \sum_{t=1}^{\lfloor N - i/2 \rfloor}(N-t+1)c_{i-N+t} -  (i-N+t)c_{i-N+t} \\
+&= \sum_{t=1}^{\lfloor N - i/2 \rfloor}(N-t+1-(i-N+t))c_{i-N+t} \\
+&= \sum_{t=1}^{\lfloor N - i/2 \rfloor}(2N-i-2t+1)c_{i-N+t}.
+\end{align*}It is now easy to verify that $(2N-i-2t+1)$ and $c_{i-N+t}$ are positive if $t \leq N - (i-1)/2$ which holds since $t$ ranges from $1$ to $\lfloor N - i/2 \rfloor$. The floor function is again used when we sum over pairs of terms since if $i$ is odd there is a zero-term. 
 Since all the coefficients are non-negative and the $k \geq 2$, the derivative is positive. This implies that the original function is increasing.
 \end{proof}
 
@@ -180,8 +180,8 @@ Since all the coefficients are non-negative and the $k \geq 2$, the derivative i
 \subsection{fNML is Regular}
 In this section, we will show that fNML score is regular. Recall first the definition of fNML local score
 \begin{equation}
-Q^{fnml}_N(X  \vert \ U) = \log P(x_n \mid \hat{\theta}_{X\mid U} \ ) - \sum_{j = 1}^{r_U} reg(N_j,r_X),
-\end{equation}where $r_X$ is the number of categories for $X$, $r_U$ denotes the number of possible configurations of variables in $U$, and $N_j$ is the number of times the $j$:th configuration is observed in our samples $u_N$. Note that $reg(r_X, N_j) = 0$ for any configuration not observed in our sample. 
+Q^{fnml}_N(X  \vert \ U) = \log P(x_N \mid \hat{\theta}_{X\mid U} \ ) - \sum_{j = 1}^{r_U} reg(N_j,r_X),
+\end{equation}where $r_X$ is the number of categories for $X$, $r_U$ denotes the number of possible configurations of variables in $U$, and $N_j$ is the number of times the $j^\text{th}$ configuration is observed in our samples $u_N$. Note that $reg(N_j,r_X) = 0$ for any configuration not observed in our sample. 
 fNML criterion differs from qNML only by how the penalty term is defined. We can follow a highly similar strategy in order to prove the regularity for fNML. To this end, we need the following Lemma:
 \begin{lemma}\label{regineq}
 Let $N = N_1 + N_2$ and $r \in\N, r > 2$. Now,
