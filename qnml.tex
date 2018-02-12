@@ -212,7 +212,7 @@ In general this sequence grows rapidly; $1, 1, 3, 13, 73, 501, 4051,
 
 Suzuki \cite{Suzuki2017} defines regularity for a scoring function $Q_n(X \mid Y)$ as follows:
 \begin{definition}
-Assume $H_N(X \mid Y') \leq H_N(X \mid Y)$, where $Y' \subset Y.$ We say that $Q_N(\cdot \mid \cdot)$ is regular if $Q_n(X \mid Y') \geq Q_N(X \mid Y)$.
+Assume $H_N(X \mid Y') \leq H_N(X \mid Y)$, where $Y' \subset Y.$ We say that $Q_N(\cdot \mid \cdot)$ is regular if $Q_N(X \mid Y') \geq Q_N(X \mid Y)$.
 \end{definition}
 In the definition, $N$ denotes the sample size, $X$ is some random variable, $Y$ denotes the proposed parent set for $X$, and $H_N(\cdot \mid \cdot)$ refers to the empirical conditional entropy. Suzuki \cite{Suzuki2017} shows that BDeu violates this principle and demonstrates that this can cause the score to prefer more complex networks even though data do not support this. Regular scores are also argued to be computationally more efficient when applied with branch-and-bound type algorithms for Bayesian network structure learning \cite{Suzuki2017_2}. 
 
