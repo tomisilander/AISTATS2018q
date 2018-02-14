@@ -17,7 +17,7 @@ $X$. The component $G$ defines the structure of the model as a
 directed acyclic graph (DAG) that has exactly one node for each component of
 $X$. The structure $G=(G_{1},\ldots,G_{n})$ defines for each
 variable/node $X_{i}$ its (possibly empty) parent set $G_{i}$, i.e.,
-the nodes from which there are a directed edges to the variable
+the nodes from which there is a directed edge to the variable
 $X_{i}$.
 
 Given a realization $x$ of $X$, we denote the sub\nobreakdash-vector
@@ -44,10 +44,10 @@ G_{i}(x);\theta_{i})=\prod_{i=1}^{n}\theta_{iG_{i}(x)x_{i}}.
 
 Score-based Bayesian learning of Bayesian network structures evaluates the goodness of different structures $G$ using their
 posterior probability $P(G|D,\alpha)$, where $\alpha$ denotes the
-hyperparameters for the model parameters $\theta$, and the $D$ is a
+hyperparameters for the model parameters $\theta$, and $D$ is a
 collection of $N$ $n$\nobreakdash-dimensional i.i.d. data vectors
 collected to a $N\times n$ design matrix. We use the notation $D_i$ to
-denote the $i^\text{th}$ column of the data matrix and notation $D_V$ to denote
+denote the $i^\text{th}$ column of the data matrix and the notation $D_V$ to denote
 the columns that correspond to the variable subset $V$. We also write
 $D_{i,G_i}$ for $D_{\{i\}\cup G_i}$ and denote the entries of the
 column $i$ on the rows on which the parents $G_i$ contain the value
@@ -68,7 +68,7 @@ decomposed as
 \end{eqnarray}
 In coding terms this means that each data column $D_i$ is first
 partitioned based on the values in columns $G_i$, and each part is
-then coded using a Bayesian mixture that can be expressed in a closed
+then coded using a Bayesian mixture that can be expressed in closed
 form~\cite{Bunt91, Heck95}. 
 
 \begin{figure}
@@ -103,15 +103,15 @@ with suspiciously many parameters.
 
 Recently, Suzuki~\cite{Suzuki2017} discussed the theoretical
 properties of the BDeu score and showed that in certain settings BDeu
-has tendency to add more and more parent variables for a child node
+has the tendency to add more and more parent variables for a child node
 even though the empirical conditional entropy of the child given the
 parents has already reached zero. In more detail, assume that in our
-data $D$, the values of $X_i$ are completely determined by variables
-in set $Z$, so that the empirical entropy $H_N(X_i | Z) = 0$. Now, if we can further
+data $D$ the values of $X_i$ are completely determined by variables
+in set $Z$, so that the empirical entropy $H_N(X_i | Z)$ is zero. Now, if we can further
 find one or more variables, denoted by $Y$, whose values are
 determined completely by the variables in $Z$, then BDeu will prefer
 the set $Z\cup Y$ over $Z$ alone as the parents of $X_i$. Suzuki
-argues that this kind of behaviour violates \textit{regularity} in model
+argues that this kind of behavior violates \textit{regularity} in model
 selection as the more complex model is preferred over a simpler one
 even though it does not fit the data any better. The phenomenon seems
 to stem from the way the hyperparameters for the Dirichlet
@@ -130,7 +130,7 @@ P_{NML}(D;G)=\frac{P(D|\hat\theta(D;G))}{\sum_{D'}{P(D'|\hat\theta(D';G))}},
 where $\hat\theta$ denotes the (easy to find) maximum likelihood
 parameters and the sum in the denominator goes over all the possible
 $N\times n$ data matrices. This information-theoretic NML criterion
-can be justified from the minimum description length point of view,
+can be justified from the minimum description length point of view
 \cite{Riss78,Grun07}. It has been shown to be robust with respect to
 different data generating mechanisms where a good choice of prior
 is challenging, see~\cite{eggeling2014robust,maatta16}. While it is
@@ -140,7 +140,7 @@ computation infeasible.
 
 Consequently, Silander et al.~\cite{cosco.pgm08a}
 suggested solving the BDeu parameter sensitivity problem by using the
-NML-code for the column partitions, i.e., changing the Bayesian mixture
+NML code for the column partitions, i.e., changing the Bayesian mixture
 in equation~(\ref{eqn:bayesmix}) to
 \begin{equation}
 P^1_{NML}(D_{i,G_i=j};G)=\frac{P(D|\hat\theta(D_{i,G_i=j};G))}{\sum_{D'}{P(D'|\hat\theta(D';G))}},
