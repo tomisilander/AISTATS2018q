@@ -74,7 +74,7 @@ Figure \ref{fig:shd_ranks} summarizes the SHD results in all networks by showing
 
 \subsection{Prediction and Parsimony}
 
-To empirically compare the model selection criteria we took 20 UCI
+To empirically compare the model selection criteria, we took 20 UCI
 data sets~\cite{Lichman:2013} and ran train and test experiments for
 all of them. To better compare the performance over different sample
 sizes, we picked different fractions ($10\%, 20\%, \ldots, 90\%$) of
@@ -139,14 +139,14 @@ the table) with small sample sizes, but it often performs worst
 fNML seems to be good for large sample sizes. The striking feature
 about the qNML is its robustness.  It is usually between BIC and fNML
 for all the sample sizes making it a ``safe choice''. This can be
-quantified if we further average the columns of the
-table~\ref{tbl:preds}.  This yields the average ranks of $2.95, 2.57,
+quantified if we further average the columns of
+Table~\ref{tbl:preds}.  This yields the average ranks of $2.95, 2.57,
 2.10$, and $2.37$, with standard deviations $0.49, 0.90, 0.76$, and
 $0.43$.  While fNML achieves on average the best rank, the runner-up
 qNML has the lowest standard deviation.
 
 Figure~\ref{fig:bcnpmean} shows how fNML still sometimes behaves
-strangely in terms of model complexity here measured by the number of
+strangely in terms of model complexity, here measured by the number of
 parameters in the model. qNML, instead, appears to yield more
 parsimonious models. To study the concern of fNML producing too
 complex models for small sample sizes, we studied the number of

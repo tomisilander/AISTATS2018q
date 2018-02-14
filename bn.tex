@@ -51,7 +51,7 @@ denote the $i^\text{th}$ column of the data matrix and the notation $D_V$ to den
 the columns that correspond to the variable subset $V$. We also write
 $D_{i,G_i}$ for $D_{\{i\}\cup G_i}$ and denote the entries of the
 column $i$ on the rows on which the parents $G_i$ contain the value
-configuration number by $D_{i,G_i=j}$, $j\in\{1,\ldots,q_i\}$.
+configuration number $j$ by $D_{i,G_i=j}$, $j\in\{1,\ldots,q_i\}$.
 
 It is common to assume the uniform prior for structures, in which case
 the objective function for structure learning is reduced to the
@@ -107,7 +107,7 @@ has the tendency to add more and more parent variables for a child node
 even though the empirical conditional entropy of the child given the
 parents has already reached zero. In more detail, assume that in our
 data $D$ the values of $X_i$ are completely determined by variables
-in set $Z$, so that the empirical entropy $H_N(X_i | Z)$ is zero. Now, if we can further
+in a set $Z$, so that the empirical entropy $H_N(X_i | Z)$ is zero. Now, if we can further
 find one or more variables, denoted by $Y$, whose values are
 determined completely by the variables in $Z$, then BDeu will prefer
 the set $Z\cup Y$ over $Z$ alone as the parents of $X_i$. Suzuki
@@ -146,7 +146,7 @@ in equation~(\ref{eqn:bayesmix}) to
 P^1_{NML}(D_{i,G_i=j};G)=\frac{P(D|\hat\theta(D_{i,G_i=j};G))}{\sum_{D'}{P(D'|\hat\theta(D';G))}},
 \end{equation}
 where $D'\in{\{1,\ldots,r_i\}}^{|D_{i,G_i=j}|}$.  The logarithm of the
-denominator is often called a regret, since it indicates the extra
+denominator is often called the regret, since it indicates the extra
 code length needed compared to the code length obtained using the (a
 priori unknown) maximum likelihood parameters. The regret for
 $P^1_{NML}$ depends only on the length $N$ of the categorical data
