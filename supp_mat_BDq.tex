@@ -7,17 +7,16 @@ replaced by the Bayesian marginal likelihoods
 $P^1(D_{i,G_i};G,\alpha)$ and $P^1_{NML}(D_{G_i};G,\alpha)$ using
 parameter prior $\theta_{ij} \sim
 Dirichlet(\alpha,\ldots,\alpha)$. Suzuki further suggested using the
-Jeffreys' prior by setting $\alpha=\frac{1}{2}$. While this is a
+Jeffreys' prior with $\alpha=\frac{1}{2}$. While this is a
 popular choice in statistics, it is also possible to argue for other
 values of $\alpha$ like $\alpha=\frac{1}{2}-\frac{\ln 2}{2\ln
-  N}$~\citep{watanabe15a}. Our yet to be published paper will present
-a case in which $\alpha=\frac{1}{3}$ could be preferable.
+  N}$~\citep{watanabe15a} and $\alpha=\frac{1}{3}$~\citep{jaasaari18}.
 
 Our initial experiments indicate that model selection by BDq is still
-highly sensitive to the hyperparameter $\alpha$. On next 5 pages we
+highly sensitive to the hyperparameter $\alpha$. On the next 5 pages we
 present results for learning the posterior distribution of the network
 structures for the four predictor variables (discretized to three
-equal width bins) in the iris-data (N=150). The structure prior is
+equal width bins) in the iris data (N=150). The structure prior is
 assumed to be uniform. Since BDq is score equivalent, we only include
 one representative from each equivalence class. The images also show
 the most probable structure and the predictive distribution given by
