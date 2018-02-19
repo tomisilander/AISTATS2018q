@@ -184,7 +184,7 @@ Q^{fnml}_N(X  \vert \ U) = \log P(x_N \mid \hat{\theta}_{X\mid U} \ ) - \sum_{j 
 \end{equation}where $r_X$ is the number of categories for $X$, $r_U$ denotes the number of possible configurations of variables in $U$, and $N_j$ is the number of times the $j^\text{th}$ configuration is observed in our samples $u_N$. Note that $reg(N_j,r_X) = 0$ for any configuration not observed in our sample. 
 fNML criterion differs from qNML only by how the penalty term is defined. We can follow a highly similar strategy in order to prove the regularity for fNML. To this end, we need the following Lemma:
 \begin{lemma}\label{regineq}
-Let $N = N_1 + N_2$ and $r \in\N, r > 2$. Now,
+Let $N = N_1 + N_2$ and $r \in\N, r \geq 2$. Now,
 $$
 reg(N,r) \leq reg(N_1,r) + reg(N_2,r).
 $$
