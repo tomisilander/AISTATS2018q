@@ -129,29 +129,29 @@ $e(n)=(\frac{n+1}{n})^n$ as suggested in~\cite{Riss07b}.
 \end{table}
 
 For each train/test sample, we ranked the predictive performance of
-the models learned by four different structure learning criteria (rank
+the models learned by the four different scores (rank
 1 being the best and 4 the worst). Table~\ref{tbl:preds} features the
 average rank for different data sets, the average being taken over
-1000 different train test samples for each 9 sample sizes for each
-data.  BIC's bias for simplicity makes it often win (written bold in
-the table) with small sample sizes, but it often performs worst
+1000 different train/test samples for each 9 sample sizes.
+BIC's bias for simplicity makes it often win (written bold in
+the table) with small sample sizes, but it performs worst
 (underlined) for the larger sample sizes (for the same reason), while
 fNML seems to be good for large sample sizes. The striking feature
 about the qNML is its robustness.  It is usually between BIC and fNML
 for all the sample sizes making it a ``safe choice''. This can be
 quantified if we further average the columns of
-Table~\ref{tbl:preds}.  This yields the average ranks of $2.95, 2.57,
+Table~\ref{tbl:preds}, yielding the average ranks of $2.95, 2.57,
 2.10$, and $2.37$, with standard deviations $0.49, 0.90, 0.76$, and
 $0.43$.  While fNML achieves on average the best rank, the runner-up
 qNML has the lowest standard deviation.
 
 Figure~\ref{fig:bcnpmean} shows how fNML still sometimes behaves
-strangely in terms of model complexity, here measured by the number of
+strangely in terms of model complexity as measured by the number of
 parameters in the model. qNML, instead, appears to yield more
 parsimonious models. To study the concern of fNML producing too
 complex models for small sample sizes, we studied the number of
-parameters in models produced by different model selection criteria
-when using 10\% of each data set for structure learning.
+parameters in models produced by different scores when using
+10\% of each data set for structure learning.
 
 Looking at the number of parameters for the same 20 data sets again
 features BIC's preference for simple models
@@ -164,7 +164,7 @@ the number of parameters can be found in Appendix E in the Supplementary Materia
 
 \begin{table}
   \caption{Average number of parameters in models 
-    for different model selection criteria in 20 different data sets.}
+    for different scores in 20 different data sets.}
 \label{tbl:nofparams}
 \begin{center}
 \begin{tabular}{crrrrr}
