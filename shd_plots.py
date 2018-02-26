@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import numpy as np
-import seaborn as sns
 import matplotlib.pyplot as plt
-
+plt.rcParams['ps.useafm'] = True
+plt.rcParams['pdf.use14corefonts'] = True
+plt.rcParams['text.usetex'] = True
+import seaborn as sns
 
 def subplots(folder = "results/real_dag_shd/", save = False):
     
@@ -255,7 +257,7 @@ def score_to_rank(x):
 if __name__ == "__main__":
     save = True
     folder = "results/real_dag_shd/"
-    #subplots(folder = folder, save = save)
+    subplots(folder = folder, save = save)
     #rank_shd(folder = folder, save = save)
     rank_shd_from_single_tests(folder = folder, save = save)
     
