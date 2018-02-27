@@ -20,3 +20,4 @@ qNML_images/thyroid_mean.pdf qNML_images/thyroid_var.pdf qNML_images/thyroid_np_
 qNML_images/iris_mean.pdf qNML_images/iris_var.pdf qNML_images/iris_np_mean.pdf qNML_images/iris_np_var.pdf \
 qNML_images/balance_mean.pdf qNML_images/balance_var.pdf qNML_images/balance_np_mean.pdf qNML_images/balance_np_var.pdf \
 all4.pdf
+echo Then print all4.pdf to the pdf file with 4 pages per sheet in landscape
