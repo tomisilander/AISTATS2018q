@@ -11,8 +11,9 @@
 \usepackage{subfigure}
 \usepackage{bm}
 \usepackage{url}
-%\usepackage[orientation=portrait,size=a0,scale=1.4,debug]{beamerposter}        
-\usepackage[orientation=portrait,width = 91 ,height = 122 ,scale=1.39,debug]{beamerposter} 
+\usepackage[numbers]{natbib}
+\usepackage[orientation=portrait,size=a0,scale=1.4,debug]{beamerposter}        
+%\usepackage[orientation=portrait,width = 91 ,height = 122 ,scale=1.39,debug]{beamerposter} 
 %\setbeamerfont{itemize/enumerate body}{size={\fontsize{25}{31}}}
 %\setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}
 
@@ -25,15 +26,14 @@
 \definecolor{BRed}{rgb}{0.7,0,0}
 \definecolor{BGreen}{rgb}{0,0.7,0}
 
-\newcommand{\mechanism}{\mathcal{M}}
-\newcommand{\dataset}{\mathcal{D}}
-
 \newcommand{\myred}[1]{{\color{BRed}#1}}
 \newcommand{\mygreen}[1]{{\color{BGreen}#1}}
 
 
 \newcommand{\heading}[1]{\alert{\large #1}\\}
 \definecolor{myPurple}{RGB}{174, 206, 195}
+%\definecolor{myPurple}{RGB}{165,206,190}
+
 
 \usepackage{textpos}
 \usepackage{fancybox}
@@ -44,12 +44,6 @@
 \theoremstyle{plain}
 \newtheorem{assumption}{Assumption}
 
-\newcommand{\vOmega}{\bm{\Omega}}
-\newcommand{\bBeta}{\bm{\beta}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\vA}{\bm{A}}
-\newcommand{\vx}{\bm{x}}
-\newcommand{\vy}{\bm{y}}
 \definecolor{myblue}{rgb}{.85, .85, 1.0}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -115,38 +109,97 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
 \end{block}
 }
 
-\begin{block}{Section 1}
+\begin{block}{Background: Structure Learning of Bayesian Networks}
 \begin{columns}[T]
    \begin{column}{0.3\textwidth} % first column {{{
-     \heading{Subsection 1}
-     
+     \heading{Bayesian Networks}
+     \vspace*{12pt}
+     \begin{itemize}
+     \setlength\itemsep{1em}
+     \item Provide a compact way to represent a joint distribution over a random vector $X = (X_1, \ldots , X_d)$. 
+     %\item Here, each $X_i$ is a categorical random variable.
+     \item Consist of:
+     \begin{itemize}
+     \item[1.] A Directed acyclic graph $G$ which encodes the dependencies between the components of $X$.
+     \item[2.] Parameters $\theta = (\theta_1,\ldots,\theta_d)$, where $\theta_i$ denotes the parameters of the conditional distribution of $X_i$ given its parents $G_i$. 
+     \end{itemize}
+     \item Decomposition: $P(X \mid G, \theta) = \prod_{i=1}^dP(X_i\mid G_i,\theta_i)$
+     \end{itemize}     
    \end{column}
   
    \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
-      \color{myPurple} \line(0,1){400}
+      \color{myPurple} \line(0,1){450}
    \end{column} % }}}
    
    \begin{column}{0.3\textwidth} % second column {{{
-     \heading{Subsection 2}
+     \heading{Structure Learning}
+     \vspace*{12pt}
+     \begin{itemize}
+     \setlength\itemsep{1em}
+     \item[Data:] Each $X_i$ is a categorical variable. We observe $n$ independent samples of $X$ which are collected in a data matrix $D$ of size $n\times d$. 
+     \item[Goal:] We consider a \textit{score-based} approach and seek a graph $G$ that maximizes a scoring function which evaluates how well a given graph fits the observed data.
+     \item Some scoring functions: BIC, BDeu and fNML. 
+   	 \end{itemize}
    \end{column}
-   
+  
    \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
-      \color{myPurple} \line(0,1){400}
+      \color{myPurple} \line(0,1){450}
    \end{column} % }}}
    \begin{column}{0.3\textwidth}% third column {{{
-     \heading{Subsection 3}
+     \heading{Scoring Functions}
+     \begin{itemize}
+     
+	 \vspace*{12pt}
+	 \setlength\itemsep{1em}     
+     \item[BDeu] Bayesian marginal likelihood based on Dirichlet priors. Depends on a single 
+     hyperparameter $\alpha >0$ called equivalent sample size. 
+     \item[BIC] Maximized likelihood with penalty $\frac{k}{2}\log n$, where $k$ is the number of free parameters in the network. 
+     \item[fNML] Factorized Normalized Maximum likelihood. Maximized likelihood with penalty defined via \textit{regret} functions.
+     \end{itemize}
      
    \end{column} % end of first column }}}
 \end{columns}
 \end{block}
 
 
-\begin{block}{Section 2}
+\begin{block}{Quotient Normalized Maximum Likelihood Criterion}
 \begin{columns}[T]
-   \begin{column}{0.25\textwidth} % first column {{{
-	\heading{Subsection 1}
-     
-     
+   \begin{column}{0.18\textwidth} % first column {{{
+   \heading{Motivation}
+   \vspace*{12pt}
+   	\textcolor{teal}{BDeu}
+	\begin{itemize}	    
+    \item Is very sensitive to the choice of the hyperparameter $\alpha$ \cite{cosco.uai07}.
+    \item Is not \textit{regular} \cite{Suzuki2017} (can be shown in certain situations to favour too complex models over simpler) 
+    \end{itemize}
+    \vspace*{12pt}
+    \textcolor{teal}{fNML}
+	\begin{itemize}	    
+    \item Is not score equivalent: the graphs expressing the same independence statements are not scored equally.
+    \item Learned structures are often rather complex, which hampers their interpretation.
+    \end{itemize}
+    
+    %\vspace*{12pt} 
+	%\textcolor{HIITgreen}{Figure:} Number of parameters as a function of sample size for UCI Breast Cancer  data.     
+    
+    \end{column}
+
+   \begin{column}{0.18\textwidth}
+   \vphantom{\large Motivation}
+   \vspace*{12pt} 
+    \textcolor{teal}{BIC}
+    \begin{itemize}
+    \item Appears to
+require large sample sizes in order to identify appropriate
+structures \cite{cosco.pgm08a,Liu2012}. 
+	\end{itemize}  
+	
+	
+	\begin{figure}
+  	\includegraphics[width=\textwidth]{breast_cancer_npmean.pdf}
+  	\caption{Number of parameters as a function of sample size for Breast Cancer (UCI) data.}
+  	\end{figure}
+
    \end{column}
    
    \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
@@ -154,7 +207,14 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
    \end{column} % }}}
    
    \begin{column}{0.3\textwidth} % second column {{{
-	\heading{Subsection 2}
+	\heading{qNML: Definition}
+	\vspace*{12pt}
+	\begin{itemize}
+	\item We would like to choose a model $G$ maximizing	
+	\begin{equation}
+	P_{NML}(D;G)=\frac{P(D \mid \hat\theta , G)}{\sum_{D'}{P(D' \mid \hat  \theta,G)}},
+	\end{equation}where $\hat\theta$ denotes the maximum likelihood parameters.
+	\end{itemize}
 	
    \end{column}
    
@@ -163,9 +223,9 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
    \end{column} % }}}
    
    
-   \begin{column}{0.3\textwidth}% third column {{{
+   \begin{column}{0.25\textwidth}% third column {{{
    
-      \heading{Subsection 3}
+      \heading{qNML: Properties}
    
    \end{column} % end of first column }}}
    % \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
@@ -177,27 +237,27 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
 \end{columns}
 \end{block}
 
-\begin{block}{Section 3}
+\begin{block}{Experimental Results}
   \begin{columns}[T]
     \begin{column}{0.35\textwidth}
-      \heading{Subsection 1}
+      \heading{Structure Learning}
 
     \end{column}
    \begin{column}{0.005\textwidth}\linethickness{0.3ex}
-      \color{myPurple} \line(0,1){800}
+      \color{myPurple} \line(0,1){700}
    \end{column} % }}}
    
     \begin{column}{0.23\textwidth}
-    \heading{Subsection 2}
+    \heading{Prediction}
       
     \end{column}
     
     \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
-      \color{myPurple} \line(0,1){800}
+      \color{myPurple} \line(0,1){700}
    \end{column} % }}}
     \begin{column}{0.3\textwidth}
-    \heading{Subsection 3}
-  
+    \heading{Conclusions}
+
     \end{column}
   \end{columns}
 \end{block}
@@ -209,7 +269,8 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
 %\scriptsize
 \tiny
 {
-[1] 
+\bibliographystyle{apalike}
+\bibliography{../cosco}
 }
 \end{block} %}}}
   \end{column}
@@ -218,7 +279,7 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
 %\scriptsize
 \tiny
 {
-..........
+J.L., E.J. and T.R. were supported by the Academy of Finland (COIN CoE and Project \textsc{TensorML}). J.L. was supported by the DoCS doctoral programme of the University of Helsinki.
 }
 \end{block} %}}}
   \end{column}
