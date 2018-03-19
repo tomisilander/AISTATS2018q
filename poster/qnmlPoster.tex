@@ -12,7 +12,8 @@
 \usepackage{bm}
 \usepackage{url}
 \usepackage[numbers]{natbib}
-\usepackage[orientation=portrait,size=a0,scale=1.4,debug]{beamerposter}        
+\usepackage[orientation=portrait,size=a0,scale=1.4,debug]{beamerposter}
+\usepackage{blkarray}        
 %\usepackage[orientation=portrait,width = 91 ,height = 122 ,scale=1.39,debug]{beamerposter} 
 %\setbeamerfont{itemize/enumerate body}{size={\fontsize{25}{31}}}
 %\setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}
@@ -123,7 +124,7 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
      \item[1.] A Directed acyclic graph $G$ which encodes the dependencies between the components of $X$.
      \item[2.] Parameters $\theta = (\theta_1,\ldots,\theta_d)$, where $\theta_i$ denotes the parameters of the conditional distribution of $X_i$ given its parents $G_i$. 
      \end{itemize}
-     \item Decomposition: $P(X \mid G, \theta) = \prod_{i=1}^dP(X_i\mid G_i,\theta_i)$
+     \item Decomposition: $P(X \mid G, \theta) = \prod_{i=1}^dP(X_i\mid X_{G_i},\theta_i)$
      \end{itemize}     
    \end{column}
   
@@ -148,13 +149,12 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
    \begin{column}{0.3\textwidth}% third column {{{
      \heading{Scoring Functions}
      \begin{itemize}
-     
 	 \vspace*{12pt}
 	 \setlength\itemsep{1em}     
      \item[BDeu] Bayesian marginal likelihood based on Dirichlet priors. Depends on a single 
      hyperparameter $\alpha >0$ called equivalent sample size. 
-     \item[BIC] Maximized likelihood with penalty $\frac{k}{2}\log n$, where $k$ is the number of free parameters in the network. 
-     \item[fNML] Factorized Normalized Maximum likelihood. Maximized likelihood with penalty defined via \textit{regret} functions.
+     \item[BIC] Maximized log-likelihood with penalty $\frac{k}{2}\log n$, where $k$ is the number of free parameters in the network. 
+     \item[fNML] Factorized Normalized Maximum likelihood. Maximized log-likelihood with penalty defined via \textit{regret} functions.
      \end{itemize}
      
    \end{column} % end of first column }}}
@@ -207,14 +207,55 @@ structures \cite{cosco.pgm08a,Liu2012}.
    \end{column} % }}}
    
    \begin{column}{0.3\textwidth} % second column {{{
-	\heading{qNML: Definition}
+	\heading{qNML: Idea}
 	\vspace*{12pt}
 	\begin{itemize}
-	\item We would like to choose a model $G$ maximizing	
+	\item Following the \textit{MDL-principle}, we would like to pick a model $G$ maximizing
+
 	\begin{equation}
-	P_{NML}(D;G)=\frac{P(D \mid \hat\theta , G)}{\sum_{D'}{P(D' \mid \hat  \theta,G)}},
-	\end{equation}where $\hat\theta$ denotes the maximum likelihood parameters.
+	\log P_{NML}(D;G) = \underbrace{\log P(D \mid \hat\theta , G)}_{\text{Maximized log-likelihood}} - \underbrace{\log \sum_{D'}P(D' \mid \hat  \theta,G)}_{:= \text{ regret. } \textbf{Intractable!}}, \notag
+	\end{equation}%where $\hat\theta$ denotes the maximum likelihood parameters.
+
+	\item However, for \textbf{a single categorical data vector}, regret and one dimensional $P^1_{NML}$-code can be computed.
+	%\item In $P^1_{NML}$, regret depends on $N$, the length of the categorical data vector $D_i$ and $r_i$, the number of possible values for corresponding variable $X_i$. 
+	%\item Justification from \textit{Minimum description length} principle.
+	\item \textbf{Trick}. Recall factorization w.r.t. graph $G$:
+	$$
+	P(D\mid G) = \prod_{i = 1}^{d}P(D_i \mid D_{G_i}) = \prod_{i = 1}^{d}\frac{P(D_{i,G_i})}{P(D_{G_i})}
+	$$
+	\item Assume there are \textbf{no independencies} among $G_i$. Now, $D_{i,G_i} = $
+	\vspace*{12pt}
 	\end{itemize}
+	\begin{minipage}{0.45\textwidth}
+	\begin{align*}
+	\begin{blockarray}{c|ccc}
+	D_i\phantom{s} & \phantom{..}  & D_{G_i} & \phantom{..}\\
+	\begin{block}{(c|ccc)}
+  	1 & 1 & 1 & 1  \\
+  	0 & 1 & 0 & 0 \\
+  	1 & 1 &0 & 0  \\
+  	1 & 1 & 1 & 1  \\
+	\end{block}
+	\end{blockarray} 
+	\ \to \ 
+	\begin{blockarray}{c}
+	\phantom{...}\\
+	\begin{block}{(c)}
+  	0   \\
+  	1  \\
+  	2  \\
+  	0   \\
+	\end{block}
+	\end{blockarray}
+ 	\end{align*}
+	\end{minipage}\quad
+	\begin{minipage}{0.45\textwidth}
+	\fbox{\parbox{\textwidth}{
+	\begin{itemize}
+	\item We can treat $D_{i,G_i}$ and $D_{G_i}$ as values of single variables!
+	\item $P(D_{i,G_i})$ and $P(D_{i,G_i})$ can be modeled using $P_{NML}^1$-code.
+	\end{itemize}}}  
+	\end{minipage}
 	
    \end{column}
    
@@ -225,14 +266,35 @@ structures \cite{cosco.pgm08a,Liu2012}.
    
    \begin{column}{0.25\textwidth}% third column {{{
    
-      \heading{qNML: Properties}
+   	\heading{qNML: Definition \& Properties}
+   	Definition of qNML score:
+    	\begin{empheq}[box={\mybluebox[4pt][4pt]}]{equation}	    		
+	s^{qNML} := \sum_{i = 1}^d \log \frac{P^1_{NML}(D_{i,G_i})}{P^1_{NML}(D_{G_i})},\notag
+	\end{empheq}$\log P^1_{NML}(D) = \log P(D \mid \hat{\theta}) - reg(n,r).$
+	
+	\begin{itemize}
+	 \item $D$ is understood as  $n$ observations on single categorical variable with $r$ possible values.
+	\item Accurate approximation for $reg(n,r)$ from \cite{Szpankowski2012}:
+	\begin{align*}
+    reg(n, r) &\approx  n\left(\log{\alpha} + (\alpha + 2) \log{C_\alpha} - \frac{1}{C_\alpha}\right) \\ 
+    &- \frac{1}{2} \log{\left(C_\alpha + \frac{2}{\alpha}\right)},
+	\end{align*}
+where $\alpha = \frac{r}{n}$ and $C_\alpha = \frac{1}{2} + \frac{1}{2} \sqrt{1 + \frac{4}{\alpha}}$.
+	\end{itemize}
+	\vspace*{12pt}
+	qNML score is:
+	\fbox{\parbox{0.95\textwidth}{
+	\begin{itemize}	
+	\item \textcolor{teal}{\textbf{hyper-parameter free}}
+	\item \textcolor{teal}{\textbf{consistent}}
+	\item \textcolor{teal}{\textbf{score equivalent}}
+	\item \textcolor{teal}{\textbf{regular}}
+	\item qNML agrees with NML for every network composed of fully connected sub-graphs.
+	\end{itemize}}}
+	
+   \end{column} 
    
-   \end{column} % end of first column }}}
-   % \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
-   %    \color{myPurple} \line(0,1){600}
-   % \end{column} % }}}
-   % \begin{column}{0.3\textwidth} % third column {{{
-   % \end{column} % end of third column }}}
+   
    
 \end{columns}
 \end{block}
@@ -241,10 +303,32 @@ structures \cite{cosco.pgm08a,Liu2012}.
   \begin{columns}[T]
     \begin{column}{0.35\textwidth}
       \heading{Structure Learning}
+      
+	  \begin{minipage}{0.45\textwidth}
+	  \begin{figure}[h]
 
+		\includegraphics[width=\columnwidth]{shd_all.pdf}
+		\caption{SHD as a function of sample size.}
+		\label{fig:all_shd}
+		\end{figure}
+	  \end{minipage}
+	  \begin{minipage}{0.45\textwidth}
+	  \begin{itemize}
+	  \item Data generated from real world DAG structures.
+	  \item Exact DP structure learning algorithm.
+	  \end{itemize}
+	  \begin{figure}[h]
+		\includegraphics[width=\columnwidth]{shd_rank_all.pdf}
+		\caption{Average ranks for each score.}
+		\label{fig:all_shd}
+		\end{figure}
+	  \end{minipage}
+	  
+	\vspace*{12pt}
+	\textbf{qNML seems overall a safe choice in structure learning, especially with moderate and large sample sizes!} 
     \end{column}
    \begin{column}{0.005\textwidth}\linethickness{0.3ex}
-      \color{myPurple} \line(0,1){700}
+      \color{myPurple} \line(0,1){600}
    \end{column} % }}}
    
     \begin{column}{0.23\textwidth}
@@ -253,7 +337,7 @@ structures \cite{cosco.pgm08a,Liu2012}.
     \end{column}
     
     \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
-      \color{myPurple} \line(0,1){700}
+      \color{myPurple} \line(0,1){600}
    \end{column} % }}}
     \begin{column}{0.3\textwidth}
     \heading{Conclusions}
