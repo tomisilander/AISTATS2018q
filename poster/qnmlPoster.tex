@@ -38,8 +38,8 @@
 
 \usepackage{textpos}
 \usepackage{fancybox}
-\usepackage{tikz}
-\usepackage{mathtools}
+\setlength{\fboxsep}{12pt}
+%\usepackage{mathtools}
 \usepackage{empheq}
 
 \theoremstyle{plain}
@@ -132,7 +132,7 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
       \color{myPurple} \line(0,1){450}
    \end{column} % }}}
    
-   \begin{column}{0.3\textwidth} % second column {{{
+   \begin{column}{0.25\textwidth} % second column {{{
      \heading{Structure Learning}
      \vspace*{12pt}
      \begin{itemize}
@@ -164,46 +164,56 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
 
 \begin{block}{Quotient Normalized Maximum Likelihood Criterion}
 \begin{columns}[T]
-   \begin{column}{0.18\textwidth} % first column {{{
-   \heading{Motivation}
-   \vspace*{12pt}
-   	\textcolor{teal}{BDeu}
-	\begin{itemize}	    
-    \item Is very sensitive to the choice of the hyperparameter $\alpha$ \cite{cosco.uai07}.
-    \item Is not \textit{regular} \cite{Suzuki2017} (can be shown in certain situations to favour too complex models over simpler) 
-    \end{itemize}
-    \vspace*{12pt}
-    \textcolor{teal}{fNML}
-	\begin{itemize}	    
-    \item Is not score equivalent: the graphs expressing the same independence statements are not scored equally.
-    \item Learned structures are often rather complex, which hampers their interpretation.
-    \end{itemize}
-    
-    %\vspace*{12pt} 
-	%\textcolor{HIITgreen}{Figure:} Number of parameters as a function of sample size for UCI Breast Cancer  data.     
-    
-    \end{column}
 
-   \begin{column}{0.18\textwidth}
-   \vphantom{\large Motivation}
-   \vspace*{12pt} 
-    \textcolor{teal}{BIC}
-    \begin{itemize}
-    \item Appears to
-require large sample sizes in order to identify appropriate
-structures \cite{cosco.pgm08a,Liu2012}. 
-	\end{itemize}  
+	\begin{column}{0.34\textwidth} % first column {{{
+   		\heading{Motivation}
+   		\begin{minipage}{0.49\textwidth}
+   			\vspace*{12pt}
+		   	\textcolor{teal}{BDeu}
+			\begin{itemize}	    
+		    \item Is very sensitive to the choice of the hyperparameter $\alpha$ \cite{cosco.uai07}.
+		    \item Is not \textit{regular} \cite{Suzuki2017} (can be shown in certain situations to favour too complex models over simpler) 
+		    \end{itemize}
+		    \vspace*{12pt}
+		    \textcolor{teal}{fNML}
+			\begin{itemize}	    
+		    \item Is not score equivalent: the graphs expressing the same independence statements are not scored equally.
+		    \item Learned structures are often rather complex, which hampers their interpretation.
+		    \end{itemize}		    
 	
-	
-	\begin{figure}
-  	\includegraphics[width=\textwidth]{breast_cancer_npmean.pdf}
-  	\caption{Number of parameters as a function of sample size for Breast Cancer (UCI) data.}
-  	\end{figure}
-
-   \end{column}
+   		\end{minipage}
+   		\begin{minipage}{0.49\textwidth}		   
+		   \phantom{why vspace* does nothing??}
+		   %\vspace*{12pt} 
+		   \textcolor{teal}{BIC}
+		    \begin{itemize}
+		    \item Appears to
+		require large sample sizes in order to identify appropriate
+		structures \cite{cosco.pgm08a,Liu2012}. 
+			\end{itemize}  
+			
+			
+			\begin{figure}
+		  	\includegraphics[width=\textwidth]{breast_cancer_npmean.pdf}
+		  	\caption{Number of parameters as a function of sample size for Breast Cancer (UCI) data.}
+		  	\end{figure}
+   		
+   		\end{minipage}
+   		
+   		\vspace*{12pt}
+   		
+   		\shadowbox{
+		\parbox{0.97\textwidth}{
+		\vspace*{12pt}
+		The quest for a model selection criterion that would yield \textbf{more parsimonious}, \textbf{easier to interpret}, but still \textbf{predictive} Bayesian networks structures is one of the main motivations for this work.
+		\vspace*{12pt}
+		}}  
+		
+  
+   	\end{column}
    
    \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
-      \color{myPurple} \line(0,1){650}
+      \color{myPurple} \line(0,1){810}
    \end{column} % }}}
    
    \begin{column}{0.3\textwidth} % second column {{{
@@ -250,7 +260,9 @@ structures \cite{cosco.pgm08a,Liu2012}.
  	\end{align*}
 	\end{minipage}\quad
 	\begin{minipage}{0.45\textwidth}
-	\fbox{\parbox{\textwidth}{
+	\shadowbox{
+	\parbox{\textwidth}{
+	\vspace*{12pt}
 	\begin{itemize}
 	\item We can treat $D_{i,G_i}$ and $D_{G_i}$ as values of single variables!
 	\item $P(D_{i,G_i})$ and $P(D_{i,G_i})$ can be modeled using $P_{NML}^1$-code.
@@ -260,13 +272,14 @@ structures \cite{cosco.pgm08a,Liu2012}.
    \end{column}
    
    \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
-      \color{myPurple} \line(0,1){650}
+      \color{myPurple} \line(0,1){810}
    \end{column} % }}}
    
    
    \begin{column}{0.25\textwidth}% third column {{{
    
    	\heading{qNML: Definition \& Properties}
+   	\vspace*{12pt}
    	Definition of qNML score:
     	\begin{empheq}[box={\mybluebox[4pt][4pt]}]{equation}	    		
 	s^{qNML} := \sum_{i = 1}^d \log \frac{P^1_{NML}(D_{i,G_i})}{P^1_{NML}(D_{G_i})},\notag
@@ -281,15 +294,18 @@ structures \cite{cosco.pgm08a,Liu2012}.
 	\end{align*}
 where $\alpha = \frac{r}{n}$ and $C_\alpha = \frac{1}{2} + \frac{1}{2} \sqrt{1 + \frac{4}{\alpha}}$.
 	\end{itemize}
+	
 	\vspace*{12pt}
-	qNML score is:
-	\fbox{\parbox{0.95\textwidth}{
+	\shadowbox{\parbox{0.85\textwidth}{
+	\vspace*{12pt}
+	\textbf{qNML score is:}
 	\begin{itemize}	
 	\item \textcolor{teal}{\textbf{hyper-parameter free}}
 	\item \textcolor{teal}{\textbf{consistent}}
 	\item \textcolor{teal}{\textbf{score equivalent}}
 	\item \textcolor{teal}{\textbf{regular}}
-	\item qNML agrees with NML for every network composed of fully connected sub-graphs.
+	\item \textcolor{teal}{\textbf{it equals NML for many models.}}
+	%\item qNML agrees with NML for every network composed of fully connected sub-graphs.
 	\end{itemize}}}
 	
    \end{column} 
@@ -325,10 +341,10 @@ where $\alpha = \frac{r}{n}$ and $C_\alpha = \frac{1}{2} + \frac{1}{2} \sqrt{1 +
 	  \end{minipage}
 	  
 	\vspace*{12pt}
-	\textbf{qNML seems overall a safe choice in structure learning, especially with moderate and large sample sizes!} 
+	%\textbf{qNML seems overall a safe choice in structure learning, especially with moderate and large sample sizes!} 
     \end{column}
    \begin{column}{0.005\textwidth}\linethickness{0.3ex}
-      \color{myPurple} \line(0,1){600}
+      \color{myPurple} \line(0,1){590}
    \end{column} % }}}
    
     \begin{column}{0.23\textwidth}
@@ -337,7 +353,7 @@ where $\alpha = \frac{r}{n}$ and $C_\alpha = \frac{1}{2} + \frac{1}{2} \sqrt{1 +
     \end{column}
     
     \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
-      \color{myPurple} \line(0,1){600}
+      \color{myPurple} \line(0,1){590}
    \end{column} % }}}
     \begin{column}{0.3\textwidth}
     \heading{Conclusions}
