@@ -4,15 +4,17 @@
 {
   \usetheme{hiitposter}
 }
-%\graphicspath{{imgs/}}
+
+
 \usepackage{amsmath,amsthm, amssymb,mathrsfs}
 \usepackage{color}
 \usepackage{times}
 \usepackage{subfigure}
+\usepackage{booktabs}
 \usepackage{bm}
 \usepackage{url}
 \usepackage[numbers]{natbib}
-\usepackage[orientation=portrait,size=a0,scale=1.4,debug]{beamerposter}
+\usepackage[orientation=portrait,size=a0,scale=1.34,debug]{beamerposter}
 \usepackage{blkarray}        
 %\usepackage[orientation=portrait,width = 91 ,height = 122 ,scale=1.39,debug]{beamerposter} 
 %\setbeamerfont{itemize/enumerate body}{size={\fontsize{25}{31}}}
@@ -22,31 +24,15 @@
 
 \def\newblock{\hskip .11em plus .33em minus 3.07em}
 
-\definecolor{DRed}{rgb}{0.8,0.6,0.6}
-\definecolor{DGreen}{rgb}{0.6,0.7,0.6}
-\definecolor{BRed}{rgb}{0.7,0,0}
-\definecolor{BGreen}{rgb}{0,0.7,0}
-
-\newcommand{\myred}[1]{{\color{BRed}#1}}
-\newcommand{\mygreen}[1]{{\color{BGreen}#1}}
-
-
 \newcommand{\heading}[1]{\alert{\large #1}\\}
 \definecolor{myPurple}{RGB}{174, 206, 195}
-%\definecolor{myPurple}{RGB}{165,206,190}
 
-
-\usepackage{textpos}
 \usepackage{fancybox}
 \setlength{\fboxsep}{12pt}
-%\usepackage{mathtools}
+
 \usepackage{empheq}
 
-\theoremstyle{plain}
-\newtheorem{assumption}{Assumption}
-
 \definecolor{myblue}{rgb}{.85, .85, 1.0}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newlength\mytemplen
 \newsavebox\mytempbox
@@ -74,15 +60,6 @@
 
 \makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\makeatletter
-\newcommand\mathcircled[1]{%
-  \mathpalette\@mathcircled{#1}%
-}
-\newcommand\@mathcircled[2]{%
-  \tikz[baseline=(math.base)] \node[red,draw,circle,inner sep=1pt] (math) {$\m@th#1#2$};%
-}
-\makeatother
-
 
 \title{Quotient Normalized Maximum Likelihood Criterion for Learning Bayesian Network Structures}
 \author{Tomi Silander$^1$, Janne Lepp{\"a}-aho$^2$, Elias J{\"a}{\"a}saari$^2$, and Teemu Roos$^2$}
@@ -118,7 +95,6 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
      \begin{itemize}
      \setlength\itemsep{1em}
      \item Provide a compact way to represent a joint distribution over a random vector $X = (X_1, \ldots , X_d)$. 
-     %\item Here, each $X_i$ is a categorical random variable.
      \item Consist of:
      \begin{itemize}
      \item[1.] A Directed acyclic graph $G$ which encodes the dependencies between the components of $X$.
@@ -129,7 +105,7 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
    \end{column}
   
    \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
-      \color{myPurple} \line(0,1){450}
+      \color{myPurple} \line(0,1){430}
    \end{column} % }}}
    
    \begin{column}{0.25\textwidth} % second column {{{
@@ -144,7 +120,7 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
    \end{column}
   
    \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
-      \color{myPurple} \line(0,1){450}
+      \color{myPurple} \line(0,1){430}
    \end{column} % }}}
    \begin{column}{0.3\textwidth}% third column {{{
      \heading{Scoring Functions}
@@ -154,7 +130,7 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
      \item[BDeu] Bayesian marginal likelihood based on Dirichlet priors. Depends on a single 
      hyperparameter $\alpha >0$ called equivalent sample size. 
      \item[BIC] Maximized log-likelihood with penalty $\frac{k}{2}\log n$, where $k$ is the number of free parameters in the network. 
-     \item[fNML] Factorized Normalized Maximum likelihood. Maximized log-likelihood with penalty defined via \textit{regret} functions.
+     \item[fNML] Factorized Normalized Maximum Likelihood. Maximized log-likelihood with penalty defined via \textit{regret} functions.
      \end{itemize}
      
    \end{column} % end of first column }}}
@@ -213,7 +189,7 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
    	\end{column}
    
    \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
-      \color{myPurple} \line(0,1){810}
+      \color{myPurple} \line(0,1){820}
    \end{column} % }}}
    
    \begin{column}{0.3\textwidth} % second column {{{
@@ -227,8 +203,6 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
 	\end{equation}%where $\hat\theta$ denotes the maximum likelihood parameters.
 
 	\item However, for \textbf{a single categorical data vector}, regret and one dimensional $P^1_{NML}$-code can be computed.
-	%\item In $P^1_{NML}$, regret depends on $N$, the length of the categorical data vector $D_i$ and $r_i$, the number of possible values for corresponding variable $X_i$. 
-	%\item Justification from \textit{Minimum description length} principle.
 	\item \textbf{Trick}. Recall factorization w.r.t. graph $G$:
 	$$
 	P(D\mid G) = \prod_{i = 1}^{d}P(D_i \mid D_{G_i}) = \prod_{i = 1}^{d}\frac{P(D_{i,G_i})}{P(D_{G_i})}
@@ -272,7 +246,7 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
    \end{column}
    
    \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
-      \color{myPurple} \line(0,1){810}
+      \color{myPurple} \line(0,1){820}
    \end{column} % }}}
    
    
@@ -289,10 +263,10 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
 	 \item $D$ is understood as  $n$ observations on single categorical variable with $r$ possible values.
 	\item Accurate approximation for $reg(n,r)$ from \cite{Szpankowski2012}:
 	\begin{align*}
-    reg(n, r) &\approx  n\left(\log{\alpha} + (\alpha + 2) \log{C_\alpha} - \frac{1}{C_\alpha}\right) \\ 
-    &- \frac{1}{2} \log{\left(C_\alpha + \frac{2}{\alpha}\right)},
+    reg(n, r) &\approx  n\left(\log{\beta} + (\beta + 2) \log{C_\beta} - \frac{1}{C_\beta}\right) \\ 
+    &- \frac{1}{2} \log{\left(C_\beta + \frac{2}{\beta}\right)},
 	\end{align*}
-where $\alpha = \frac{r}{n}$ and $C_\alpha = \frac{1}{2} + \frac{1}{2} \sqrt{1 + \frac{4}{\alpha}}$.
+where $\beta = \frac{r}{n}$ and $C_\beta = \frac{1}{2} + \frac{1}{2} \sqrt{1 + \frac{4}{\beta}}$.
 	\end{itemize}
 	
 	\vspace*{12pt}
@@ -300,12 +274,11 @@ where $\alpha = \frac{r}{n}$ and $C_\alpha = \frac{1}{2} + \frac{1}{2} \sqrt{1 +
 	\vspace*{12pt}
 	\textbf{qNML score is:}
 	\begin{itemize}	
-	\item \textcolor{teal}{\textbf{hyper-parameter free}}
-	\item \textcolor{teal}{\textbf{consistent}}
-	\item \textcolor{teal}{\textbf{score equivalent}}
-	\item \textcolor{teal}{\textbf{regular}}
-	\item \textcolor{teal}{\textbf{it equals NML for many models.}}
-	%\item qNML agrees with NML for every network composed of fully connected sub-graphs.
+	\item {\textbf{hyper-parameter free}}
+	\item {\textbf{consistent}}
+	\item {\textbf{score equivalent}}
+	\item {\textbf{regular}}
+	\item {\textbf{it equals NML for many models.}}
 	\end{itemize}}}
 	
    \end{column} 
@@ -317,48 +290,133 @@ where $\alpha = \frac{r}{n}$ and $C_\alpha = \frac{1}{2} + \frac{1}{2} \sqrt{1 +
 
 \begin{block}{Experimental Results}
   \begin{columns}[T]
-    \begin{column}{0.35\textwidth}
+    \begin{column}{0.4\textwidth}
       \heading{Structure Learning}
       
-	  \begin{minipage}{0.45\textwidth}
-	  \begin{figure}[h]
+      \begin{minipage}{0.3\textwidth}
+      
+      \begin{itemize}
+	  \item Data generated from real world DAG structures.
+	  \item $5$ networks, $d  = 6,5,11,5$ and $8$, \\ edges: $ 6,4,17,4$ and $8$. 
+	  \item Networks learned using exact DP-algorithm.
+	  \item We measure Structural Hamming Distance (SHD).
+	  %\item Average ranks (over $5$ networks and $1000$ tests) also shown.
+	  \end{itemize}
 
+	  \end{minipage}
+      \begin{minipage}{0.35\textwidth}
+      	\phantom{dsaasdasdasdasd}
+		\begin{itemize}
+	  	\item Average ranks (over $5$ networks and $1000$ tests) also shown.
+	  	\end{itemize}      
+      
+	  \begin{figure}[h]
 		\includegraphics[width=\columnwidth]{shd_all.pdf}
 		\caption{SHD as a function of sample size.}
 		\label{fig:all_shd}
 		\end{figure}
 	  \end{minipage}
-	  \begin{minipage}{0.45\textwidth}
-	  \begin{itemize}
-	  \item Data generated from real world DAG structures.
-	  \item Exact DP structure learning algorithm.
-	  \end{itemize}
+	  \begin{minipage}{0.33\textwidth}
 	  \begin{figure}[h]
 		\includegraphics[width=\columnwidth]{shd_rank_all.pdf}
 		\caption{Average ranks for each score.}
-		\label{fig:all_shd}
 		\end{figure}
+		
+		\shadowbox{\parbox{0.95\textwidth}{
+		qNML:
+		\begin{itemize}	
+		\item obtains the best ranking when $n > 300$.
+		\item never has the worst average ranking.
+		\end{itemize}}}		
+	
 	  \end{minipage}
 	  
+	  
+	  
 	\vspace*{12pt}
-	%\textbf{qNML seems overall a safe choice in structure learning, especially with moderate and large sample sizes!} 
     \end{column}
    \begin{column}{0.005\textwidth}\linethickness{0.3ex}
-      \color{myPurple} \line(0,1){590}
+      \color{myPurple} \line(0,1){630}
    \end{column} % }}}
    
-    \begin{column}{0.23\textwidth}
+    \begin{column}{0.55\textwidth}
     \heading{Prediction}
-      
+    
+    \vspace*{12pt}
+	\begin{minipage}{0.3\textwidth}
+	\vspace*{12pt}
+	\begin{itemize}
+	\item 20 UCI data sets split to train and test sets.
+	\item Used training fractions: $10\%, 20\% , \ldots, 90\%$.
+	%\item Graphs learned using the exact algorithm.
+	\item BIC, fNML and qNML use sequential predictive (sNML) parameters.
+	\item BDeu uses Bayesian predictive parameter (BPP) values with $\alpha = 1$. 
+	\item Scores are ranked from 1 to 4 according to test set log-loss.
+	\end{itemize}	
+	\end{minipage}
+	\begin{minipage}{0.35\textwidth}	
+		\centering
+		\tiny{
+		\textcolor{HIITgreen}{Table:} Average predictive performance rank over \\ different sample sizes for different scores. \\ \textbf{Best}, \underline{worst}.    
+	    \begin{table}
+		%\caption{Average predictive performance rank over different sample sizes for different model selection criteria in 20 different data sets.}
+		\label{tbl:preds}
+		\begin{center}
+		\begin{tabular}{crrrrr}
+		       Data
+		    & $n$
+		    & \multicolumn{1}{p{0.7cm}}{\centering BDeu}
+		    & \multicolumn{1}{p{0.8cm}}{\centering BIC}
+		    & \multicolumn{1}{p{0.9cm}}{\centering fNML}
+		    & \multicolumn{1}{p{0.9cm}}{\centering qNML}\\
+		       \midrule
+		 PostOpe &     90 &              2.79 &     \textbf{1.20} &  \underline{3.06} &           2.94 \\
+		    Iris &    150 &  \underline{2.82} &              2.37 &     \textbf{2.27} &           2.54 \\
+		    Wine &    178 &  \underline{3.23} &     \textbf{1.88} &              2.67 &           2.22 \\
+		   Glass &    214 &  \underline{3.61} &              3.09 &     \textbf{1.42} &           1.88 \\
+		 Thyroid &    215 &              2.55 &  \underline{3.21} &     \textbf{1.80} &           2.44 \\
+		 HeartSt &    270 &  \underline{3.12} &     \textbf{1.39} &              3.12 &           2.37 \\
+		 BreastC &    286 &  \underline{3.09} &     \textbf{1.41} &              2.97 &           2.53 \\
+		 HeartHu &    294 &  \underline{3.18} &     \textbf{1.66} &              2.90 &           2.27 \\
+		 HeartCl &    303 &  \underline{3.46} &     \textbf{1.38} &              2.99 &           2.17 \\
+		   Ecoli &    336 &              3.20 &  \underline{3.53} &     \textbf{1.24} &           2.04 \\
+		   Liver &    345 &  \underline{3.17} &              2.39 &              2.69 &  \textbf{1.75} \\
+		 Balance &    625 &  \underline{3.35} &              1.91 &     \textbf{1.59} &           3.16 \\
+		 BcWisco &    699 &  \underline{3.06} &              2.03 &              2.89 &  \textbf{2.02} \\
+		 Diabete &    768 &  \underline{2.91} &              2.70 &              2.68 &  \textbf{1.71} \\
+		 TicTacT &    958 &  \underline{3.44} &              2.71 &     \textbf{1.31} &           2.53 \\
+		   Yeast &   1484 &              2.60 &  \underline{3.76} &     \textbf{1.55} &           2.10 \\
+		 Abalone &   4177 &              2.60 &  \underline{3.64} &     \textbf{1.04} &           2.72 \\
+		 PageBlo &   5473 &              2.24 &  \underline{3.61} &     \textbf{1.31} &           2.83 \\
+		   Adult &  32561 &              3.23 &  \underline{3.77} &     \textbf{1.00} &           2.00 \\
+		 Shuttle &  58000 &     \textbf{1.44} &  \underline{3.78} &              1.56 &           3.22 \\
+		\midrule		 
+		 \textcolor{teal}{Mean} &  \phantom{} & \underline{2.95}  & 2.57 & \textbf{2.10}  &2.37 \\
+		 \textcolor{teal}{SD}  &  \phantom{} & 0.49 & \underline{0.90} &0.76 & \textbf{0.43} \\
+		\end{tabular}
+		\end{center}
+		\end{table}}	
+	\end{minipage}
+	\begin{minipage}{0.3\textwidth}
+	
+	
+	\shadowbox{\parbox{0.95\textwidth}{
+	\begin{itemize}
+	\item fNML obtains on average the best rank with qNML as the runner-up.	
+	\item qNML has the lowest standard deviation. 
+	\end{itemize}}}
+		
+	We also studied the number of parameters in learned models when using $10\%$ samples for structure learning.
+	\vspace*{12pt}	
+	
+	\shadowbox{\parbox{0.95\textwidth}{
+	\begin{itemize}
+	\item qNML almost always yields more parsimonious models than fNML, but more complex than BIC.	
+	\end{itemize}}}
+	\end{minipage}	    
+          
     \end{column}
     
-    \begin{column}{0.005\textwidth}\linethickness{0.3ex} % separator {{{
-      \color{myPurple} \line(0,1){590}
-   \end{column} % }}}
-    \begin{column}{0.3\textwidth}
-    \heading{Conclusions}
-
-    \end{column}
   \end{columns}
 \end{block}
 
