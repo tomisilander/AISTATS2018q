@@ -98,7 +98,7 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
      \item Consist of:
      \begin{itemize}
      \item[1.] A Directed acyclic graph $G$ which encodes the dependencies between the components of $X$.
-     \item[2.] Parameters $\theta = (\theta_1,\ldots,\theta_d)$, where $\theta_i$ denotes the parameters of the conditional distribution of $X_i$ given its parents $G_i$. 
+     \item[2.] Parameters $\theta = (\theta_1,\ldots,\theta_d)$, where $\theta_i$ denotes the parameters of the conditional distribution of $X_i$ given its parents $X_{G_i}$. 
      \end{itemize}
      \item Decomposition: $P(X \mid G, \theta) = \prod_{i=1}^dP(X_i\mid X_{G_i},\theta_i)$
      \end{itemize}     
@@ -207,7 +207,7 @@ $^{2}$ HIIT / Department of Computer Science, University of Helsinki, Finland}
 	$$
 	P(D\mid G) = \prod_{i = 1}^{d}P(D_i \mid D_{G_i}) = \prod_{i = 1}^{d}\frac{P(D_{i,G_i})}{P(D_{G_i})}
 	$$
-	\item Assume there are \textbf{no independencies} among $G_i$. Now, $D_{i,G_i} = $
+	\item Assume there are \textbf{no independencies} among $X_{G_i}$. Now, $D_{i,G_i} = $
 	\vspace*{12pt}
 	\end{itemize}
 	\begin{minipage}{0.45\textwidth}
@@ -425,11 +425,46 @@ where $\beta = \frac{r}{n}$ and $C_\beta = \frac{1}{2} + \frac{1}{2} \sqrt{1 + \
   \begin{column}{0.63\paperwidth}
 \begin{block}{References} %{{{
 %\scriptsize
-\tiny
-{
-\bibliographystyle{apalike}
-\bibliography{../cosco}
-}
+%\tiny
+%{
+%\bibliographystyle{apalike}
+%\bibliography{../cosco}
+%}
+
+\begin{tiny}
+\begin{thebibliography}{}
+\bibitem[Liu et~al., 2012]{Liu2012}
+Liu, Z. et~al. (2012).
+\newblock Empirical evaluation of scoring functions for {B}ayesian network
+  model selection.
+\newblock {\em BMC Bioinformatics}, 13(15):S14.
+
+\bibitem[Silander, T. et~al., 2007]{cosco.uai07}
+Silander et~al. (2007).
+\newblock On sensitivity of the {MAP} {Bayesian} network structure to the
+  equivalent sample size parameter.
+\newblock In {\em Proceedings of {UAI--07}}.
+
+\bibitem[Silander, T. et~al., 2008]{cosco.pgm08a}
+Silander et~al. (2008).
+\newblock Factorized normalized maximum likelihood criterion for learning
+  {B}ayesian network structures.
+\newblock In {\em Proceedings of {PGM-08}}.
+
+\bibitem[Suzuki, 2017]{Suzuki2017}
+Suzuki, J. (2017).
+\newblock A theoretical analysis of the {BDeu} scores in {B}ayesian network
+  structure learning.
+\newblock {\em Behaviormetrika}, 44(1):97--116.
+
+\bibitem[Szpankowski and Weinberger, 2012]{Szpankowski2012}
+Szpankowski, W. and Weinberger, M.~J. (2012).
+\newblock Minimax pointwise redundancy for memoryless models over large
+  alphabets.
+\newblock {\em IEEE Transactions on Information Theory}, 58(7):4094--4104.
+\end{thebibliography}
+\end{tiny}
+
 \end{block} %}}}
   \end{column}
   \begin{column}{0.33\paperwidth}
