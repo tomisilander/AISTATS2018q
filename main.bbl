@@ -1,0 +1,228 @@
+\begin{thebibliography}{}
+
+\bibitem[Adamchik, 1997]{Adamchik1997}
+Adamchik, V. (1997).
+\newblock On {S}tirling numbers and {E}uler sums.
+\newblock {\em Journal of Computational and Applied Mathematics}, 79(1):119 --
+  130.
+
+\bibitem[Akaike, 1973]{Akai73}
+Akaike, H. (1973).
+\newblock Information theory and an extension of the maximum likelihood
+  principle.
+\newblock In Petrox, B. and Caski, F., editors, {\em Proceedings of the Second
+  International Symposium on Information Theory}, pages 267--281, Budapest.
+  Akademiai Kiado.
+
+\bibitem[Buntine, 1991]{Bunt91}
+Buntine, W. (1991).
+\newblock Theory refinement on {Bayesian} networks.
+\newblock In D'Ambrosio, B., Smets, P., and Bonissone, P., editors, {\em
+  Proceedings of the Seventh Conference on Uncertainty in Artificial
+  Intelligence}, pages 52--60. Morgan Kaufmann Publishers.
+
+\bibitem[Chickering, 1995]{Chick95}
+Chickering, D.~M. (1995).
+\newblock {A Transformational Characterization of Equivalent Bayesian Network
+  Structures}.
+\newblock In {\em {UAI '95: Proceedings of the Eleventh Annual Conference on
+  Uncertainty in Artificial Intelligence}}, pages 87--98. Morgan Kaufmann.
+
+\bibitem[Eggeling et~al., 2014]{eggeling2014robust}
+Eggeling, R., Roos, T., Myllym{\"a}ki, P., Grosse, I., et~al. (2014).
+\newblock Robust learning of inhomogeneous {PMMs}.
+\newblock In Kaski, S. and Corander, J., editors, {\em Proceedings of the
+  Seventeenth International Conference on Artificial Intelligence and
+  Statistics}, pages 229--237. PMLR.
+
+\bibitem[Gr\"unwald, 2007]{Grun07}
+Gr\"unwald, P. (2007).
+\newblock {\em The Minimum Description Length Principle}.
+\newblock MIT Press.
+
+\bibitem[Haughton, 1988]{Haug88}
+Haughton, D. (1988).
+\newblock On the choice of a model to fit data from an exponential family.
+\newblock {\em Annals of Statistics}, 16(1):342--355.
+
+\bibitem[Heckerman, 1995]{Heck95b}
+Heckerman, D. (1995).
+\newblock A {Bayesian} approach to learning causal network.
+\newblock In Besnard, P. and Hanks, S., editors, {\em Uncertainty in Artificial
+  Intelligence: Proceedings of the Eleventh Conference}, pages 285--295,
+  Montreal, Canada.
+
+\bibitem[Heckerman et~al., 1995]{Heck95}
+Heckerman, D., Geiger, D., and Chickering, D. (1995).
+\newblock Learning {Bayesian} networks: The combination of knowledge and
+  statistical data.
+\newblock {\em Machine Learning}, 20(3):197--243.
+
+\bibitem[Ide et~al., 2014]{bn4brainconnect}
+Ide, J.~S., Zhang, S., and Li, C.~S. (2014).
+\newblock {{B}ayesian network models in brain functional connectivity
+  analysis}.
+\newblock {\em International Journal of Approximate Reasoning}, 56(1 Pt 1).
+
+\bibitem[J\"{a}\"{a}saari et~al., 2018]{jaasaari18}
+J\"{a}\"{a}saari, E., Lepp\"{a}-aho, J., Silander, T., and Roos, T. (2018).
+\newblock Minimax optimal {B}ayes mixtures for memoryless sources over large
+  alphabets.
+\newblock Accepted for the {\em 29th International Conference on Algorithmic
+  Learning Theory (ALT 2018)}.
+
+\bibitem[Koller and Friedman, 2009]{KOLLER}
+Koller, D. and Friedman, N. (2009).
+\newblock {\em Probabilistic Graphical Models: Principles and Techniques}.
+\newblock MIT Press.
+
+\bibitem[Kontkanen et~al., 2003]{cosco.aistat03}
+Kontkanen, P., Buntine, W., Myllym\"aki, P., Rissanen, J., and Tirri, H.
+  (2003).
+\newblock Efficient computation of stochastic complexity.
+\newblock In Bishop, C. and Frey, B., editors, {\em Proceedings of the Ninth
+  International Conference on Artificial Intelligence and Statistics}, pages
+  233--238. Society for Artificial Intelligence and Statistics.
+
+\bibitem[Lichman, 2013]{Lichman:2013}
+Lichman, M. (2013).
+\newblock {UCI} machine learning repository.
+
+\bibitem[Liu et~al., 2012]{Liu2012}
+Liu, Z., Malone, B., and Yuan, C. (2012).
+\newblock Empirical evaluation of scoring functions for {B}ayesian network
+  model selection.
+\newblock {\em BMC Bioinformatics}, 13(15):S14.
+
+\bibitem[M\"{a}\"{a}tt\"{a} et~al., 2016]{maatta16}
+M\"{a}\"{a}tt\"{a}, J., Schmidt, D.~F., and Roos, T. (2016).
+\newblock Subset selection in linear regression using sequentially normalized
+  least squares: Asymptotic theory.
+\newblock {\em Scandinavian Journal of Statistics}, 43(2):382--395.
+
+\bibitem[Mononen and Myllym\"{a}ki, 2008]{cosco.itsl08}
+Mononen, T. and Myllym\"{a}ki, P. (2008).
+\newblock On the multinomial stochastic complexity and its connection to the
+  birthday problem.
+\newblock In {\em Proceedings of the International Conference on Information
+  Theory and Statistical Learning}, Las Vegas, NV.
+
+\bibitem[Pearl, 1988]{Pear88}
+Pearl, J. (1988).
+\newblock {\em Probabilistic Reasoning in Intelligent Systems: Networks of
+  Plausible Inference}.
+\newblock Morgan Kaufmann Publishers, San Mateo, CA.
+
+\bibitem[Rissanen, 1978]{Riss78}
+Rissanen, J. (1978).
+\newblock Modeling by shortest data description.
+\newblock {\em Automatica}, 14:445--471.
+
+\bibitem[Rissanen, 1996]{Riss96a}
+Rissanen, J. (1996).
+\newblock Fisher information and stochastic complexity.
+\newblock {\em IEEE Transactions on Information Theory}, 42(1):40--47.
+
+\bibitem[Rissanen and Roos, 2007]{Riss07b}
+Rissanen, J. and Roos, T. (2007).
+\newblock Conditional {NML} models.
+\newblock In {\em Proceedings of the Information Theory and Applications
+  Workshop ({ITA}-07)}, San Diego, CA.
+
+\bibitem[Sachs et~al., 2002]{bn4sigpath02}
+Sachs, K., Gifford, D., Jaakkola, T., Sorger, P., and Lauffenburger, D.~A.
+  (2002).
+\newblock {{B}ayesian network approach to cell signaling pathway modeling}.
+\newblock {\em Science's STKE}, 2002(148):38--38.
+
+\bibitem[Savickas and Vasilecas, 2014]{bn4bpmining}
+Savickas, T. and Vasilecas, O. (2014).
+\newblock Bayesian belief network application in process mining.
+\newblock In {\em Proceedings of the 15th International Conference on Computer
+  Systems and Technologies}, CompSysTech '14, pages 226--233, New York, NY,
+  USA. ACM.
+
+\bibitem[Schwarz, 1978]{Schw78}
+Schwarz, G. (1978).
+\newblock Estimating the dimension of a model.
+\newblock {\em Annals of Statistics}, 6:461--464.
+
+\bibitem[Shtarkov, 1987]{Shta87}
+Shtarkov, Y. (1987).
+\newblock Universal sequential coding of single messages.
+\newblock {\em Problems of Information Transmission}, 23:3--17.
+
+\bibitem[Silander et~al., 2007]{cosco.uai07}
+Silander, T., Kontkanen, P., and Myllym\"aki, P. (2007).
+\newblock On sensitivity of the {MAP} {Bayesian} network structure to the
+  equivalent sample size parameter.
+\newblock In Parr, R. and van~der Gaag, L., editors, {\em Proceedings of the
+  23rd Conference on Uncertainty in Artificial Intelligence ({UAI--07})}, pages
+  360--367. AUAI Press.
+
+\bibitem[Silander and Myllym\"aki, 2006]{cosco.uai06}
+Silander, T. and Myllym\"aki, P. (2006).
+\newblock A simple approach for finding the globally optimal {Bayesian} network
+  structure.
+\newblock In Dechter, R. and Richardson, T., editors, {\em Proceedings of the
+  22nd Conference on Uncertainty in Artificial Intelligence ({UAI--06})}, pages
+  445--452. AUAI Press.
+
+\bibitem[Silander et~al., 2008]{cosco.pgm08a}
+Silander, T., Roos, T., Kontkanen, P., and Myllym{\"a}ki, P. (2008).
+\newblock Factorized normalized maximum likelihood criterion for learning
+  {B}ayesian network structures.
+\newblock In {\em Proceedings of the 4th European Workshop on Probabilistic
+  Graphical Models ({PGM}-08)}, pages 257--264, Hirtshals, Denmark.
+
+\bibitem[Silander et~al., 2010]{SilanderIJAR10}
+Silander, T., Roos, T., and Myllym{\"a}ki, P. (2010).
+\newblock Learning locally minimax optimal {Bayesian} networks.
+\newblock {\em International Journal of Approximate Reasoning}, 51(5):544 --
+  557.
+
+\bibitem[Steck, 2008]{Steck08}
+Steck, H. (2008).
+\newblock Learning the {B}ayesian network structure: {Dirichlet} prior vs data.
+\newblock In McAllester, D.~A. and Myllym{\"a}ki, P., editors, {\em Proceedings
+  of the 24th Annual Conference on Uncertainty in Artificial Intelligence
+  ({UAI--08})}, pages 511--518. AUAI Press.
+
+\bibitem[Suzuki, 2017]{Suzuki2017}
+Suzuki, J. (2017).
+\newblock A theoretical analysis of the {BDeu} scores in {B}ayesian network
+  structure learning.
+\newblock {\em Behaviormetrika}, 44(1):97--116.
+
+\bibitem[Suzuki and Kawahara, 2017]{Suzuki2017_2}
+Suzuki, J. and Kawahara, J. (2017).
+\newblock Branch and bound for regular {Bayesian} network structure learning.
+\newblock The 33rd Conference on Uncertainty in Artificial Intelligence, {UAI}
+  2017, August 11-15, 2017, Sydney, {Australia}.
+
+\bibitem[Szpankowski and Weinberger, 2012]{Szpankowski2012}
+Szpankowski, W. and Weinberger, M.~J. (2012).
+\newblock Minimax pointwise redundancy for memoryless models over large
+  alphabets.
+\newblock {\em IEEE Transactions on Information Theory}, 58(7):4094--4104.
+
+\bibitem[Tsamardinos et~al., 2006]{Tsamardinos2006}
+Tsamardinos, I., Brown, L.~E., and Aliferis, C.~F. (2006).
+\newblock The max-min hill-climbing {Bayesian} network structure learning
+  algorithm.
+\newblock {\em Machine Learning}, 65(1):31--78.
+
+\bibitem[Verma and Pearl, 1991]{Verm90}
+Verma, T. and Pearl, J. (1991).
+\newblock Equivalence and synthesis of causal models.
+\newblock In {\em Proceedings of the Sixth Annual Conference on Uncertainty in
+  Artificial Intelligence (UAI-90)}, pages 255--270, New York, NY, USA.
+  Elsevier Science Inc.
+
+\bibitem[Watanabe and Roos, 2015]{watanabe15a}
+Watanabe, K. and Roos, T. (2015).
+\newblock Achievability of asymptotic minimax regret by horizon-dependent and
+  horizon-independent strategies.
+\newblock {\em Journal of Machine Learning Research}, 16:2357--2375.
+
+\end{thebibliography}

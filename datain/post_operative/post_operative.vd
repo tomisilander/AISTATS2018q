@@ -1,9 +1,0 @@
-ATT1	high	low	mid
-ATT2	high	low	mid
-ATT3	excellent	good
-ATT4	high	low	mid
-ATT5	stable	unstable
-ATT6	mod-stable	stable	unstable
-ATT7	mod-stable	stable	unstable
-ATT8	5 .. 6	7 .. 8	9 .. 12	13 .. 15
-class	A	I	S

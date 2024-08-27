@@ -7,13 +7,21 @@
 
 \documentclass[twoside]{article}
 \usepackage[accepted]{aistats2018}
-\usepackage{amsmath,amsthm,epsfig,booktabs,multirow}
+\usepackage{pdfpages}
+\usepackage{amsmath,amsthm,amssymb,bm,epsfig,booktabs,multirow}
+\usepackage[round]{natbib}
 \usepackage[hidelinks]{hyperref}
+\usepackage[title]{appendix}
+
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
 \newcommand{\Le}{\left(}
 \newcommand{\Ri}{\right)}
+\newcommand{\N}{\mathbb{N}}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
 
 % Set the typeface to Times Roman
 %\usepackage{times}
@@ -74,10 +82,19 @@ J.L., E.J. and T.R. were supported by the Academy of Finland (COIN CoE and Proje
 %%Use unnumbered third level headings for the acknowledgements title.
 %%All acknowledgements go at the end of the paper.
 
-
-%%\subsubsection*{References}
-
 \bibliographystyle{apalike}
 \bibliography{cosco}
+
+\onecolumn
+
+\begin{appendices}
+\input{supp_mat_A.tex}\newpage
+\input{supp_mat_B.tex}\newpage
+\input{supp_mat_C.tex}\newpage
+\input{supp_mat_BDq.tex}\newpage
+\input{supp_mat_D.tex}
+\end{appendices}
+%%\subsubsection*{References}
+
 
 \end{document}
